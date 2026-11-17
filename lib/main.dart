@@ -11,6 +11,7 @@ import 'features/courses/presentation/pages/courses_list_page.dart';
 import 'features/courses/presentation/pages/course_detail_page.dart';
 import 'features/quiz/presentation/pages/quiz_page.dart';
 import 'features/quiz/domain/quiz_model.dart';
+import 'features/playground/presentation/pages/playground_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,7 +78,7 @@ class CodeBroApp extends StatelessWidget {
                 ),
               ],
             ),
-        '/playground': (context) => const _ComingSoonPage(title: 'Code Playground'),
+        '/playground': (context) => const PlaygroundPage(),
         '/leaderboard': (context) => const _ComingSoonPage(title: 'Leaderboard'),
         '/profile': (context) => const _ComingSoonPage(title: 'Profile'),
       },
