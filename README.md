@@ -1,44 +1,89 @@
-<<<<<<< HEAD
-# tango
+# 🚀 CodeBro — Tango
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# 🚀 Tango
-
-A modern gamified platform for learning programming through interactive lessons, coding challenges, quizzes, and AI assistance.
+A modern, gamified Flutter learning platform for mastering programming through interactive lessons, code challenges, quizzes, and a built-in code playground.
 
 ## ✨ Features
 
-- 🐍 Learn Python, C++, Flutter, JavaScript and more
-- 🎮 Gamified learning (XP, Levels, Streaks)
-- 💻 Interactive code playground
-- 🤖 AI Programming Mentor
-- 🏆 Leaderboards & Achievements
-- 📈 Progress Tracking
+- **Gamified Learning** — XP, levels, streaks, badges, and leaderboards
+- **Interactive Lessons** — Course catalog with lesson players and progress tracking
+- **Code Playground** — Split editor + output console with run button
+- **Quiz System** — Per-question quiz screens with instant feedback and results
+- **Achievements** — Earned/locked badge grid with XP rewards
+- **Profile & Settings** — Avatar, level, XP bar, stats, sign out
+- **Dark Theme** — IDE-inspired dark UI with neon accents (glassmorphism cards, gradients)
+- **Onboarding** — 3-screen splash + onboarding flow with authentication
+
+## 📱 Screens
+
+| Screen | Status |
+|--------|--------|
+| Splash / Onboarding (3 screens) | ✅ Done |
+| Authentication (Login, Register, Forgot Password) | ✅ Done |
+| Home Dashboard (streak, XP, continue learning, quests) | ✅ Done |
+| Courses List + Course Detail | ✅ Done |
+| Lesson Player | ✅ Done |
+| Quiz System + Results | ✅ Done |
+| Code Playground (editor + output) | ✅ Done |
+| Leaderboard (Weekly / All-time) | ✅ Done |
+| Achievements | ✅ Done |
+| Profile + Settings | ✅ Done |
 
 ## 🛠 Tech Stack
 
-- Flutter
-- Dart
-- Riverpod
-- FastAPI
-- PostgreSQL
+- **Flutter** (SDK) — UI framework
+- **Dart** — Language
+- **Material Design** — Components
 
-## 📱 Status
+## 📁 Project Structure
 
-🚧 Currently under development.
->>>>>>> aed3e87e21a079f7ce5849ba9f885ee73b3714aa
+```
+lib/
+  core/
+    theme/          # app_colors, app_text_styles, app_spacing, app_radius, app_shadows
+    constants/      # app_constants, app_strings
+    extensions/     # context_extensions, widget_extensions
+  features/
+    onboarding/     # Splash + 3-screen onboarding
+    authentication/ # Login, register, forgot password
+    home/           # Dashboard, stats, quests, bottom nav
+    courses/        # Course list, course detail, lesson player
+    quiz/           # Quiz questions, options, results
+    playground/     # Code editor + output console
+    leaderboard/    # Weekly / all-time rankings
+    achievements/   # Badge grid
+    profile/        # Profile, settings, sign out
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Flutter SDK (3.12+)
+- Dart SDK
+
+### Install & Run
+
+```bash
+# Clone the repo
+git clone https://github.com/yassinalkhulaqi/Tango.git
+cd Tango
+
+# Get dependencies
+flutter pub get
+
+# Run the app
+flutter run
+```
+
+## 🌿 Branching Strategy
+
+Each feature is developed on its own branch, then merged into `main`:
+
+- `feature/ui-*` — UI screens & components
+- `feature/backend-*` — API / service layers
+- `fix/*` — Bug fixes (navigation, state management)
+- `refactor/*` — Architecture improvements
+- `feat/*` — New capabilities (localization, etc.)
+
+## 📄 License
+
+MIT

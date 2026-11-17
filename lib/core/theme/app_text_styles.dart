@@ -107,6 +107,14 @@ abstract final class AppTextStyles {
     letterSpacing: 0.5,
   );
 
+  static const TextStyle codeFont = TextStyle(
+    fontFamily: 'FiraCode',
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.primaryYellow,
+    height: 1.5,
+  );
+
   static const TextStyle xpAmount = TextStyle(
     fontFamily: 'FiraCode',
     fontSize: 14,
