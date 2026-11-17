@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/theme/app_colors.dart';
-import 'core/theme/app_text_styles.dart';
 import 'features/onboarding/presentation/pages/onboarding_page.dart';
 import 'features/authentication/presentation/pages/login_page.dart';
 import 'features/authentication/presentation/pages/register_page.dart';
@@ -13,6 +12,7 @@ import 'features/quiz/presentation/pages/quiz_page.dart';
 import 'features/quiz/domain/quiz_model.dart';
 import 'features/leaderboard/presentation/pages/leaderboard_page.dart';
 import 'features/achievements/presentation/pages/achievements_page.dart';
+import 'features/profile/presentation/pages/profile_page.dart';
 import 'features/playground/presentation/pages/playground_page.dart';
 
 void main() {
@@ -83,7 +83,7 @@ class CodeBroApp extends StatelessWidget {
         '/playground': (context) => const PlaygroundPage(),
         '/leaderboard': (context) => const LeaderboardPage(),
         '/achievements': (context) => const AchievementsPage(),
-        '/profile': (context) => const _ComingSoonPage(title: 'Profile'),
+        '/profile': (context) => const ProfilePage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/course-detail') {
@@ -114,41 +114,6 @@ class _AuthPlaceholder extends StatelessWidget {
           style: TextStyle(
             color: AppColors.textSecondary,
             fontSize: 18,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ComingSoonPage extends StatelessWidget {
-  final String title;
-  const _ComingSoonPage({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.construction_rounded, color: AppColors.textMuted, size: 52),
-              const SizedBox(height: 16),
-              Text(
-                title,
-                style: AppTextStyles.titleMedium.copyWith(
-                  color: AppColors.textSecondary,
-                  fontSize: 20,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Coming soon in the next update',
-                style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMuted),
-              ),
-            ],
           ),
         ),
       ),
