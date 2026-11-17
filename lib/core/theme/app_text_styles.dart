@@ -99,6 +99,14 @@ abstract final class AppTextStyles {
     height: 1.5,
   );
 
+  static const TextStyle streakCount = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w800,
+    color: AppColors.textPrimary,
+    letterSpacing: 0.5,
+  );
+
   static const TextStyle xpAmount = TextStyle(
     fontFamily: 'FiraCode',
     fontSize: 14,
