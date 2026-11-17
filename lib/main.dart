@@ -9,6 +9,8 @@ import 'features/authentication/presentation/pages/forgot_password_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/courses/presentation/pages/courses_list_page.dart';
 import 'features/courses/presentation/pages/course_detail_page.dart';
+import 'features/quiz/presentation/pages/quiz_page.dart';
+import 'features/quiz/domain/quiz_model.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,6 +55,28 @@ class CodeBroApp extends StatelessWidget {
         '/forgot-password': (context) => const ForgotPasswordPage(),
         '/home': (context) => const HomePage(),
         '/courses': (context) => const CoursesListPage(),
+        '/quiz': (context) => QuizPage(
+              questions: const [
+                QuizQuestion(
+                  id: 'q1',
+                  question: 'What does "void" mean in a Dart function?',
+                  options: ['Returns no value', 'Returns null', 'Returns 0', 'Returns String'],
+                  correctIndex: 0,
+                ),
+                QuizQuestion(
+                  id: 'q2',
+                  question: 'Which keyword defines a class in Dart?',
+                  options: ['class', 'struct', 'interface', 'type'],
+                  correctIndex: 0,
+                ),
+                QuizQuestion(
+                  id: 'q3',
+                  question: 'What is the entry point function in Dart?',
+                  options: ['start()', 'run()', 'main()', 'init()'],
+                  correctIndex: 2,
+                ),
+              ],
+            ),
         '/playground': (context) => const _ComingSoonPage(title: 'Code Playground'),
         '/leaderboard': (context) => const _ComingSoonPage(title: 'Leaderboard'),
         '/profile': (context) => const _ComingSoonPage(title: 'Profile'),
