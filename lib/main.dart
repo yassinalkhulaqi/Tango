@@ -12,6 +12,7 @@ import 'features/courses/presentation/pages/course_detail_page.dart';
 import 'features/quiz/presentation/pages/quiz_page.dart';
 import 'features/quiz/domain/quiz_model.dart';
 import 'features/leaderboard/presentation/pages/leaderboard_page.dart';
+import 'features/achievements/presentation/pages/achievements_page.dart';
 import 'features/playground/presentation/pages/playground_page.dart';
 
 void main() {
@@ -81,6 +82,7 @@ class CodeBroApp extends StatelessWidget {
             ),
         '/playground': (context) => const PlaygroundPage(),
         '/leaderboard': (context) => const LeaderboardPage(),
+        '/achievements': (context) => const AchievementsPage(),
         '/profile': (context) => const _ComingSoonPage(title: 'Profile'),
       },
       onGenerateRoute: (settings) {
