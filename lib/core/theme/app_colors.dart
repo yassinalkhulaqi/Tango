@@ -64,6 +64,25 @@ abstract final class AppColors {
   static const Color cyan = Color(0xFF22D3EE); // Cyan
   static const Color pink = Color(0xFFF472B6); // Pink
 
+  // Primary-prefixed aliases used across feature widgets
+  static const Color primaryGreen = green;
+  static const Color primaryOrange = orange;
+  static const Color primaryPurple = purple;
+  static const Color primaryCyan = cyan;
+
+  // Convenience gradients
+  static const LinearGradient blueGradient = LinearGradient(
+    colors: [Color(0xFF38BDF8), Color(0xFF818CF8)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient greenGradient = LinearGradient(
+    colors: [Color(0xFF4ADE80), Color(0xFF22C55E)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
   // Borders
   static const Color divider = Color(0xFF1E293B);
   static const Color cardBorder = Color(0xFF1E293B);

@@ -73,7 +73,33 @@ abstract final class AppTextStyles {
     height: 1.4,
   );
 
-  static const TextStyle codeFont = TextStyle(
+  static const TextStyle labelSmall = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textSecondary,
+    letterSpacing: 0.1,
+    height: 1.4,
+  );
+
+  static const TextStyle titleSmall = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textPrimary,
+    letterSpacing: 0.1,
+    height: 1.4,
+  );
+
+  static const TextStyle bodySmall = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textSecondary,
+    height: 1.5,
+  );
+
+  static const TextStyle xpAmount = TextStyle(
     fontFamily: 'FiraCode',
     fontSize: 14,
     fontWeight: FontWeight.w500,
