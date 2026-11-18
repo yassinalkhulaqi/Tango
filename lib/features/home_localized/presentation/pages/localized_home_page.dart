@@ -3,7 +3,8 @@ import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/localization/localized_widgets.dart';
 import '../../../../core/localization/locale_format.dart';
 import '../../../../core/localization/locale_controller.dart';
-import '../../design_v2/presentation/widgets/premium_widgets.dart';
+import '../../../../core/localization/app_locale.dart';
+import '../../../design_v2/presentation/widgets/premium_widgets.dart';
 
 /// A localized home dashboard that reads all copy from [AppLocalizations]
 /// and formats numbers through the active locale.
