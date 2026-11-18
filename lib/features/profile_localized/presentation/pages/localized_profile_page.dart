@@ -4,6 +4,7 @@ import '../../../../core/localization/localized_widgets.dart';
 import '../../../../core/localization/app_locale.dart';
 import '../../../../core/localization/locale_format.dart';
 import '../../../../core/localization/locale_controller.dart';
+import '../../../design_v2/presentation/widgets/premium_widgets.dart';
 
 /// Localized profile and settings page with language switching.
 class LocalizedProfilePage extends StatelessWidget {
