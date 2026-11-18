@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../app_locale.dart';
+import 'app_locale.dart';
 
 /// Logical-direction helpers so layouts mirror automatically for Arabic/Urdu.
 ///
@@ -52,7 +52,7 @@ abstract final class DirectionalLayout {
 
   static bool flipIcon(IconData icon, TextDirection direction) =>
       direction == TextDirection.rtl &&
-      const {Icons.arrow_back, Icons.arrow_forward, Icons.chevron_left, Icons.chevron_right}.contains(icon);
+      {Icons.arrow_back, Icons.arrow_forward, Icons.chevron_left, Icons.chevron_right}.contains(icon);
 
   static double sign(TextDirection direction) =>
       direction == TextDirection.rtl ? -1.0 : 1.0;

@@ -1,4 +1,4 @@
-import '../../string_keys.dart';
+import '../string_keys.dart';
 
 const Map<String, String> urduStrings = {
   StringKeys.appName: 'CodeBro',

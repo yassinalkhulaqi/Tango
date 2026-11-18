@@ -66,7 +66,7 @@ class CodeBroApp extends StatelessWidget {
         '/forgot-password': (context) => const ForgotPasswordPage(),
         '/home': (context) => const HomePage(),
         '/language': (context) => LanguageSettingsPage(
-              controller: LocaleController(),
+              controller: LocaleController(AppLocale.en),
             ),
         '/courses': (context) => const CoursesListPage(),
         '/quiz': (context) => QuizPage(

@@ -11,7 +11,7 @@ class LocalizedText extends StatelessWidget {
   final TextOverflow? overflow;
   final TextAlign? textAlign;
 
-  const LocalizedText(
+  LocalizedText(
     this.selector, {
     super.key,
     this.style,
@@ -39,7 +39,7 @@ class LocaleChip extends StatelessWidget {
   final bool selected;
   final ValueChanged<AppLocale>? onSelected;
 
-  const LocaleChip({
+  LocaleChip({
     super.key,
     required this.locale,
     this.selected = false,
@@ -52,9 +52,7 @@ class LocaleChip extends StatelessWidget {
       label: Text(locale.nativeName, textDirection: locale.direction),
       selected: selected,
       onSelected: onSelected == null ? null : (_) => onSelected!(locale),
-      avatar: locale.isRtl
-          ? const Icon(Icons.format_bidi_rounded, size: 16)
-          : const Icon(Icons.language_rounded, size: 16),
+      avatar: Icon(locale.isRtl ? Icons.language_rounded : Icons.language_outlined, size: 16),
     );
   }
 }

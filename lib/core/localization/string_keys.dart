@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// Translation key constants shared by every locale catalogue.
 ///
 /// Keeping keys in one place means a typo fails at compile time instead of

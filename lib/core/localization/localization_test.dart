@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tango/core/localization/app_locale.dart';
 import 'package:tango/core/localization/string_keys.dart';
+import 'package:tango/core/localization/catalogues/ar.dart';
 import 'package:tango/core/localization/catalogues/catalogue.dart';
 import 'package:tango/core/localization/locale_controller.dart';
 

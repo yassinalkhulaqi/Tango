@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../app_locale.dart';
-import '../string_keys.dart';
+import 'app_locale.dart';
+import 'string_keys.dart';
 import 'catalogues/catalogue.dart';
 
 /// Typed access to localized strings for one locale.

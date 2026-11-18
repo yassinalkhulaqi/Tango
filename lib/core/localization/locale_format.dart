@@ -1,4 +1,4 @@
-import '../app_locale.dart';
+import 'app_locale.dart';
 
 /// Locale-aware number and date formatting for Flutter screens.
 ///

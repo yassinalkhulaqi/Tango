@@ -15,7 +15,7 @@ Widget _wrap(Widget child) => MaterialApp(
 void main() {
   group('LocalizedText', () {
     testWidgets('renders the selected string', (tester) async {
-      await tester.pumpWidget(_wrap(const LocalizedText((l) => l.welcome)));
+      await tester.pumpWidget(_wrap(LocalizedText((l) => l.welcome)));
       expect(find.text('Welcome to CodeBro'), findsOneWidget);
     });
 
@@ -24,7 +24,7 @@ void main() {
         locale: const Locale('ar'),
         localizationsDelegates: AppLocalizations.delegates,
         supportedLocales: AppLocale.supportedLocales,
-        home: const Scaffold(body: LocalizedText((l) => l.welcome)),
+        home: Scaffold(body: LocalizedText((l) => l.welcome)),
       ));
       expect(find.text('مرحباً بك في CodeBro'), findsOneWidget);
     });
@@ -32,7 +32,7 @@ void main() {
 
   group('LocaleChip', () {
     testWidgets('shows the native name', (tester) async {
-      await tester.pumpWidget(_wrap(const LocaleChip(locale: AppLocale.fr)));
+      await tester.pumpWidget(_wrap(LocaleChip(locale: AppLocale.fr)));
       expect(find.text('Français'), findsOneWidget);
     });
 
