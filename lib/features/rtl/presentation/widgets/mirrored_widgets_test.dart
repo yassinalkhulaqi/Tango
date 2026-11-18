@@ -16,9 +16,9 @@ void main() {
         child: MirroredPadding(
           start: 16,
           child: Builder(builder: (context) {
-            final p = (context.findAncestorWidgetOfExactType<Padding>()!);
-            left = p.padding.left;
-            right = p.padding.right;
+            final p = context.findAncestorWidgetOfExactType<Padding>()!.padding as EdgeInsets;
+            left = p.left;
+            right = p.right;
             return const SizedBox();
           }),
         ),
@@ -32,7 +32,7 @@ void main() {
       await tester.pumpWidget(_wrap(TextDirection.rtl, MirroredPadding(
         start: 16,
         child: Builder(builder: (context) {
-          right = context.findAncestorWidgetOfExactType<Padding>()!.padding.right;
+          right = (context.findAncestorWidgetOfExactType<Padding>()!.padding as EdgeInsets).right;
           return const SizedBox();
         }),
       )));
