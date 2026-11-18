@@ -14,6 +14,11 @@ import 'features/leaderboard/presentation/pages/leaderboard_page.dart';
 import 'features/achievements/presentation/pages/achievements_page.dart';
 import 'features/profile/presentation/pages/profile_page.dart';
 import 'features/playground/presentation/pages/playground_page.dart';
+import 'features/settings/presentation/pages/language_settings_page.dart';
+import 'core/localization/app_locale.dart';
+import 'core/localization/app_localizations.dart';
+import 'core/localization/locale_controller.dart';
+import 'core/localization/localized_widgets.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +41,9 @@ class CodeBroApp extends StatelessWidget {
     return MaterialApp(
       title: 'CodeBro',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.delegates,
+      supportedLocales: AppLocale.supportedLocales,
+      locale: const Locale('en'),
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.background,
@@ -57,6 +65,9 @@ class CodeBroApp extends StatelessWidget {
         '/register': (context) => const RegisterPage(),
         '/forgot-password': (context) => const ForgotPasswordPage(),
         '/home': (context) => const HomePage(),
+        '/language': (context) => LanguageSettingsPage(
+              controller: LocaleController(AppLocale.en),
+            ),
         '/courses': (context) => const CoursesListPage(),
         '/quiz': (context) => QuizPage(
               questions: const [
