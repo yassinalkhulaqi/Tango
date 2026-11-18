@@ -23,6 +23,8 @@ class AppLocalizations {
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
 
+  static const List<LocalizationsDelegate<dynamic>> delegates = [delegate];
+
   String _t(String key) => _strings[key] ?? englishStrings[key] ?? key;
 
   String get appName => _t(StringKeys.appName);
