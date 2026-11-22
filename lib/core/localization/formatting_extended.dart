@@ -1,4 +1,4 @@
-import '../../app_locale.dart';
+import 'app_locale.dart';
 
 /// Extended formatting helpers for dates, relative time and plural-aware counts.
 abstract final class FormattingExtended {
