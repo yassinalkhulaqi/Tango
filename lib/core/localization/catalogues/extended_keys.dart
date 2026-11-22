@@ -1,4 +1,4 @@
-import '../../string_keys.dart';
+import '../string_keys.dart';
 
 /// Extended catalogue keys for dashboard, gamification and settings surfaces.
 abstract final class ExtendedKeys {
