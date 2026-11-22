@@ -45,7 +45,6 @@ class AccessibleProgress extends StatelessWidget {
     return Semantics(
       label: label,
       value: '${(value * 100).round()}%',
-      progressBar: true,
       child: LinearProgressIndicator(value: value),
     );
   }
