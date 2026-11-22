@@ -8,7 +8,7 @@ void main() {
     test('English future', () => expect(FormattingExtended.relativeTime(const Duration(hours: 2), AppLocale.en), contains('in')));
     test('Arabic has suffix', () => expect(FormattingExtended.relativeTime(const Duration(hours: -2), AppLocale.ar), contains('مضت')));
     test('picks days', () {
-      final (v, u) = FormattingExtended._pickUnit(172800);
+      final (v, u) = FormattingExtended.pickUnit(172800);
       expect(v, 2);
       expect(u, 'day');
     });

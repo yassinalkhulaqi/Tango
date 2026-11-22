@@ -7,13 +7,13 @@ abstract final class FormattingExtended {
   static String relativeTime(Duration delta, AppLocale locale) {
     final seconds = delta.inSeconds.abs();
     final future = delta.inSeconds > 0;
-    final (value, unit) = _pickUnit(seconds);
+    final (value, unit) = pickUnit(seconds);
     final prefix = locale.isRtl ? '' : (future ? 'in ' : '');
     final suffix = locale.isRtl ? (future ? ' لاحقاً' : ' مضت') : (future ? '' : ' ago');
     return '$prefix$value $unit$suffix';
   }
 
-  static (int, String) _pickUnit(int seconds) {
+  static (int, String) pickUnit(int seconds) {
     if (seconds >= 31536000) return (seconds ~/ 31536000, 'year');
     if (seconds >= 2592000) return (seconds ~/ 2592000, 'month');
     if (seconds >= 604800) return (seconds ~/ 604800, 'week');
