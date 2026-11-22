@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
-import 'dashboard_tiles.dart';
+import '../widgets/dashboard_tiles.dart';
 
 /// Dashboard shell composing greeting, quick stats and section placeholders.
 class DashboardV3Page extends StatelessWidget {
