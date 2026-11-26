@@ -8,8 +8,12 @@ on:
 
 jobs:
   flutter:
-    name: Flutter
+    name: Flutter (${{ matrix.flavor }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [dev, staging, prod]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -21,10 +25,31 @@ jobs:
         run: flutter pub get
       - name: Analyze
         run: flutter analyze
-      - name: Test
-        run: flutter test
-      - name: Build web
-        run: flutter build web --release
+      - name: Format check
+        run: dart format --output=none --set-exit-if-changed lib test
+      - name: Test with coverage
+        run: flutter test --coverage
+      - name: Build web (${{ matrix.flavor }})
+        run: >
+          flutter build web --release
+          --dart-define=FLAVOR=${{ matrix.flavor }}
+          --dart-define=API_BASE_URL=${{ matrix.flavor == 'prod' && 'https://api.codebro.dev/api/v1' || 'http://10.0.2.2:3000/api/v1' }}
+
+  android:
+    name: Android release
+    runs-on: ubuntu-latest
+    needs: flutter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.4'
+          channel: stable
+          cache: true
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Build app bundle
+        run: flutter build appbundle --release --dart-define=FLAVOR=prod
 
   backend:
     name: Node API
@@ -38,9 +63,9 @@ jobs:
         with:
           node-version: '20'
           cache: npm
-          cache-dependency-path: backend/package.json
+          cache-dependency-path: backend/package-lock.json
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Generate Prisma client
         run: npm run prisma:generate
       - name: Lint
