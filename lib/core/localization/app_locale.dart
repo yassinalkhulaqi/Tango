@@ -59,8 +59,10 @@ class AppLocaleHelper {
     return AppLocale.fromCode(normalized);
   }
 
-  static List<AppLocale> byDirection(TextDirection direction) =>
-      AppLocale.values.where((locale) => locale.direction == direction).toList();
+  static List<AppLocale> byDirection(TextDirection direction) => AppLocale
+      .values
+      .where((locale) => locale.direction == direction)
+      .toList();
 
   static List<AppLocale> get rtlLocales => byDirection(TextDirection.rtl);
 
@@ -68,9 +70,8 @@ class AppLocaleHelper {
 
   static String toLanguageTag(AppLocale locale) => locale.formattingLocale;
 
-  static AppLocale parseLanguageTag(String tag) => AppLocale.fromCode(
-        tag.split('-').first,
-      );
+  static AppLocale parseLanguageTag(String tag) =>
+      AppLocale.fromCode(tag.split('-').first);
 
   static bool isSupported(String code) =>
       AppLocale.values.any((locale) => locale.code == code.toLowerCase());
@@ -79,6 +80,6 @@ class AppLocaleHelper {
       AppLocale.values.map((locale) => locale.code).toList();
 
   static Map<String, AppLocale> get byCodeMap => {
-        for (final locale in AppLocale.values) locale.code: locale,
-      };
+    for (final locale in AppLocale.values) locale.code: locale,
+  };
 }

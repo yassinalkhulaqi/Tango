@@ -16,10 +16,16 @@ enum ExtendedLocale {
   final String formattingLocale;
   final TextDirection direction;
 
-  const ExtendedLocale(this.code, this.nativeName, this.englishName,
-      this.formattingLocale, this.direction);
+  const ExtendedLocale(
+    this.code,
+    this.nativeName,
+    this.englishName,
+    this.formattingLocale,
+    this.direction,
+  );
 
-  static ExtendedLocale fromCode(String code) => ExtendedLocale.values.firstWhere(
+  static ExtendedLocale fromCode(String code) =>
+      ExtendedLocale.values.firstWhere(
         (locale) => locale.code == code.toLowerCase(),
         orElse: () => ExtendedLocale.de,
       );
@@ -39,13 +45,33 @@ class CombinedLocales {
   const CombinedLocales._();
 
   static const List<String> allCodes = [
-    'en', 'ar', 'fr', 'es', 'tr', 'ur', 'de', 'it', 'pt', 'ru', 'zh', 'ja',
+    'en',
+    'ar',
+    'fr',
+    'es',
+    'tr',
+    'ur',
+    'de',
+    'it',
+    'pt',
+    'ru',
+    'zh',
+    'ja',
   ];
 
   static const List<String> rtlCodes = ['ar', 'ur'];
 
   static const List<String> ltrCodes = [
-    'en', 'fr', 'es', 'tr', 'de', 'it', 'pt', 'ru', 'zh', 'ja',
+    'en',
+    'fr',
+    'es',
+    'tr',
+    'de',
+    'it',
+    'pt',
+    'ru',
+    'zh',
+    'ja',
   ];
 
   static bool isRtl(String code) => rtlCodes.contains(code);
@@ -69,9 +95,18 @@ class CombinedLocales {
 
   static String nativeName(String code) {
     const names = {
-      'en': 'English', 'ar': 'العربية', 'fr': 'Français', 'es': 'Español',
-      'tr': 'Türkçe', 'ur': 'اردو', 'de': 'Deutsch', 'it': 'Italiano',
-      'pt': 'Português', 'ru': 'Русский', 'zh': '中文', 'ja': '日本語',
+      'en': 'English',
+      'ar': 'العربية',
+      'fr': 'Français',
+      'es': 'Español',
+      'tr': 'Türkçe',
+      'ur': 'اردو',
+      'de': 'Deutsch',
+      'it': 'Italiano',
+      'pt': 'Português',
+      'ru': 'Русский',
+      'zh': '中文',
+      'ja': '日本語',
     };
     return names[code] ?? code.toUpperCase();
   }

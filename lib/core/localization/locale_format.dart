@@ -1,5 +1,7 @@
 import 'app_locale.dart';
 
+import './app_locale.dart';
+
 /// Locale-aware number and date formatting for Flutter screens.
 ///
 /// Region-qualified tags are used so Arabic screens render Arabic-Indic digits.
@@ -12,8 +14,8 @@ abstract final class LocaleFormat {
     final digits = locale == AppLocale.ar
         ? '٠١٢٣٤٥٦٧٨٩'
         : locale == AppLocale.ur
-            ? '۰۱۲۳۴۵۶۷۸۹'
-            : null;
+        ? '۰۱۲۳۴۵۶۷۸۹'
+        : null;
     final formatted = value.toStringAsFixed(fractionDigits);
     if (digits == null) return formatted;
     return formatted.split('').map((char) {
@@ -23,8 +25,13 @@ abstract final class LocaleFormat {
     }).join();
   }
 
-  static String percent(num? value, AppLocale locale, {int fractionDigits = 0}) =>
-      value == null ? unavailable : '${number(value * 100, locale, fractionDigits: fractionDigits)}%';
+  static String percent(
+    num? value,
+    AppLocale locale, {
+    int fractionDigits = 0,
+  }) => value == null
+      ? unavailable
+      : '${number(value * 100, locale, fractionDigits: fractionDigits)}%';
 
   static String date(DateTime? value, AppLocale locale) {
     if (value == null) return unavailable;
@@ -34,7 +41,12 @@ abstract final class LocaleFormat {
     return locale.isRtl ? '$day/$month/$year' : '$day/$month/$year';
   }
 
-  static String money(String? canonical, AppLocale locale, {String? currency, int minorDigits = 2}) {
+  static String money(
+    String? canonical,
+    AppLocale locale, {
+    String? currency,
+    int minorDigits = 2,
+  }) {
     if (canonical == null || canonical.isEmpty) return unavailable;
     final negative = canonical.startsWith('-');
     final unsigned = negative ? canonical.substring(1) : canonical;
@@ -43,7 +55,8 @@ abstract final class LocaleFormat {
     final fraction = parts.length > 1 ? parts[1] : '';
     final padded = fraction.padRight(minorDigits, '0');
     final grouped = _group(integer);
-    final amount = '${negative ? '-' : ''}${numberAsDigits(grouped, locale)}.${numberAsDigits(padded, locale)}';
+    final amount =
+        '${negative ? '-' : ''}${numberAsDigits(grouped, locale)}.${numberAsDigits(padded, locale)}';
     return currency == null ? amount : '$amount $currency';
   }
 
@@ -51,8 +64,8 @@ abstract final class LocaleFormat {
     final digits = locale == AppLocale.ar
         ? '٠١٢٣٤٥٦٧٨٩'
         : locale == AppLocale.ur
-            ? '۰۱۲۳۴۵۶۷۸۹'
-            : null;
+        ? '۰۱۲۳۴۵۶۷۸۹'
+        : null;
     if (digits == null) return value;
     return value.split('').map((char) {
       final code = char.codeUnitAt(0);

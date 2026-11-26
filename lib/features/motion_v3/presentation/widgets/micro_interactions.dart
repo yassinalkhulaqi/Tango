@@ -6,21 +6,33 @@ class PressScale extends StatefulWidget {
   final VoidCallback? onTap;
   final double scale;
 
-  const PressScale({super.key, required this.child, this.onTap, this.scale = 0.96});
+  const PressScale({
+    super.key,
+    required this.child,
+    this.onTap,
+    this.scale = 0.96,
+  });
 
   @override
   State<PressScale> createState() => _PressScaleState();
 }
 
-class _PressScaleState extends State<PressScale> with SingleTickerProviderStateMixin {
+class _PressScaleState extends State<PressScale>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _scale;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 120));
-    _scale = Tween<double>(begin: 1.0, end: widget.scale).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 120),
+    );
+    _scale = Tween<double>(
+      begin: 1.0,
+      end: widget.scale,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -38,7 +50,8 @@ class _PressScaleState extends State<PressScale> with SingleTickerProviderStateM
       onTap: widget.onTap,
       child: AnimatedBuilder(
         animation: _scale,
-        builder: (context, _) => Transform.scale(scale: _scale.value, child: widget.child),
+        builder: (context, _) =>
+            Transform.scale(scale: _scale.value, child: widget.child),
       ),
     );
   }
@@ -55,7 +68,8 @@ class StaggerIn extends StatefulWidget {
   State<StaggerIn> createState() => _StaggerInState();
 }
 
-class _StaggerInState extends State<StaggerIn> with SingleTickerProviderStateMixin {
+class _StaggerInState extends State<StaggerIn>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _fade;
   late final Animation<Offset> _slide;
@@ -63,14 +77,25 @@ class _StaggerInState extends State<StaggerIn> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 400));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
     final delay = widget.index * 80;
     _fade = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Interval(delay / (delay + 400).clamp(1, 2000), 1.0, curve: Curves.easeOut)),
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(
+          delay / (delay + 400).clamp(1, 2000),
+          1.0,
+          curve: Curves.easeOut,
+        ),
+      ),
     );
-    _slide = Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    _slide = Tween<Offset>(
+      begin: const Offset(0, 0.2),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _controller.forward();
   }
 
@@ -82,6 +107,9 @@ class _StaggerInState extends State<StaggerIn> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(opacity: _fade, child: SlideTransition(position: _slide, child: widget.child));
+    return FadeTransition(
+      opacity: _fade,
+      child: SlideTransition(position: _slide, child: widget.child),
+    );
   }
 }

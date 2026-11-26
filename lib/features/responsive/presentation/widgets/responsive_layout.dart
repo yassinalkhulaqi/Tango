@@ -30,7 +30,10 @@ class ResponsiveLayout extends StatelessWidget {
       builder: (context, constraints) {
         final width = constraints.maxWidth;
         if (Breakpoints.isDesktop(width)) {
-          return (desktopBuilder ?? tabletBuilder ?? phoneBuilder)(context, width);
+          return (desktopBuilder ?? tabletBuilder ?? phoneBuilder)(
+            context,
+            width,
+          );
         }
         if (Breakpoints.isTablet(width)) {
           return (tabletBuilder ?? phoneBuilder)(context, width);
@@ -51,8 +54,17 @@ class ResponsiveGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final columns = Breakpoints.isDesktop(width) ? 4 : Breakpoints.isTablet(width) ? 3 : 2;
-        return GridView.count(crossAxisCount: columns, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), children: children);
+        final columns = Breakpoints.isDesktop(width)
+            ? 4
+            : Breakpoints.isTablet(width)
+            ? 3
+            : 2;
+        return GridView.count(
+          crossAxisCount: columns,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: children,
+        );
       },
     );
   }

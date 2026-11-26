@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
-import '../domain/lesson_models.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
+import '../../domain/lesson_models.dart';
 
 class LessonDiffWidget extends StatelessWidget {
   final CodeDiff diff;
@@ -187,8 +187,12 @@ class LessonDiffWidget extends StatelessWidget {
 
   Widget _buildChangeSummary(CodeDiff diff) {
     final added = diff.changes.where((c) => c.type == DiffType.added).length;
-    final removed = diff.changes.where((c) => c.type == DiffType.removed).length;
-    final changed = diff.changes.where((c) => c.type == DiffType.changed).length;
+    final removed = diff.changes
+        .where((c) => c.type == DiffType.removed)
+        .length;
+    final changed = diff.changes
+        .where((c) => c.type == DiffType.changed)
+        .length;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -311,9 +315,7 @@ class InlineDiffMarker extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: color, width: 1),
       ),
-      child: Center(
-        child: Icon(icon, color: color, size: 10),
-      ),
+      child: Center(child: Icon(icon, color: color, size: 10)),
     );
   }
 }
@@ -378,7 +380,11 @@ class SideBySideDiff extends StatelessWidget {
                       final line = index < originalLines.length
                           ? originalLines[index]
                           : '';
-                      return _buildLine(index + 1, line, AppColors.textSecondary);
+                      return _buildLine(
+                        index + 1,
+                        line,
+                        AppColors.textSecondary,
+                      );
                     },
                   ),
                 ),

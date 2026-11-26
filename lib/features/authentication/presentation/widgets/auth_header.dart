@@ -15,7 +15,11 @@ class AuthHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.terminal_rounded, color: AppColors.primaryBlue, size: 28),
+            const Icon(
+              Icons.terminal_rounded,
+              color: AppColors.primaryBlue,
+              size: 28,
+            ),
             const SizedBox(width: 10),
             Text(
               'CodeBro',

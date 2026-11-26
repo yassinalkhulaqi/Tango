@@ -5,7 +5,7 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/theme/app_shadows.dart';
-import '../domain/course_model.dart';
+import '../../domain/course_model.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
@@ -110,7 +110,9 @@ class CourseCard extends StatelessWidget {
                     style: AppTextStyles.titleMedium.copyWith(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: course.isLocked ? AppColors.textMuted : AppColors.textPrimary,
+                      color: course.isLocked
+                          ? AppColors.textMuted
+                          : AppColors.textPrimary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

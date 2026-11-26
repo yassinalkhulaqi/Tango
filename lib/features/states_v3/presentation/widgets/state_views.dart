@@ -11,7 +11,14 @@ class StateViewV3 extends StatelessWidget {
   final String? actionLabel;
   final VoidCallback? onAction;
 
-  const StateViewV3({super.key, required this.kind, required this.title, this.message, this.actionLabel, this.onAction});
+  const StateViewV3({
+    super.key,
+    required this.kind,
+    required this.title,
+    this.message,
+    this.actionLabel,
+    this.onAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +36,28 @@ class StateViewV3 extends StatelessWidget {
             if (kind == StateKindV3.loading)
               const CircularProgressIndicator()
             else
-              Icon(icon, size: 56, color: kind == StateKindV3.error ? AppColors.pink : AppColors.textMuted),
+              Icon(
+                icon,
+                size: 56,
+                color: kind == StateKindV3.error
+                    ? AppColors.pink
+                    : AppColors.textMuted,
+              ),
             const SizedBox(height: AppSpacing.lg),
-            Text(title, style: AppTextStyles.titleLarge, textAlign: TextAlign.center),
+            Text(
+              title,
+              style: AppTextStyles.titleLarge,
+              textAlign: TextAlign.center,
+            ),
             if (message != null) ...[
               const SizedBox(height: AppSpacing.sm),
-              Text(message!, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
+              Text(
+                message!,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ],
             if (actionLabel != null && onAction != null) ...[
               const SizedBox(height: AppSpacing.lg),
@@ -73,9 +96,18 @@ class AsyncBoundaryV3<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (loading) return StateViewV3(kind: StateKindV3.loading, title: loadingLabel);
-    if (error != null) return StateViewV3(kind: StateKindV3.error, title: errorTitle, message: error, actionLabel: retryLabel, onAction: onRetry);
-    if (data == null) return StateViewV3(kind: StateKindV3.empty, title: errorTitle);
+    if (loading)
+      return StateViewV3(kind: StateKindV3.loading, title: loadingLabel);
+    if (error != null)
+      return StateViewV3(
+        kind: StateKindV3.error,
+        title: errorTitle,
+        message: error,
+        actionLabel: retryLabel,
+        onAction: onRetry,
+      );
+    if (data == null)
+      return StateViewV3(kind: StateKindV3.empty, title: errorTitle);
     return builder(data as T);
   }
 }

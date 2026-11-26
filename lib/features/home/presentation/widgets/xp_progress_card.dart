@@ -29,13 +29,19 @@ class XPProgressCard extends StatelessWidget {
                     value: 0.75,
                     strokeWidth: 6,
                     backgroundColor: AppColors.surfaceLight,
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryGreen),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                      AppColors.primaryGreen,
+                    ),
                   ),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.bolt_rounded, color: AppColors.primaryYellow, size: 20),
+                    const Icon(
+                      Icons.bolt_rounded,
+                      color: AppColors.primaryYellow,
+                      size: 20,
+                    ),
                     Text(
                       '750',
                       style: AppTextStyles.titleSmall.copyWith(
@@ -70,7 +76,9 @@ class XPProgressCard extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: 0.75,
                       backgroundColor: AppColors.surfaceLight,
-                      valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryGreen),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.primaryGreen,
+                      ),
                     ),
                   ),
                 ),

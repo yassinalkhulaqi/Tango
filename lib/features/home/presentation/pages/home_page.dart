@@ -9,6 +9,11 @@ import '../widgets/category_card.dart';
 import '../widgets/challenge_card.dart';
 import '../widgets/lesson_path_widget.dart';
 import '../widgets/daily_quests_card.dart';
+import 'package:go_router/go_router.dart';
+import '../../../courses/presentation/pages/courses_list_page.dart';
+import '../../../leaderboard/presentation/pages/leaderboard_page.dart';
+import '../../../playground/presentation/pages/playground_page.dart';
+import '../../../profile/presentation/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,45 +27,54 @@ class _HomePageState extends State<HomePage> {
 
   static const _navItems = [
     _NavItem(Icons.home_rounded, 'Home', AppColors.primaryGreen, '/home'),
-    _NavItem(Icons.menu_book_rounded, 'Courses', AppColors.primaryBlue, '/courses'),
-    _NavItem(Icons.terminal_rounded, 'Code', AppColors.primaryOrange, '/playground'),
-    _NavItem(Icons.leaderboard_rounded, 'League', AppColors.primaryPurple, '/leaderboard'),
-    _NavItem(Icons.person_rounded, 'Profile', AppColors.primaryCyan, '/profile'),
+    _NavItem(
+      Icons.menu_book_rounded,
+      'Courses',
+      AppColors.primaryBlue,
+      '/courses',
+    ),
+    _NavItem(
+      Icons.terminal_rounded,
+      'Code',
+      AppColors.primaryOrange,
+      '/playground',
+    ),
+    _NavItem(
+      Icons.leaderboard_rounded,
+      'League',
+      AppColors.primaryPurple,
+      '/leaderboard',
+    ),
+    _NavItem(
+      Icons.person_rounded,
+      'Profile',
+      AppColors.primaryCyan,
+      '/profile',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: _currentIndex == 0 ? _buildHome() : _buildPlaceholder(),
+      body: _buildPage(),
       bottomNavigationBar: _buildBottomNav(),
     );
   }
 
-  Widget _buildPlaceholder() {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              _navItems[_currentIndex].icon,
-              color: AppColors.textMuted,
-              size: 52,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              '${_navItems[_currentIndex].label}\nComing Soon',
-              textAlign: TextAlign.center,
-              style: AppTextStyles.titleMedium.copyWith(
-                color: AppColors.textSecondary,
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  Widget _buildPage() {
+    switch (_currentIndex) {
+      case 1:
+        return const CoursesListPage();
+      case 2:
+        return const PlaygroundPage();
+      case 3:
+        return const LeaderboardPage();
+      case 4:
+        return const ProfilePage();
+      default:
+        return _buildHome();
+    }
   }
 
   Widget _buildHome() {
@@ -84,10 +98,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Your Path 🗺️',
-                    style: AppTextStyles.titleMedium,
-                  ),
+                  Text('Your Path 🗺️', style: AppTextStyles.titleMedium),
                   Text(
                     'See All',
                     style: AppTextStyles.labelMedium.copyWith(
@@ -105,10 +116,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Continue 📖',
-                    style: AppTextStyles.titleMedium,
-                  ),
+                  Text('Continue 📖', style: AppTextStyles.titleMedium),
                   Text(
                     'My Courses',
                     style: AppTextStyles.labelMedium.copyWith(
@@ -123,10 +131,7 @@ class _HomePageState extends State<HomePage> {
               const ContinueLearningCard(),
               const SizedBox(height: 24),
               // Section: Daily Quests
-              const Text(
-                'Daily Quests 🎯',
-                style: AppTextStyles.titleMedium,
-              ),
+              const Text('Daily Quests 🎯', style: AppTextStyles.titleMedium),
               const SizedBox(height: 12),
               const DailyQuestsCard(),
               const SizedBox(height: 24),
@@ -134,10 +139,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Challenge 🏆',
-                    style: AppTextStyles.titleMedium,
-                  ),
+                  Text('Challenge 🏆', style: AppTextStyles.titleMedium),
                   Text(
                     '+50 XP',
                     style: AppTextStyles.xpAmount.copyWith(fontSize: 14),
@@ -148,10 +150,7 @@ class _HomePageState extends State<HomePage> {
               const ChallengeCard(),
               const SizedBox(height: 24),
               // Section: Stats
-              Text(
-                'Your Stats 📊',
-                style: AppTextStyles.titleMedium,
-              ),
+              Text('Your Stats 📊', style: AppTextStyles.titleMedium),
               const SizedBox(height: 12),
               _buildStatsRow(),
               const SizedBox(height: 24),
@@ -159,10 +158,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Explore 📚',
-                    style: AppTextStyles.titleMedium,
-                  ),
+                  Text('Explore 📚', style: AppTextStyles.titleMedium),
                   Text(
                     'See All',
                     style: AppTextStyles.labelMedium.copyWith(
@@ -208,13 +204,14 @@ class _HomePageState extends State<HomePage> {
               color: AppColors.primaryOrange.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Icon(Icons.local_fire_department_rounded, color: AppColors.primaryOrange, size: 22),
+            child: const Icon(
+              Icons.local_fire_department_rounded,
+              color: AppColors.primaryOrange,
+              size: 22,
+            ),
           ),
           const SizedBox(width: 12),
-          const Text(
-            '12 Day Streak',
-            style: AppTextStyles.streakCount,
-          ),
+          const Text('12 Day Streak', style: AppTextStyles.streakCount),
           const Spacer(),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -225,7 +222,11 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.emoji_events_rounded, color: AppColors.primaryPurple, size: 14),
+                const Icon(
+                  Icons.emoji_events_rounded,
+                  color: AppColors.primaryPurple,
+                  size: 14,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   'Gold League',
@@ -335,7 +336,9 @@ class _HomePageState extends State<HomePage> {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: const Border(top: BorderSide(color: AppColors.cardBorder, width: 1)),
+        border: const Border(
+          top: BorderSide(color: AppColors.cardBorder, width: 1),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.2),
@@ -357,14 +360,19 @@ class _HomePageState extends State<HomePage> {
                   if (index == 0) {
                     setState(() => _currentIndex = 0);
                   } else {
-                    Navigator.of(context).pushNamed(item.route);
+                    GoRouter.of(context).go(item.route);
                   }
                 },
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 250),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
-                    color: isActive ? item.color.withValues(alpha: 0.12) : Colors.transparent,
+                    color: isActive
+                        ? item.color.withValues(alpha: 0.12)
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Column(
@@ -381,7 +389,9 @@ class _HomePageState extends State<HomePage> {
                         style: AppTextStyles.labelSmall.copyWith(
                           color: isActive ? item.color : AppColors.textMuted,
                           fontSize: 10,
-                          fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                          fontWeight: isActive
+                              ? FontWeight.w700
+                              : FontWeight.w500,
                         ),
                       ),
                     ],

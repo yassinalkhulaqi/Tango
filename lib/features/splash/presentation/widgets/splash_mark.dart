@@ -28,9 +28,10 @@ class _SplashMarkState extends State<SplashMark>
       vsync: this,
       duration: const Duration(milliseconds: 1600),
     );
-    _glow = Tween<double>(begin: 0.85, end: 1.15).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _glow = Tween<double>(
+      begin: 0.85,
+      end: 1.15,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     if (!widget.reducedMotion) _controller.repeat(reverse: true);
   }
 
@@ -67,7 +68,9 @@ class _SplashMarkState extends State<SplashMark>
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primaryBlue.withValues(alpha: 0.25 * _glow.value),
+                    color: AppColors.primaryBlue.withValues(
+                      alpha: 0.25 * _glow.value,
+                    ),
                     blurRadius: 40 * _glow.value,
                     spreadRadius: 12 * _glow.value,
                   ),

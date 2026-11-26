@@ -20,7 +20,8 @@ const Map<String, String> spanishStrings = {
   StringKeys.loading: 'Cargando',
   StringKeys.unavailable: 'No disponible',
   StringKeys.errorTitle: 'Algo salió mal',
-  StringKeys.errorMessage: 'No pudimos completar la solicitud. Inténtalo de nuevo.',
+  StringKeys.errorMessage:
+      'No pudimos completar la solicitud. Inténtalo de nuevo.',
   StringKeys.emptyTitle: 'Aún no hay nada aquí',
   StringKeys.emptyMessage: 'Tu viaje de aprendizaje empieza aquí.',
   StringKeys.language: 'Idioma',

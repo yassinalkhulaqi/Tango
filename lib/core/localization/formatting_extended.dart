@@ -1,5 +1,7 @@
 import 'app_locale.dart';
 
+import './app_locale.dart';
+
 /// Extended formatting helpers for dates, relative time and plural-aware counts.
 abstract final class FormattingExtended {
   static const unavailable = '\u2014';
@@ -9,7 +11,9 @@ abstract final class FormattingExtended {
     final future = delta.inSeconds > 0;
     final (value, unit) = pickUnit(seconds);
     final prefix = locale.isRtl ? '' : (future ? 'in ' : '');
-    final suffix = locale.isRtl ? (future ? ' لاحقاً' : ' مضت') : (future ? '' : ' ago');
+    final suffix = locale.isRtl
+        ? (future ? ' لاحقاً' : ' مضت')
+        : (future ? '' : ' ago');
     return '$prefix$value $unit$suffix';
   }
 
@@ -23,7 +27,12 @@ abstract final class FormattingExtended {
     return (seconds, 'second');
   }
 
-  static String pluralCount(int count, AppLocale locale, String one, String other) {
+  static String pluralCount(
+    int count,
+    AppLocale locale,
+    String one,
+    String other,
+  ) {
     if (locale == AppLocale.ar) {
       if (count == 0) return 'لا $other';
       if (count == 1) return one;
@@ -36,6 +45,10 @@ abstract final class FormattingExtended {
 
   static String initials(String name) {
     final parts = name.trim().split(RegExp(r'\s+'));
-    return parts.map((p) => p.isNotEmpty ? p[0] : '').take(2).join().toUpperCase();
+    return parts
+        .map((p) => p.isNotEmpty ? p[0] : '')
+        .take(2)
+        .join()
+        .toUpperCase();
   }
 }

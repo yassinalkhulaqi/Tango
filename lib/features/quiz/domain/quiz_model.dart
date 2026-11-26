@@ -36,5 +36,6 @@ class QuizSession {
     return correct;
   }
 
-  double get scorePercent => questions.isEmpty ? 0 : correctCount / questions.length;
+  double get scorePercent =>
+      questions.isEmpty ? 0 : correctCount / questions.length;
 }

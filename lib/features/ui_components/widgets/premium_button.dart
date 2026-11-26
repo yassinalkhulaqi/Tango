@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
-import '../theme/app_text_styles.dart';
-import '../theme/app_spacing.dart';
-import '../theme/app_radius.dart';
-import '../theme/app_motion.dart';
-import '../theme/app_gradients.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../core/theme/app_radius.dart';
+import '../../../core/theme/app_motion.dart';
+import '../../../core/theme/app_gradients.dart';
 
 class PremiumButton extends StatelessWidget {
   final String text;
@@ -47,8 +47,9 @@ class PremiumButton extends StatelessWidget {
         gradient: enabled ? gradient : null,
         color: enabled ? null : AppColors.cardBorder.withValues(alpha: 0.4),
         borderRadius: AppRadius.circular(AppRadius.xl),
-        boxShadow:
-            enabled ? [AppGradients.glow(AppColors.primaryBlue, blurRadius: 20)] : [],
+        boxShadow: enabled
+            ? [AppGradients.glow(AppColors.primaryBlue, blurRadius: 20)]
+            : [],
       ),
       child: Material(
         color: Colors.transparent,
@@ -167,7 +168,9 @@ class AuthTextField extends StatelessWidget {
                     ? GestureDetector(
                         onTap: onToggle,
                         child: Icon(
-                          obscureText ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                          obscureText
+                              ? Icons.visibility_off_rounded
+                              : Icons.visibility_rounded,
                           color: AppColors.textMuted,
                           size: 20,
                         ),
@@ -181,22 +184,33 @@ class AuthTextField extends StatelessWidget {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: AppRadius.circular(AppRadius.lg),
-                  borderSide: const BorderSide(color: AppColors.cardBorder, width: 1.5),
+                  borderSide: const BorderSide(
+                    color: AppColors.cardBorder,
+                    width: 1.5,
+                  ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: AppRadius.circular(AppRadius.lg),
                   borderSide: BorderSide(
-                    color: enabled ? AppColors.cardBorder : AppColors.cardBorder.withValues(alpha: 0.3),
+                    color: enabled
+                        ? AppColors.cardBorder
+                        : AppColors.cardBorder.withValues(alpha: 0.3),
                     width: 1.5,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: AppRadius.circular(AppRadius.lg),
-                  borderSide: const BorderSide(color: AppColors.primaryBlue, width: 2),
+                  borderSide: const BorderSide(
+                    color: AppColors.primaryBlue,
+                    width: 2,
+                  ),
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: AppRadius.circular(AppRadius.lg),
-                  borderSide: const BorderSide(color: AppColors.pink, width: 1.5),
+                  borderSide: const BorderSide(
+                    color: AppColors.pink,
+                    width: 1.5,
+                  ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: AppRadius.circular(AppRadius.lg),
@@ -317,7 +331,9 @@ class AuthHeader extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: AppGradients.primary,
             shape: BoxShape.circle,
-            boxShadow: [AppGradients.glow(AppColors.primaryBlue, blurRadius: 24)],
+            boxShadow: [
+              AppGradients.glow(AppColors.primaryBlue, blurRadius: 24),
+            ],
           ),
           child: const Center(
             child: Icon(Icons.terminal_rounded, color: Colors.white, size: 32),
@@ -332,7 +348,9 @@ class AuthHeader extends StatelessWidget {
         const SizedBox(height: AppSpacing.sm),
         Text(
           subtitle,
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textSecondary,
+          ),
           textAlign: TextAlign.center,
         ),
       ],

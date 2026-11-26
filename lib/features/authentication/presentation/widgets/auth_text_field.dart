@@ -53,9 +53,16 @@ class AuthTextField extends StatelessWidget {
               hintStyle: AppTextStyles.bodyMedium.copyWith(
                 color: AppColors.textMuted.withValues(alpha: 0.5),
               ),
-              prefixIcon: Icon(prefixIcon, color: AppColors.textMuted, size: 20),
+              prefixIcon: Icon(
+                prefixIcon,
+                color: AppColors.textMuted,
+                size: 20,
+              ),
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 16,
+              ),
             ),
           ),
         ),

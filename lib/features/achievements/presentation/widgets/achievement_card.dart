@@ -3,8 +3,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_shadows.dart';
-import '../domain/achievement_model.dart';
+import '../../../../core/theme/app_shadows.dart';
+import '../../domain/achievement_model.dart';
 
 class AchievementCard extends StatelessWidget {
   final Achievement achievement;
@@ -75,7 +75,11 @@ class AchievementCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.star_rounded, color: AppColors.primaryYellow, size: 16),
+                Icon(
+                  Icons.star_rounded,
+                  color: AppColors.primaryYellow,
+                  size: 16,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
                   '+${achievement.xpReward} XP',

@@ -76,7 +76,11 @@ class _ChallengeCardState extends State<ChallengeCard>
                   ),
                 ],
               ),
-              child: const Icon(Icons.local_fire_department_rounded, color: Colors.white, size: 28),
+              child: const Icon(
+                Icons.local_fire_department_rounded,
+                color: Colors.white,
+                size: 28,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -90,7 +94,11 @@ class _ChallengeCardState extends State<ChallengeCard>
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(Icons.bolt_rounded, color: AppColors.primaryYellow, size: 16),
+                      const Icon(
+                        Icons.bolt_rounded,
+                        color: AppColors.primaryYellow,
+                        size: 16,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         '+50 XP',

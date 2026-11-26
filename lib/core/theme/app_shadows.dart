@@ -19,7 +19,11 @@ abstract final class AppShadows {
     offset: Offset(0, 8),
   );
 
-  static BoxShadow glow(Color color, {double blurRadius = 20, double spreadRadius = 2}) {
+  static BoxShadow glow(
+    Color color, {
+    double blurRadius = 20,
+    double spreadRadius = 2,
+  }) {
     return BoxShadow(
       color: color.withValues(alpha: 0.35),
       blurRadius: blurRadius,

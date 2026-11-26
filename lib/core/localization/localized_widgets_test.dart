@@ -6,11 +6,11 @@ import 'package:tango/core/localization/localized_widgets.dart';
 import 'package:tango/core/localization/locale_controller.dart';
 
 Widget _wrap(Widget child) => MaterialApp(
-      locale: const Locale('en'),
-      localizationsDelegates: AppLocalizations.delegates,
-      supportedLocales: AppLocale.supportedLocales,
-      home: Scaffold(body: child),
-    );
+  locale: const Locale('en'),
+  localizationsDelegates: AppLocalizations.delegates,
+  supportedLocales: AppLocale.supportedLocales,
+  home: Scaffold(body: child),
+);
 
 void main() {
   group('LocalizedText', () {
@@ -20,12 +20,14 @@ void main() {
     });
 
     testWidgets('reads from the scoped locale', (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        locale: const Locale('ar'),
-        localizationsDelegates: AppLocalizations.delegates,
-        supportedLocales: AppLocale.supportedLocales,
-        home: Scaffold(body: LocalizedText((l) => l.welcome)),
-      ));
+      await tester.pumpWidget(
+        MaterialApp(
+          locale: const Locale('ar'),
+          localizationsDelegates: AppLocalizations.delegates,
+          supportedLocales: AppLocale.supportedLocales,
+          home: Scaffold(body: LocalizedText((l) => l.welcome)),
+        ),
+      );
       expect(find.text('مرحباً بك في CodeBro'), findsOneWidget);
     });
   });
@@ -38,10 +40,14 @@ void main() {
 
     testWidgets('calls onSelected with the locale', (tester) async {
       AppLocale? selected;
-      await tester.pumpWidget(_wrap(LocaleChip(
-        locale: AppLocale.ur,
-        onSelected: (locale) => selected = locale,
-      )));
+      await tester.pumpWidget(
+        _wrap(
+          LocaleChip(
+            locale: AppLocale.ur,
+            onSelected: (locale) => selected = locale,
+          ),
+        ),
+      );
       await tester.tap(find.byType(LocaleChip));
       await tester.pumpAndSettle();
       expect(selected, AppLocale.ur);
@@ -50,10 +56,9 @@ void main() {
 
   group('LocalePicker', () {
     testWidgets('groups RTL and LTR locales', (tester) async {
-      await tester.pumpWidget(_wrap(LocalePicker(
-        current: AppLocale.en,
-        onChanged: (_) {},
-      )));
+      await tester.pumpWidget(
+        _wrap(LocalePicker(current: AppLocale.en, onChanged: (_) {})),
+      );
       expect(find.text('Right-to-left languages'), findsOneWidget);
       expect(find.text('Left-to-right languages'), findsOneWidget);
       expect(find.byType(LocaleChip), findsNWidgets(6));
@@ -63,12 +68,14 @@ void main() {
   group('LocalizationScope', () {
     testWidgets('applies RTL direction from the controller', (tester) async {
       final controller = LocaleController(AppLocale.ar);
-      await tester.pumpWidget(MaterialApp(
-        home: LocalizationScope(
-          controller: controller,
-          child: const DirectionalityAssertion(),
+      await tester.pumpWidget(
+        MaterialApp(
+          home: LocalizationScope(
+            controller: controller,
+            child: const DirectionalityAssertion(),
+          ),
         ),
-      ));
+      );
       expect(find.byType(DirectionalityAssertion), findsOneWidget);
     });
   });

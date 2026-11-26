@@ -22,21 +22,25 @@ void main() {
 
   group('PremiumSplashScreen', () {
     testWidgets('shows brand and tagline', (tester) async {
-      await tester.pumpWidget(const PremiumSplashScreen(
-        brandName: 'CodeBro',
-        tagline: 'Learn by building',
-      ));
+      await tester.pumpWidget(
+        const PremiumSplashScreen(
+          brandName: 'CodeBro',
+          tagline: 'Learn by building',
+        ),
+      );
       expect(find.text('CodeBro'), findsOneWidget);
       expect(find.text('Learn by building'), findsOneWidget);
     });
 
     testWidgets('calls onReady after hold', (tester) async {
       var ready = false;
-      await tester.pumpWidget(PremiumSplashScreen(
-        brandName: 'CodeBro',
-        hold: const Duration(milliseconds: 50),
-        onReady: () => ready = true,
-      ));
+      await tester.pumpWidget(
+        PremiumSplashScreen(
+          brandName: 'CodeBro',
+          hold: const Duration(milliseconds: 50),
+          onReady: () => ready = true,
+        ),
+      );
       await tester.pump(const Duration(milliseconds: 100));
       expect(ready, isTrue);
     });
@@ -44,12 +48,16 @@ void main() {
 
   group('ShimmerBlock', () {
     testWidgets('renders a block', (tester) async {
-      await tester.pumpWidget(_wrap(const ShimmerBlock(width: 100, height: 20)));
+      await tester.pumpWidget(
+        _wrap(const ShimmerBlock(width: 100, height: 20)),
+      );
       expect(find.byType(ShimmerBlock), findsOneWidget);
     });
 
     testWidgets('disables when told', (tester) async {
-      await tester.pumpWidget(_wrap(const ShimmerBlock(width: 100, height: 20, enabled: false)));
+      await tester.pumpWidget(
+        _wrap(const ShimmerBlock(width: 100, height: 20, enabled: false)),
+      );
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     });
@@ -57,7 +65,9 @@ void main() {
 
   group('SkeletonTable', () {
     testWidgets('labeled for screen readers', (tester) async {
-      await tester.pumpWidget(_wrap(const SkeletonTable(label: 'Loading payments')));
+      await tester.pumpWidget(
+        _wrap(const SkeletonTable(label: 'Loading payments')),
+      );
       expect(find.bySemanticsLabel('Loading payments'), findsOneWidget);
     });
   });

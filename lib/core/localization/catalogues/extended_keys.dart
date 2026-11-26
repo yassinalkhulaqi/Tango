@@ -20,9 +20,22 @@ abstract final class ExtendedKeys {
   static const String languageChanged = 'languageChanged';
 
   static const List<String> all = [
-    streakTitle, streakFreeze, levelUp, nextLevel, dailyGoal, weeklyGoal,
-    completedLessons, perfectQuiz, continueStreak, achievementUnlocked,
-    shareProgress, inviteFriends, darkMode, lightMode, systemTheme, languageChanged,
+    streakTitle,
+    streakFreeze,
+    levelUp,
+    nextLevel,
+    dailyGoal,
+    weeklyGoal,
+    completedLessons,
+    perfectQuiz,
+    continueStreak,
+    achievementUnlocked,
+    shareProgress,
+    inviteFriends,
+    darkMode,
+    lightMode,
+    systemTheme,
+    languageChanged,
   ];
 }
 

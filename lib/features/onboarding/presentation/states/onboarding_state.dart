@@ -15,9 +15,7 @@ class OnboardingState {
   bool get isLastPage => currentPage == totalPages - 1;
   double get progress => (currentPage + 1) / totalPages;
 
-  OnboardingState copyWith({
-    int? currentPage,
-  }) {
+  OnboardingState copyWith({int? currentPage}) {
     return OnboardingState(
       currentPage: currentPage ?? this.currentPage,
       totalPages: totalPages,

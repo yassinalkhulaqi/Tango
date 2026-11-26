@@ -4,9 +4,9 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
 import '../../../../core/extensions/context_extensions.dart';
-import '../../../core/theme/app_shadows.dart';
-import '../domain/quiz_model.dart';
-import 'widgets/quiz_option_card.dart';
+import '../../../../core/theme/app_shadows.dart';
+import '../../domain/quiz_model.dart';
+import '../widgets/quiz_option_card.dart';
 
 class QuizPage extends StatefulWidget {
   final List<QuizQuestion> questions;
@@ -37,7 +37,8 @@ class _QuizPageState extends State<QuizPage> {
     if (_isLast) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => QuizResultPage(questions: widget.questions, answers: _answers),
+          builder: (_) =>
+              QuizResultPage(questions: widget.questions, answers: _answers),
         ),
       );
     } else {
@@ -102,7 +103,9 @@ class _QuizPageState extends State<QuizPage> {
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: const Border(bottom: BorderSide(color: AppColors.cardBorder, width: 1)),
+        border: const Border(
+          bottom: BorderSide(color: AppColors.cardBorder, width: 1),
+        ),
       ),
       child: Column(
         children: [
@@ -115,7 +118,9 @@ class _QuizPageState extends State<QuizPage> {
               ),
               Text(
                 '${(_currentIndex + 1)} / ${widget.questions.length}',
-                style: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -141,7 +146,9 @@ class _QuizPageState extends State<QuizPage> {
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: const Border(top: BorderSide(color: AppColors.cardBorder, width: 1)),
+        border: const Border(
+          top: BorderSide(color: AppColors.cardBorder, width: 1),
+        ),
       ),
       child: SizedBox(
         width: double.infinity,
@@ -159,7 +166,11 @@ class QuizResultPage extends StatelessWidget {
   final List<QuizQuestion> questions;
   final List<int?> answers;
 
-  const QuizResultPage({super.key, required this.questions, required this.answers});
+  const QuizResultPage({
+    super.key,
+    required this.questions,
+    required this.answers,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +205,10 @@ class QuizResultPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: AppRadius.circular(AppRadius.xxl),
-                        border: Border.all(color: AppColors.cardBorder, width: 1),
+                        border: Border.all(
+                          color: AppColors.cardBorder,
+                          width: 1,
+                        ),
                         boxShadow: [AppShadows.soft],
                       ),
                       child: Column(
@@ -202,13 +216,17 @@ class QuizResultPage extends StatelessWidget {
                           Text(
                             '${(percent * 100).round()}%',
                             style: AppTextStyles.displayLarge.copyWith(
-                              color: perfect ? AppColors.green : AppColors.primaryBlue,
+                              color: perfect
+                                  ? AppColors.green
+                                  : AppColors.primaryBlue,
                             ),
                           ),
                           const SizedBox(height: AppSpacing.sm),
                           Text(
                             '$correct / ${questions.length} correct',
-                            style: AppTextStyles.bodyLarge.copyWith(color: AppColors.textSecondary),
+                            style: AppTextStyles.bodyLarge.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
                           ),
                           const SizedBox(height: AppSpacing.md),
                           Text(
@@ -239,19 +257,26 @@ class QuizResultPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AppColors.surfaceLight,
                             borderRadius: AppRadius.circular(AppRadius.lg),
-                            border: Border.all(color: AppColors.cardBorder, width: 1),
+                            border: Border.all(
+                              color: AppColors.cardBorder,
+                              width: 1,
+                            ),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 q.question,
-                                style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w600),
+                                style: AppTextStyles.bodyLarge.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                               const SizedBox(height: AppSpacing.sm),
                               Text(
                                 'Correct: ${q.options[q.correctIndex]}',
-                                style: AppTextStyles.bodyMedium.copyWith(color: AppColors.green),
+                                style: AppTextStyles.bodyMedium.copyWith(
+                                  color: AppColors.green,
+                                ),
                               ),
                             ],
                           ),
@@ -263,7 +288,9 @@ class QuizResultPage extends StatelessWidget {
                       width: double.infinity,
                       height: 52,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                        onPressed: () => Navigator.of(
+                          context,
+                        ).popUntil((route) => route.isFirst),
                         child: const Text('Back to Courses'),
                       ),
                     ),

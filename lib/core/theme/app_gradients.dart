@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
+import './app_colors.dart';
 
 abstract final class AppGradients {
   static const LinearGradient primary = LinearGradient(
@@ -50,8 +50,12 @@ abstract final class AppGradients {
     end: Alignment.centerRight,
   );
 
-  static BoxShadow glow(Color color,
-      {double blurRadius = 20, double spreadRadius = 2, Offset offset = Offset.zero}) {
+  static BoxShadow glow(
+    Color color, {
+    double blurRadius = 20,
+    double spreadRadius = 2,
+    Offset offset = Offset.zero,
+  }) {
     return BoxShadow(
       color: color.withValues(alpha: 0.35),
       blurRadius: blurRadius,
@@ -60,7 +64,10 @@ abstract final class AppGradients {
     );
   }
 
-  static BoxShadow cardShadow({double blurRadius = 16, Offset offset = Offset.zero}) {
+  static BoxShadow cardShadow({
+    double blurRadius = 16,
+    Offset offset = Offset.zero,
+  }) {
     return BoxShadow(
       color: Colors.black.withValues(alpha: 0.25),
       blurRadius: blurRadius,
@@ -68,11 +75,11 @@ abstract final class AppGradients {
     );
   }
 
-  static BoxShadow softShadow({Offset offset = Offset(0, 2), double blurRadius = 8}) {
+  static BoxShadow softShadow({Offset? offset, double blurRadius = 8}) {
     return BoxShadow(
       color: Colors.black.withValues(alpha: 0.15),
       blurRadius: blurRadius,
-      offset: offset,
+      offset: offset ?? const Offset(0, 2),
     );
   }
 }

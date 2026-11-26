@@ -29,10 +29,9 @@ class GlassCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.glassBackground,
             borderRadius: BorderRadius.circular(borderRadius),
-            border: border ?? Border.all(
-              color: const Color(0x1E94A3B8),
-              width: 1.5,
-            ),
+            border:
+                border ??
+                Border.all(color: const Color(0x1E94A3B8), width: 1.5),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.25),
@@ -77,9 +76,10 @@ class _NeonGlowContainerState extends State<NeonGlowContainer>
       vsync: this,
       duration: const Duration(seconds: 3),
     )..repeat(reverse: true);
-    _glowAnimation = Tween<double>(begin: 2.0, end: widget.maxBlurRadius).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _glowAnimation = Tween<double>(
+      begin: 2.0,
+      end: widget.maxBlurRadius,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -147,16 +147,26 @@ class CodeEditorPreview extends StatelessWidget {
                 const SizedBox(width: 20),
                 // File Tab Name
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.surface,
                     borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: const Color(0x1E94A3B8), width: 1),
+                    border: Border.all(
+                      color: const Color(0x1E94A3B8),
+                      width: 1,
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.code_rounded, size: 14, color: AppColors.primaryBlue),
+                      const Icon(
+                        Icons.code_rounded,
+                        size: 14,
+                        color: AppColors.primaryBlue,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         'main.py',
@@ -179,11 +189,26 @@ class CodeEditorPreview extends StatelessWidget {
               children: [
                 _buildCodeLine('1', 'import', ' codebro', keyword: true),
                 const SizedBox(height: 4),
-                _buildCodeLine('2', 'def', ' learn_programming():', keyword: true),
+                _buildCodeLine(
+                  '2',
+                  'def',
+                  ' learn_programming():',
+                  keyword: true,
+                ),
                 const SizedBox(height: 4),
-                _buildCodeLine('3', '    app = codebro.App()', '', secondary: true),
+                _buildCodeLine(
+                  '3',
+                  '    app = codebro.App()',
+                  '',
+                  secondary: true,
+                ),
                 const SizedBox(height: 4),
-                _buildCodeLine('4', '    app.start_journey()', '', secondary: true),
+                _buildCodeLine(
+                  '4',
+                  '    app.start_journey()',
+                  '',
+                  secondary: true,
+                ),
                 const SizedBox(height: 4),
                 _buildCodeLine('5', 'learn_programming()', '', highlight: true),
               ],
@@ -205,8 +230,14 @@ class CodeEditorPreview extends StatelessWidget {
     );
   }
 
-  Widget _buildCodeLine(String num, String accentText, String normalText,
-      {bool keyword = false, bool secondary = false, bool highlight = false}) {
+  Widget _buildCodeLine(
+    String num,
+    String accentText,
+    String normalText, {
+    bool keyword = false,
+    bool secondary = false,
+    bool highlight = false,
+  }) {
     return Row(
       children: [
         SizedBox(
@@ -226,7 +257,10 @@ class CodeEditorPreview extends StatelessWidget {
               if (keyword)
                 TextSpan(
                   text: accentText,
-                  style: const TextStyle(color: AppColors.pink, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: AppColors.pink,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )
               else if (secondary)
                 TextSpan(
@@ -236,7 +270,11 @@ class CodeEditorPreview extends StatelessWidget {
               else
                 TextSpan(
                   text: accentText,
-                  style: TextStyle(color: highlight ? AppColors.primaryYellow : AppColors.textPrimary),
+                  style: TextStyle(
+                    color: highlight
+                        ? AppColors.primaryYellow
+                        : AppColors.textPrimary,
+                  ),
                 ),
               TextSpan(
                 text: normalText,
@@ -270,7 +308,10 @@ class RoadmapVisual extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.alt_route_rounded, color: AppColors.primaryBlue),
+                  const Icon(
+                    Icons.alt_route_rounded,
+                    color: AppColors.primaryBlue,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Python Mastery Path',
@@ -283,7 +324,9 @@ class RoadmapVisual extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.green.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.green.withValues(alpha: 0.3)),
+                  border: Border.all(
+                    color: AppColors.green.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: Text(
                   '65% Active',
@@ -362,7 +405,7 @@ class RoadmapVisual extends StatelessWidget {
                     BoxShadow(
                       color: AppColors.primaryYellow.withValues(alpha: 0.3),
                       blurRadius: 10,
-                    )
+                    ),
                   ]
                 : null,
           ),
@@ -371,7 +414,10 @@ class RoadmapVisual extends StatelessWidget {
                 ? Icon(Icons.check_rounded, color: color, size: 18)
                 : Text(
                     step,
-                    style: AppTextStyles.codeFont.copyWith(color: color, fontSize: 13),
+                    style: AppTextStyles.codeFont.copyWith(
+                      color: color,
+                      fontSize: 13,
+                    ),
                   ),
           ),
         ),
@@ -385,7 +431,9 @@ class RoadmapVisual extends StatelessWidget {
                 style: AppTextStyles.labelLarge.copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: isActive ? AppColors.textPrimary : AppColors.textSecondary,
+                  color: isActive
+                      ? AppColors.textPrimary
+                      : AppColors.textSecondary,
                 ),
               ),
               const SizedBox(height: 2),
@@ -393,7 +441,9 @@ class RoadmapVisual extends StatelessWidget {
                 desc,
                 style: AppTextStyles.bodyMedium.copyWith(
                   fontSize: 11,
-                  color: isActive ? AppColors.primaryYellow : AppColors.textMuted,
+                  color: isActive
+                      ? AppColors.primaryYellow
+                      : AppColors.textMuted,
                 ),
               ),
             ],
@@ -427,7 +477,11 @@ class GamifiedStatsDashboard extends StatelessWidget {
                   gradient: AppColors.primaryGradient,
                 ),
                 child: const Center(
-                  child: Icon(Icons.person_rounded, color: Colors.white, size: 24),
+                  child: Icon(
+                    Icons.person_rounded,
+                    color: Colors.white,
+                    size: 24,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -450,7 +504,10 @@ class GamifiedStatsDashboard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   gradient: AppColors.yellowGradient,
                   borderRadius: BorderRadius.circular(12),
@@ -479,8 +536,14 @@ class GamifiedStatsDashboard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Level Progress', style: AppTextStyles.labelMedium.copyWith(fontSize: 11)),
-                  Text('750 / 1000 XP', style: AppTextStyles.labelMedium.copyWith(fontSize: 11)),
+                  Text(
+                    'Level Progress',
+                    style: AppTextStyles.labelMedium.copyWith(fontSize: 11),
+                  ),
+                  Text(
+                    '750 / 1000 XP',
+                    style: AppTextStyles.labelMedium.copyWith(fontSize: 11),
+                  ),
                 ],
               ),
               const SizedBox(height: 6),
@@ -491,7 +554,9 @@ class GamifiedStatsDashboard extends StatelessWidget {
                   child: LinearProgressIndicator(
                     value: 0.75,
                     backgroundColor: AppColors.surfaceLight,
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryBlue),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                      AppColors.primaryBlue,
+                    ),
                   ),
                 ),
               ),
@@ -504,9 +569,24 @@ class GamifiedStatsDashboard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildMetricCard(Icons.emoji_events_rounded, 'Streak', '12 Days', AppColors.orange),
-              _buildMetricCard(Icons.military_tech_rounded, 'Badges', '8 Earned', AppColors.purple),
-              _buildMetricCard(Icons.insights_rounded, 'Accuracy', '94 %', AppColors.cyan),
+              _buildMetricCard(
+                Icons.emoji_events_rounded,
+                'Streak',
+                '12 Days',
+                AppColors.orange,
+              ),
+              _buildMetricCard(
+                Icons.military_tech_rounded,
+                'Badges',
+                '8 Earned',
+                AppColors.purple,
+              ),
+              _buildMetricCard(
+                Icons.insights_rounded,
+                'Accuracy',
+                '94 %',
+                AppColors.cyan,
+              ),
             ],
           ),
         ],
@@ -514,7 +594,12 @@ class GamifiedStatsDashboard extends StatelessWidget {
     );
   }
 
-  Widget _buildMetricCard(IconData icon, String label, String value, Color color) {
+  Widget _buildMetricCard(
+    IconData icon,
+    String label,
+    String value,
+    Color color,
+  ) {
     return Column(
       children: [
         Container(
@@ -530,11 +615,17 @@ class GamifiedStatsDashboard extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           label,
-          style: AppTextStyles.labelMedium.copyWith(fontSize: 10, color: AppColors.textMuted),
+          style: AppTextStyles.labelMedium.copyWith(
+            fontSize: 10,
+            color: AppColors.textMuted,
+          ),
         ),
         Text(
           value,
-          style: AppTextStyles.labelLarge.copyWith(fontSize: 12, fontWeight: FontWeight.bold),
+          style: AppTextStyles.labelLarge.copyWith(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );

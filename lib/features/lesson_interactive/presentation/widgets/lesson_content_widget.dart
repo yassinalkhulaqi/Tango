@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
 
 class LessonContentWidget extends StatelessWidget {
   final String content;
@@ -38,9 +38,7 @@ class LessonContentWidget extends StatelessWidget {
           _buildCodeBlock(codeExample),
           const SizedBox(height: AppSpacing.xxl),
         ],
-        if (explanation.isNotEmpty) ...[
-          _buildExplanationBox(explanation),
-        ],
+        if (explanation.isNotEmpty) ...[_buildExplanationBox(explanation)],
       ],
     );
   }
@@ -59,7 +57,10 @@ class LessonContentWidget extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.xs,
+            ),
             decoration: BoxDecoration(
               color: const Color(0xFF0F141C),
               borderRadius: const BorderRadius.only(
@@ -69,7 +70,11 @@ class LessonContentWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.code_rounded, color: AppColors.primaryYellow, size: 16),
+                const Icon(
+                  Icons.code_rounded,
+                  color: AppColors.primaryYellow,
+                  size: 16,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
                   'Code Example',
@@ -81,7 +86,11 @@ class LessonContentWidget extends StatelessWidget {
                 const Spacer(),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.copy_rounded, color: AppColors.textMuted, size: 18),
+                  icon: const Icon(
+                    Icons.copy_rounded,
+                    color: AppColors.textMuted,
+                    size: 18,
+                  ),
                   tooltip: 'Copy code',
                 ),
               ],
@@ -114,7 +123,11 @@ class LessonContentWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.lightbulb_rounded, color: AppColors.primaryYellow, size: 20),
+          const Icon(
+            Icons.lightbulb_rounded,
+            color: AppColors.primaryYellow,
+            size: 20,
+          ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Text(
@@ -207,19 +220,29 @@ class CodeTipBox extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primaryBlue.withValues(alpha: 0.1), AppColors.surface],
+          colors: [
+            AppColors.primaryBlue.withValues(alpha: 0.1),
+            AppColors.surface,
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: AppRadius.circular(AppRadius.lg),
-        border: Border.all(color: AppColors.primaryBlue.withValues(alpha: 0.3), width: 1),
+        border: Border.all(
+          color: AppColors.primaryBlue.withValues(alpha: 0.3),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.tips_and_updates_rounded, color: AppColors.primaryBlue, size: 20),
+              const Icon(
+                Icons.tips_and_updates_rounded,
+                color: AppColors.primaryBlue,
+                size: 20,
+              ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(

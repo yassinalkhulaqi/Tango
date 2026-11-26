@@ -33,8 +33,8 @@ class LanguageSettingsPage extends StatelessWidget {
               Text(
                 l10n.digitsAccepted,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 24),
               LocalePicker(
@@ -72,8 +72,8 @@ class _PreviewCard extends StatelessWidget {
             Text(
               locale.englishName,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
             const SizedBox(height: 12),
             Row(
@@ -82,8 +82,7 @@ class _PreviewCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(locale.code.toUpperCase()),
                 const Spacer(),
-                if (locale.isRtl)
-                  const Chip(label: Text('RTL')),
+                if (locale.isRtl) const Chip(label: Text('RTL')),
               ],
             ),
           ],

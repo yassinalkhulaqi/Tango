@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 abstract final class AppColors {
   // Ultra Premium Dark Backgrounds
   static const Color background = Color(0xFF070A0F); // Deep space dark
-  static const Color surface = Color(0xFF0F141C);    // High-end card/surface
+  static const Color surface = Color(0xFF0F141C); // High-end card/surface
   static const Color surfaceLight = Color(0xFF19202B); // Accent surface
-  static const Color glassBackground = Color(0x0F19212C); // Glassmorphism backdrop
+  static const Color glassBackground = Color(
+    0x0F19212C,
+  ); // Glassmorphism backdrop
 
   // Python-inspired accents & Premium neon colors
   static const Color primaryBlue = Color(0xFF38BDF8); // Electric sky blue
@@ -43,11 +45,7 @@ abstract final class AppColors {
   );
 
   static const LinearGradient backgroundGradient = LinearGradient(
-    colors: [
-      Color(0xFF070A0F),
-      Color(0xFF0C111A),
-      Color(0xFF080D14),
-    ],
+    colors: [Color(0xFF070A0F), Color(0xFF0C111A), Color(0xFF080D14)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );

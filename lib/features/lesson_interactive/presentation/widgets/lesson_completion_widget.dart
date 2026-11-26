@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
 
 class LessonCompletionWidget extends StatelessWidget {
   final int xpEarned;
@@ -27,10 +27,16 @@ class LessonCompletionWidget extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: AppGradients.neonGreen,
             shape: BoxShape.circle,
-            boxShadow: [AppGradients.glow(AppColors.primaryGreen, blurRadius: 40)],
+            boxShadow: [
+              AppGradients.glow(AppColors.primaryGreen, blurRadius: 40),
+            ],
           ),
           child: const Center(
-            child: Icon(Icons.check_circle_rounded, color: Colors.white, size: 56),
+            child: Icon(
+              Icons.check_circle_rounded,
+              color: Colors.white,
+              size: 56,
+            ),
           ),
         ),
         const SizedBox(height: AppSpacing.xxl),
@@ -92,7 +98,10 @@ class LessonCompletionWidget extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                      vertical: AppSpacing.xs,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.primaryGreen.withValues(alpha: 0.15),
                       borderRadius: AppRadius.circular(AppRadius.xxl),
@@ -189,10 +198,7 @@ class CelebrationParticle extends StatelessWidget {
       child: Container(
         width: size,
         height: size,
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle,
-        ),
+        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
       ),
     );
   }
@@ -230,10 +236,7 @@ class _ConfettiAnimationState extends State<ConfettiAnimation>
       AppColors.primaryCyan,
     ];
     for (int i = 0; i < widget.particleCount; i++) {
-      _positions.add(Offset(
-        (i / widget.particleCount) * 300,
-        (i % 5) * 60,
-      ));
+      _positions.add(Offset((i / widget.particleCount) * 300, (i % 5) * 60));
       _colors.shuffle();
       _sizes.add(4 + (i % 6) * 2.0);
     }

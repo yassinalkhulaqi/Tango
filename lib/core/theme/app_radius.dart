@@ -8,6 +8,7 @@ abstract final class AppRadius {
   static const double xxl = 20;
   static const double xxxl = 24;
 
-  static BorderRadius all(double radius) => BorderRadius.all(Radius.circular(radius));
+  static BorderRadius all(double radius) =>
+      BorderRadius.all(Radius.circular(radius));
   static BorderRadius circular(double radius) => BorderRadius.circular(radius);
 }

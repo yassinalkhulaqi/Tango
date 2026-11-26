@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../states/onboarding_content_data.dart';
-import 'premium_components.dart';
+import './premium_components.dart';
 
 class OnboardingPageContent extends StatelessWidget {
   final OnboardingContent content;

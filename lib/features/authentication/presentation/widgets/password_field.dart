@@ -22,7 +22,8 @@ class PasswordField extends StatefulWidget {
   State<PasswordField> createState() => _PasswordFieldState();
 }
 
-class _PasswordFieldState extends State<PasswordField> with SingleTickerProviderStateMixin {
+class _PasswordFieldState extends State<PasswordField>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _rotateAnim;
 
@@ -43,7 +44,9 @@ class _PasswordFieldState extends State<PasswordField> with SingleTickerProvider
   void didUpdateWidget(PasswordField old) {
     super.didUpdateWidget(old);
     if (old.obscureText != widget.obscureText) {
-      widget.obscureText ? _animController.reverse() : _animController.forward();
+      widget.obscureText
+          ? _animController.reverse()
+          : _animController.forward();
     }
   }
 
@@ -85,20 +88,29 @@ class _PasswordFieldState extends State<PasswordField> with SingleTickerProvider
               hintStyle: AppTextStyles.bodyMedium.copyWith(
                 color: AppColors.textMuted.withValues(alpha: 0.5),
               ),
-              prefixIcon: const Icon(Icons.lock_outline_rounded, color: AppColors.textMuted, size: 20),
+              prefixIcon: const Icon(
+                Icons.lock_outline_rounded,
+                color: AppColors.textMuted,
+                size: 20,
+              ),
               suffixIcon: GestureDetector(
                 onTap: widget.onToggle,
                 child: RotationTransition(
                   turns: _rotateAnim,
                   child: Icon(
-                    widget.obscureText ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                    widget.obscureText
+                        ? Icons.visibility_off_rounded
+                        : Icons.visibility_rounded,
                     color: AppColors.textMuted,
                     size: 20,
                   ),
                 ),
               ),
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 16,
+              ),
             ),
           ),
         ),

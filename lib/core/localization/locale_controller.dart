@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_locale.dart';
+import './app_locale.dart';
 
 /// Holds the active locale and notifies the widget tree on change.
 ///

@@ -4,7 +4,8 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
 import '../../../../core/extensions/context_extensions.dart';
-import '../../../core/theme/app_shadows.dart';
+import '../../../../core/theme/app_shadows.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -16,16 +17,36 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final _stats = [
     _Stat(Icons.check_circle_rounded, '48', 'Lessons', AppColors.primaryGreen),
-    _Stat(Icons.local_fire_department_rounded, '12', 'Streak', AppColors.primaryOrange),
+    _Stat(
+      Icons.local_fire_department_rounded,
+      '12',
+      'Streak',
+      AppColors.primaryOrange,
+    ),
     _Stat(Icons.bolt_rounded, '12,450', 'Total XP', AppColors.primaryYellow),
     _Stat(Icons.emoji_events_rounded, '6', 'Badges', AppColors.primaryPurple),
   ];
 
   final _settings = [
-    _SettingItem(Icons.notifications_rounded, 'Notifications', 'Get streak reminders', true),
-    _SettingItem(Icons.dark_mode_rounded, 'Dark Mode', 'CodeBro is dark-only', false),
+    _SettingItem(
+      Icons.notifications_rounded,
+      'Notifications',
+      'Get streak reminders',
+      true,
+    ),
+    _SettingItem(
+      Icons.dark_mode_rounded,
+      'Dark Mode',
+      'CodeBro is dark-only',
+      false,
+    ),
     _SettingItem(Icons.language_rounded, 'Language', 'English', false),
-    _SettingItem(Icons.help_outline_rounded, 'Help & Support', 'Contact the CodeBro team', false),
+    _SettingItem(
+      Icons.help_outline_rounded,
+      'Help & Support',
+      'Contact the CodeBro team',
+      false,
+    ),
   ];
 
   @override
@@ -47,7 +68,9 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             sliver: SliverToBoxAdapter(child: _buildSettingsSection()),
           ),
-          const SliverPadding(padding: EdgeInsets.only(bottom: AppSpacing.huge)),
+          const SliverPadding(
+            padding: EdgeInsets.only(bottom: AppSpacing.huge),
+          ),
         ],
       ),
     );
@@ -90,9 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: s.color.withValues(alpha: 0.15),
                   borderRadius: AppRadius.circular(AppRadius.md),
                 ),
-                child: Center(
-                  child: Icon(s.icon, color: s.color, size: 22),
-                ),
+                child: Center(child: Icon(s.icon, color: s.color, size: 22)),
               ),
               const SizedBox(width: AppSpacing.md),
               Column(
@@ -105,7 +126,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Text(
                     s.label,
-                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -129,7 +152,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Text(
               '8,900 / 12,000 XP',
-              style: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.labelMedium.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
           ],
         ),
@@ -168,7 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 52,
           child: OutlinedButton(
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/auth');
+              GoRouter.of(context).go('/login');
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.pink,
@@ -218,7 +243,10 @@ class _SettingRow extends StatelessWidget {
         border: Border.all(color: AppColors.cardBorder, width: 1),
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.xs,
+        ),
         leading: Icon(setting.icon, color: AppColors.textSecondary, size: 22),
         title: Text(
           setting.title,
@@ -229,7 +257,10 @@ class _SettingRow extends StatelessWidget {
         ),
         subtitle: Text(
           setting.subtitle,
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMuted, fontSize: 12),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textMuted,
+            fontSize: 12,
+          ),
         ),
         trailing: setting.enabled
             ? Switch(
@@ -237,16 +268,30 @@ class _SettingRow extends StatelessWidget {
                 onChanged: (_) {},
                 activeThumbColor: AppColors.primaryBlue,
               )
-            : const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted, size: 20),
+            : const Icon(
+                Icons.chevron_right_rounded,
+                color: AppColors.textMuted,
+                size: 20,
+              ),
       ),
     );
   }
 }
+
 class _ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.xxl),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.lg,
+        AppSpacing.lg,
+        AppSpacing.xxl,
+      ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0xFF070A0F), Color(0xFF0C111A)],
@@ -262,7 +307,9 @@ class _ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
             decoration: BoxDecoration(
               gradient: AppColors.primaryGradient,
               shape: BoxShape.circle,
-              boxShadow: [AppShadows.glow(AppColors.primaryBlue, blurRadius: 40)],
+              boxShadow: [
+                AppShadows.glow(AppColors.primaryBlue, blurRadius: 40),
+              ],
             ),
             child: const Center(
               child: Text(
@@ -287,14 +334,19 @@ class _ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
           const SizedBox(height: AppSpacing.xs),
           Text(
             'Level 7 • Senior Developer',
-            style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           const SizedBox(height: AppSpacing.xs),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.xs,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.primaryBlue.withValues(alpha: 0.15),
                   borderRadius: AppRadius.circular(AppRadius.xxl),

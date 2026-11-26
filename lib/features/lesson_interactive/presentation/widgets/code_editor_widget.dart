@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
 
 class CodeEditorWidget extends StatefulWidget {
   final String initialCode;
@@ -56,7 +56,10 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
               topRight: Radius.circular(14),
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.xs,
+          ),
           child: Row(
             children: [
               Container(
@@ -102,10 +105,16 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
                         height: 16,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation(AppColors.primaryGreen),
+                          valueColor: AlwaysStoppedAnimation(
+                            AppColors.primaryGreen,
+                          ),
                         ),
                       )
-                    : const Icon(Icons.play_arrow_rounded, color: AppColors.primaryGreen, size: 20),
+                    : const Icon(
+                        Icons.play_arrow_rounded,
+                        color: AppColors.primaryGreen,
+                        size: 20,
+                      ),
                 tooltip: 'Run Code',
               ),
             ],
@@ -159,7 +168,10 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
               children: [
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: AppSpacing.xs,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF0F141C),
                     borderRadius: const BorderRadius.only(
@@ -169,7 +181,11 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.terminal_rounded, color: AppColors.primaryCyan, size: 16),
+                      const Icon(
+                        Icons.terminal_rounded,
+                        color: AppColors.primaryCyan,
+                        size: 16,
+                      ),
                       const SizedBox(width: AppSpacing.xs),
                       Text(
                         'Output',

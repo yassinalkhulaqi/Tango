@@ -110,8 +110,12 @@ class MirroredAccentCard extends StatelessWidget {
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
         border: Border(
-          left: rtl ? BorderSide.none : BorderSide(color: accent, width: accentWidth),
-          right: rtl ? BorderSide(color: accent, width: accentWidth) : BorderSide.none,
+          left: rtl
+              ? BorderSide.none
+              : BorderSide(color: accent, width: accentWidth),
+          right: rtl
+              ? BorderSide(color: accent, width: accentWidth)
+              : BorderSide.none,
         ),
       ),
       child: child,

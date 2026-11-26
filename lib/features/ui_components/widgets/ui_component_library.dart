@@ -30,7 +30,10 @@ class GlassCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.glassBackground,
         borderRadius: borderRadius ?? AppRadius.circular(AppRadius.xl),
-        border: Border.all(color: borderColor.withValues(alpha: 0.2), width: borderWidth),
+        border: Border.all(
+          color: borderColor.withValues(alpha: 0.2),
+          width: borderWidth,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.25),
@@ -92,7 +95,10 @@ class StreakIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       decoration: BoxDecoration(
         gradient: AppGradients.streak,
         borderRadius: AppRadius.circular(AppRadius.xxl),
@@ -103,7 +109,11 @@ class StreakIndicator extends StatelessWidget {
         children: [
           AnimatedContainer(
             duration: AppMotion.snappy,
-            child: const Icon(Icons.local_fire_department_rounded, color: Colors.white, size: 20),
+            child: const Icon(
+              Icons.local_fire_department_rounded,
+              color: Colors.white,
+              size: 20,
+            ),
           ),
           const SizedBox(width: AppSpacing.xs),
           Text(
@@ -159,7 +169,9 @@ class AchievementCard extends StatelessWidget {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: unlocked ? color.withValues(alpha: 0.2) : AppColors.cardBorder.withValues(alpha: 0.4),
+              color: unlocked
+                  ? color.withValues(alpha: 0.2)
+                  : AppColors.cardBorder.withValues(alpha: 0.4),
               shape: BoxShape.circle,
               border: Border.all(
                 color: unlocked ? color : AppColors.textMuted,
@@ -197,7 +209,11 @@ class AchievementCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.star_rounded, color: AppColors.primaryYellow, size: 16),
+                const Icon(
+                  Icons.star_rounded,
+                  color: AppColors.primaryYellow,
+                  size: 16,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
                   '+$xpReward XP',
@@ -262,15 +278,24 @@ class CourseCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: AppRadius.circular(AppRadius.xl),
                       gradient: isLocked
-                          ? const LinearGradient(colors: [Color(0xFF1E293B), Color(0xFF0F141C)])
+                          ? const LinearGradient(
+                              colors: [Color(0xFF1E293B), Color(0xFF0F141C)],
+                            )
                           : LinearGradient(
-                              colors: [color.withValues(alpha: 0.15), AppColors.surface],
+                              colors: [
+                                color.withValues(alpha: 0.15),
+                                AppColors.surface,
+                              ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
                     ),
                     child: Center(
-                      child: Icon(icon, size: 40, color: isLocked ? AppColors.textMuted : color),
+                      child: Icon(
+                        icon,
+                        size: 40,
+                        color: isLocked ? AppColors.textMuted : color,
+                      ),
                     ),
                   ),
                   if (isLocked)
@@ -279,7 +304,13 @@ class CourseCard extends StatelessWidget {
                         color: Colors.black.withValues(alpha: 0.45),
                         borderRadius: AppRadius.circular(AppRadius.xl),
                       ),
-                      child: const Center(child: Icon(Icons.lock_rounded, color: Colors.white, size: 28)),
+                      child: const Center(
+                        child: Icon(
+                          Icons.lock_rounded,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                      ),
                     ),
                   Positioned(
                     bottom: 0,
@@ -317,7 +348,9 @@ class CourseCard extends StatelessWidget {
                     style: AppTextStyles.titleMedium.copyWith(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: isLocked ? AppColors.textMuted : AppColors.textPrimary,
+                      color: isLocked
+                          ? AppColors.textMuted
+                          : AppColors.textPrimary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -325,7 +358,10 @@ class CourseCard extends StatelessWidget {
                   const SizedBox(height: AppSpacing.xs),
                   Text(
                     '$lessonCount lessons',
-                    style: AppTextStyles.labelMedium.copyWith(fontSize: 11, color: AppColors.textSecondary),
+                    style: AppTextStyles.labelMedium.copyWith(
+                      fontSize: 11,
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -381,13 +417,21 @@ class LessonItem extends StatelessWidget {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: isCompleted ? AppColors.primaryGreen : isLocked ? AppColors.cardBorder : AppColors.primaryBlue,
+                    color: isCompleted
+                        ? AppColors.primaryGreen
+                        : isLocked
+                        ? AppColors.cardBorder
+                        : AppColors.primaryBlue,
                     shape: BoxShape.circle,
                   ),
                   child: Center(
                     child: Text(
                       '${index + 1}',
-                      style: AppTextStyles.labelMedium.copyWith(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13),
+                      style: AppTextStyles.labelMedium.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                 ),
@@ -400,13 +444,18 @@ class LessonItem extends StatelessWidget {
                         title,
                         style: AppTextStyles.bodyLarge.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: isLocked ? AppColors.textMuted : AppColors.textPrimary,
+                          color: isLocked
+                              ? AppColors.textMuted
+                              : AppColors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: AppSpacing.xs),
                       Text(
                         description,
-                        style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, fontSize: 12),
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: 12,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -414,11 +463,23 @@ class LessonItem extends StatelessWidget {
                   ),
                 ),
                 if (isCompleted)
-                  const Icon(Icons.check_circle_rounded, color: AppColors.primaryGreen, size: 20)
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    color: AppColors.primaryGreen,
+                    size: 20,
+                  )
                 else if (isLocked)
-                  const Icon(Icons.lock_outline_rounded, color: AppColors.textMuted, size: 20)
+                  const Icon(
+                    Icons.lock_outline_rounded,
+                    color: AppColors.textMuted,
+                    size: 20,
+                  )
                 else
-                  const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.primaryBlue, size: 16),
+                  const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: AppColors.primaryBlue,
+                    size: 16,
+                  ),
               ],
             ),
           ),
@@ -434,7 +495,13 @@ class StatsCard extends StatelessWidget {
   final String label;
   final Color color;
 
-  const StatsCard({super.key, required this.icon, required this.value, required this.label, required this.color});
+  const StatsCard({
+    super.key,
+    required this.icon,
+    required this.value,
+    required this.label,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -462,8 +529,16 @@ class StatsCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(value, style: AppTextStyles.titleLarge.copyWith(fontSize: 20)),
-              Text(label, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
+              Text(
+                value,
+                style: AppTextStyles.titleLarge.copyWith(fontSize: 20),
+              ),
+              Text(
+                label,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
             ],
           ),
         ],
@@ -503,18 +578,39 @@ class CategoryCard extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: color.withValues(alpha: 0.15),
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14)),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(14),
+                  topRight: Radius.circular(14),
+                ),
               ),
-              child: Center(child: Icon(icon, size: 36, color: isLocked ? AppColors.textMuted : color)),
+              child: Center(
+                child: Icon(
+                  icon,
+                  size: 36,
+                  color: isLocked ? AppColors.textMuted : color,
+                ),
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(AppSpacing.sm),
             child: Column(
               children: [
-                Text(name, style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
+                Text(
+                  name,
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                  ),
+                ),
                 const SizedBox(height: AppSpacing.xs),
-                Text('$lessonCount lessons', style: AppTextStyles.bodyMedium.copyWith(fontSize: 11, color: AppColors.textSecondary)),
+                Text(
+                  '$lessonCount lessons',
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    fontSize: 11,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
               ],
             ),
           ),
@@ -530,7 +626,13 @@ class ChallengeCard extends StatelessWidget {
   final int xpReward;
   final Color color;
 
-  const ChallengeCard({super.key, required this.title, required this.description, required this.xpReward, this.color = AppColors.primaryYellow});
+  const ChallengeCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.xpReward,
+    this.color = AppColors.primaryYellow,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -538,7 +640,11 @@ class ChallengeCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [color.withValues(alpha: 0.2), AppColors.surface], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        gradient: LinearGradient(
+          colors: [color.withValues(alpha: 0.2), AppColors.surface],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         borderRadius: AppRadius.circular(AppRadius.xxl),
         border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
         boxShadow: [AppGradients.glow(color, blurRadius: 16)],
@@ -551,13 +657,26 @@ class ChallengeCard extends StatelessWidget {
               Icon(Icons.flag_rounded, color: color, size: 20),
               const SizedBox(width: AppSpacing.sm),
               const Spacer(),
-              Text('+$xpReward XP', style: AppTextStyles.labelLarge.copyWith(color: color, fontWeight: FontWeight.w800)),
+              Text(
+                '+$xpReward XP',
+                style: AppTextStyles.labelLarge.copyWith(
+                  color: color,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
           Text(title, style: AppTextStyles.titleMedium.copyWith(fontSize: 18)),
           const SizedBox(height: AppSpacing.sm),
-          Text(description, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary), maxLines: 2, overflow: TextOverflow.ellipsis),
+          Text(
+            description,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );
@@ -593,25 +712,46 @@ class DailyQuestsCard extends StatelessWidget {
                     color: AppColors.primaryBlue.withValues(alpha: 0.15),
                     borderRadius: AppRadius.circular(AppRadius.md),
                   ),
-                  child: Center(child: Icon(q['icon'], color: AppColors.primaryBlue, size: 18)),
+                  child: Center(
+                    child: Icon(
+                      q['icon'],
+                      color: AppColors.primaryBlue,
+                      size: 18,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: AppSpacing.md),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(q['title'], style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w600)),
+                      Text(
+                        q['title'],
+                        style: AppTextStyles.bodyLarge.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       const SizedBox(height: AppSpacing.xs),
-                      Text('+${q['xp']} XP', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, fontSize: 12)),
+                      Text(
+                        '+${q['xp']} XP',
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                Checkbox(value: q['completed'] ?? false, onChanged: null, activeColor: AppColors.primaryGreen),
+                Checkbox(
+                  value: q['completed'] ?? false,
+                  onChanged: null,
+                  activeColor: AppColors.primaryGreen,
+                ),
               ],
             ),
-          ),
-        ],
-      ),
+          );
+        }),
+      ],
     );
   }
 }
@@ -636,7 +776,9 @@ class LessonPathWidget extends StatelessWidget {
           return Container(
             width: 90,
             decoration: BoxDecoration(
-              color: isCurrent ? AppColors.primaryBlue.withValues(alpha: 0.2) : AppColors.surface,
+              color: isCurrent
+                  ? AppColors.primaryBlue.withValues(alpha: 0.2)
+                  : AppColors.surface,
               borderRadius: AppRadius.circular(AppRadius.lg),
               border: Border.all(color: AppColors.cardBorder, width: 1),
             ),
@@ -647,18 +789,33 @@ class LessonPathWidget extends StatelessWidget {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: isCompleted ? AppColors.primaryGreen : isCurrent ? AppColors.primaryBlue : AppColors.cardBorder,
+                    color: isCompleted
+                        ? AppColors.primaryGreen
+                        : isCurrent
+                        ? AppColors.primaryBlue
+                        : AppColors.cardBorder,
                     shape: BoxShape.circle,
                   ),
                   child: Center(
                     child: Text(
                       '${index + 1}',
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.xs),
-                Text(step['title'], style: AppTextStyles.bodyMedium.copyWith(fontSize: 11, fontWeight: FontWeight.w600), textAlign: TextAlign.center),
+                Text(
+                  step['title'],
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           );
@@ -673,7 +830,12 @@ class UserHeader extends StatelessWidget {
   final String level;
   final String avatar;
 
-  const UserHeader({super.key, required this.name, required this.level, required this.avatar});
+  const UserHeader({
+    super.key,
+    required this.name,
+    required this.level,
+    required this.avatar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -685,16 +847,33 @@ class UserHeader extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: AppGradients.primary,
             shape: BoxShape.circle,
-            boxShadow: [AppGradients.glow(AppColors.primaryBlue, blurRadius: 20)],
+            boxShadow: [
+              AppGradients.glow(AppColors.primaryBlue, blurRadius: 20),
+            ],
           ),
-          child: Center(child: Text(avatar, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 20))),
+          child: Center(
+            child: Text(
+              avatar,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                fontSize: 20,
+              ),
+            ),
+          ),
         ),
         const SizedBox(width: AppSpacing.md),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(name, style: AppTextStyles.titleMedium.copyWith(fontSize: 17)),
-            Text(level, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, fontSize: 13)),
+            Text(
+              level,
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
+                fontSize: 13,
+              ),
+            ),
           ],
         ),
       ],
@@ -707,7 +886,12 @@ class ShimmerLoading extends StatelessWidget {
   final double height;
   final BorderRadiusGeometry borderRadius;
 
-  const ShimmerLoading({super.key, required this.width, required this.height, this.borderRadius = const BorderRadius.all(Radius.circular(8))});
+  const ShimmerLoading({
+    super.key,
+    required this.width,
+    required this.height,
+    this.borderRadius = const BorderRadius.all(Radius.circular(8)),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -730,13 +914,17 @@ class ShimmerEffect extends StatefulWidget {
   State<ShimmerEffect> createState() => _ShimmerEffectState();
 }
 
-class _ShimmerEffectState extends State<ShimmerEffect> with SingleTickerProviderStateMixin {
+class _ShimmerEffectState extends State<ShimmerEffect>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
     _controller.repeat(reverse: true);
   }
 
@@ -754,7 +942,11 @@ class _ShimmerEffectState extends State<ShimmerEffect> with SingleTickerProvider
         return ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           child: LinearGradient(
-            colors: [AppColors.surfaceLight, AppColors.surface.withValues(alpha: 0.5), AppColors.surfaceLight],
+            colors: [
+              AppColors.surfaceLight,
+              AppColors.surface.withValues(alpha: 0.5),
+              AppColors.surfaceLight,
+            ],
             stops: [0.1, 0.3, 0.5],
             begin: Alignment(-1.0 + _controller.value * 2, 0),
             end: Alignment(1.0 + _controller.value * 2, 0),
@@ -794,12 +986,20 @@ class EmptyState extends StatelessWidget {
               color: AppColors.cardBorder.withValues(alpha: 0.5),
               shape: BoxShape.circle,
             ),
-            child: Center(child: Icon(icon, color: AppColors.textMuted, size: 40)),
+            child: Center(
+              child: Icon(icon, color: AppColors.textMuted, size: 40),
+            ),
           ),
           const SizedBox(height: AppSpacing.lg),
           Text(title, style: AppTextStyles.titleMedium.copyWith(fontSize: 20)),
           const SizedBox(height: AppSpacing.sm),
-          Text(message, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
+          Text(
+            message,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: AppSpacing.xxl),
           SizedBox(
             width: double.infinity,
@@ -817,7 +1017,12 @@ class ErrorState extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
 
-  const ErrorState({super.key, required this.title, required this.message, required this.onRetry});
+  const ErrorState({
+    super.key,
+    required this.title,
+    required this.message,
+    required this.onRetry,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -825,11 +1030,21 @@ class ErrorState extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline_rounded, color: AppColors.pink, size: 48),
+          const Icon(
+            Icons.error_outline_rounded,
+            color: AppColors.pink,
+            size: 48,
+          ),
           const SizedBox(height: AppSpacing.lg),
           Text(title, style: AppTextStyles.titleMedium.copyWith(fontSize: 20)),
           const SizedBox(height: AppSpacing.sm),
-          Text(message, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary), textAlign: TextAlign.center),
+          Text(
+            message,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: AppSpacing.xxl),
           SizedBox(
             width: double.infinity,

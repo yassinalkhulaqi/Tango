@@ -1,10 +1,10 @@
 import '../app_locale.dart';
 import '../string_keys.dart';
-import 'ar.dart';
-import 'fr.dart';
-import 'es.dart';
-import 'tr.dart';
-import 'ur.dart';
+import './ar.dart';
+import './fr.dart';
+import './es.dart';
+import './tr.dart';
+import './ur.dart';
 
 /// English source catalogue. Other locales fall back to these values when a
 /// key has not yet been translated.
@@ -28,7 +28,8 @@ const Map<String, String> englishStrings = {
   StringKeys.loading: 'Loading',
   StringKeys.unavailable: 'Unavailable',
   StringKeys.errorTitle: 'Something went wrong',
-  StringKeys.errorMessage: 'We couldn\'t complete that request. Please try again.',
+  StringKeys.errorMessage:
+      'We couldn\'t complete that request. Please try again.',
   StringKeys.emptyTitle: 'Nothing here yet',
   StringKeys.emptyMessage: 'Your learning journey starts here.',
   StringKeys.language: 'Language',
@@ -128,8 +129,13 @@ Map<String, String> catalogueFor(AppLocale locale) =>
     translationCatalogues[locale.code] ?? englishStrings;
 
 /// Completeness of a catalogue against the source keys.
-TranslationCompleteness completenessOf(String code, Map<String, String> catalogue) {
-  final missing = StringKeys.allKeys.where((key) => !catalogue.containsKey(key)).toList();
+TranslationCompleteness completenessOf(
+  String code,
+  Map<String, String> catalogue,
+) {
+  final missing = StringKeys.allKeys
+      .where((key) => !catalogue.containsKey(key))
+      .toList();
   return TranslationCompleteness(
     locale: code,
     translated: StringKeys.allKeys.length - missing.length,

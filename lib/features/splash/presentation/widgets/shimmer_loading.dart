@@ -43,7 +43,10 @@ class _ShimmerBlockState extends State<ShimmerBlock>
   void didUpdateWidget(covariant ShimmerBlock oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.enabled != oldWidget.enabled) {
-      if (widget.enabled) _controller.repeat(); else _controller.stop();
+      if (widget.enabled)
+        _controller.repeat();
+      else
+        _controller.stop();
     }
   }
 
@@ -125,18 +128,21 @@ class SkeletonTable extends StatelessWidget {
               ),
             ),
             const Divider(height: 1, color: AppColors.cardBorder),
-            ...List.generate(rows, (index) => const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                children: [
-                  ShimmerBlock(width: 90, height: 16),
-                  SizedBox(width: 24),
-                  ShimmerBlock(width: 140, height: 16),
-                  Spacer(),
-                  ShimmerBlock(width: 50, height: 16),
-                ],
+            ...List.generate(
+              rows,
+              (index) => const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  children: [
+                    ShimmerBlock(width: 90, height: 16),
+                    SizedBox(width: 24),
+                    ShimmerBlock(width: 140, height: 16),
+                    Spacer(),
+                    ShimmerBlock(width: 50, height: 16),
+                  ],
+                ),
               ),
-            )),
+            ),
           ],
         ),
       ),

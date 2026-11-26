@@ -63,7 +63,11 @@ class CategoryCard extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.cardBorder),
                     ),
-                    child: const Icon(Icons.lock_rounded, size: 10, color: AppColors.textMuted),
+                    child: const Icon(
+                      Icons.lock_rounded,
+                      size: 10,
+                      color: AppColors.textMuted,
+                    ),
                   ),
                 ),
             ],

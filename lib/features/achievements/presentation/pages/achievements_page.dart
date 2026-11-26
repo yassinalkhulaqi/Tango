@@ -4,9 +4,9 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
 import '../../../../core/extensions/context_extensions.dart';
-import '../../../core/theme/app_shadows.dart';
-import '../domain/achievement_model.dart';
-import 'achievement_card.dart';
+import '../../../../core/theme/app_shadows.dart';
+import '../../domain/achievement_model.dart';
+import '../widgets/achievement_card.dart';
 
 class AchievementsPage extends StatefulWidget {
   const AchievementsPage({super.key});
@@ -114,7 +114,9 @@ class _AchievementsPageState extends State<AchievementsPage> {
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: const Border(bottom: BorderSide(color: AppColors.cardBorder, width: 1)),
+        border: const Border(
+          bottom: BorderSide(color: AppColors.cardBorder, width: 1),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +130,9 @@ class _AchievementsPageState extends State<AchievementsPage> {
               ),
               Text(
                 '$earned / ${_achievements.length}',
-                style: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),

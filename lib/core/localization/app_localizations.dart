@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'app_locale.dart';
-import 'string_keys.dart';
-import 'catalogues/catalogue.dart';
+import './app_locale.dart';
+import './string_keys.dart';
+import './catalogues/catalogue.dart';
 
 /// Typed access to localized strings for one locale.
 ///
@@ -15,7 +15,10 @@ class AppLocalizations {
   AppLocalizations(this.locale) : _strings = catalogueFor(locale);
 
   static AppLocalizations of(BuildContext context) {
-    final localizations = Localizations.of<AppLocalizations>(context, AppLocalizations);
+    final localizations = Localizations.of<AppLocalizations>(
+      context,
+      AppLocalizations,
+    );
     if (localizations != null) return localizations;
     return AppLocalizations(AppLocale.en);
   }
@@ -140,7 +143,8 @@ class AppLocalizations {
   }
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override

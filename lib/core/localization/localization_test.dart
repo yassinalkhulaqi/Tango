@@ -10,7 +10,10 @@ void main() {
   group('AppLocale', () {
     test('supports six languages including two RTL locales', () {
       expect(AppLocale.values.length, 6);
-      expect(AppLocale.values.where((l) => l.isRtl).map((l) => l.code).toList(), ['ar', 'ur']);
+      expect(
+        AppLocale.values.where((l) => l.isRtl).map((l) => l.code).toList(),
+        ['ar', 'ur'],
+      );
     });
 
     test('parses language-only and regional codes', () {
@@ -24,8 +27,14 @@ void main() {
     });
 
     test('provides Flutter locales for MaterialApp', () {
-      expect(AppLocale.flutterLocales.map((l) => l.languageCode), contains('ar'));
-      expect(AppLocale.flutterLocales.map((l) => l.languageCode), contains('ur'));
+      expect(
+        AppLocale.flutterLocales.map((l) => l.languageCode),
+        contains('ar'),
+      );
+      expect(
+        AppLocale.flutterLocales.map((l) => l.languageCode),
+        contains('ur'),
+      );
     });
 
     test('groups locales by direction', () {
@@ -42,18 +51,30 @@ void main() {
   group('Translation catalogues', () {
     test('every locale catalogue is registered', () {
       for (final locale in AppLocale.values) {
-        expect(translationCatalogues.containsKey(locale.code), isTrue, reason: locale.code);
+        expect(
+          translationCatalogues.containsKey(locale.code),
+          isTrue,
+          reason: locale.code,
+        );
       }
     });
 
     test('English catalogue contains every key', () {
       final completeness = completenessOf('en', englishStrings);
-      expect(completeness.isComplete, isTrue, reason: completeness.missing.join(', '));
+      expect(
+        completeness.isComplete,
+        isTrue,
+        reason: completeness.missing.join(', '),
+      );
     });
 
     test('Arabic catalogue contains every key', () {
       final completeness = completenessOf('ar', arabicStrings);
-      expect(completeness.isComplete, isTrue, reason: completeness.missing.join(', '));
+      expect(
+        completeness.isComplete,
+        isTrue,
+        reason: completeness.missing.join(', '),
+      );
     });
 
     test('each locale resolves to a catalogue', () {
@@ -64,7 +85,11 @@ void main() {
 
     test('all locales cover the same key set', () {
       for (final entry in translationCatalogues.entries) {
-        expect(entry.value.keys.length, StringKeys.allKeys.length, reason: entry.key);
+        expect(
+          entry.value.keys.length,
+          StringKeys.allKeys.length,
+          reason: entry.key,
+        );
       }
     });
   });

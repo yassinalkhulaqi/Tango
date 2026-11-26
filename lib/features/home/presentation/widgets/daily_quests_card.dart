@@ -19,7 +19,11 @@ class DailyQuestsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.event_note_rounded, color: AppColors.primaryPurple, size: 20),
+              const Icon(
+                Icons.event_note_rounded,
+                color: AppColors.primaryPurple,
+                size: 20,
+              ),
               const SizedBox(width: 8),
               Text(
                 'Daily Quests',
@@ -89,11 +93,17 @@ class _QuestRow extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            color: done ? color.withValues(alpha: 0.15) : AppColors.surfaceLight,
+            color: done
+                ? color.withValues(alpha: 0.15)
+                : AppColors.surfaceLight,
             borderRadius: BorderRadius.circular(10),
           ),
           child: done
-              ? const Icon(Icons.check_rounded, color: AppColors.primaryGreen, size: 18)
+              ? const Icon(
+                  Icons.check_rounded,
+                  color: AppColors.primaryGreen,
+                  size: 18,
+                )
               : Icon(icon, color: AppColors.textMuted, size: 16),
         ),
         const SizedBox(width: 12),

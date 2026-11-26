@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
 
 class LessonProgressWidget extends StatelessWidget {
   final double progress;
@@ -64,7 +64,9 @@ class LessonProgressWidget extends StatelessWidget {
                   height: 4,
                   margin: const EdgeInsets.symmetric(horizontal: 1),
                   decoration: BoxDecoration(
-                    color: isCompleted ? AppColors.primaryGreen : AppColors.cardBorder.withValues(alpha: 0.3),
+                    color: isCompleted
+                        ? AppColors.primaryGreen
+                        : AppColors.cardBorder.withValues(alpha: 0.3),
                     borderRadius: AppRadius.circular(AppRadius.md),
                   ),
                 ),
@@ -102,13 +104,17 @@ class SectionProgressIndicator extends StatelessWidget {
               color: isCompleted
                   ? AppColors.primaryGreen
                   : isCurrent
-                      ? AppColors.primaryBlue
-                      : AppColors.cardBorder,
+                  ? AppColors.primaryBlue
+                  : AppColors.cardBorder,
               shape: BoxShape.circle,
             ),
             child: Center(
               child: isCompleted
-                  ? const Icon(Icons.check_rounded, color: Colors.white, size: 16)
+                  ? const Icon(
+                      Icons.check_rounded,
+                      color: Colors.white,
+                      size: 16,
+                    )
                   : Text(
                       '${index + 1}',
                       style: const TextStyle(
@@ -142,7 +148,11 @@ class XPIndicator extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Icon(Icons.bolt_rounded, color: AppColors.primaryYellow, size: 16),
+        const Icon(
+          Icons.bolt_rounded,
+          color: AppColors.primaryYellow,
+          size: 16,
+        ),
         const SizedBox(width: AppSpacing.xs),
         Text(
           '$xp / $totalXP XP',
@@ -170,20 +180,33 @@ class LessonStreakIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primaryOrange.withValues(alpha: 0.2), AppColors.primaryYellow.withValues(alpha: 0.1)],
+          colors: [
+            AppColors.primaryOrange.withValues(alpha: 0.2),
+            AppColors.primaryYellow.withValues(alpha: 0.1),
+          ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
         borderRadius: AppRadius.circular(AppRadius.xxl),
-        border: Border.all(color: AppColors.primaryOrange.withValues(alpha: 0.3), width: 1),
+        border: Border.all(
+          color: AppColors.primaryOrange.withValues(alpha: 0.3),
+          width: 1,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.local_fire_department_rounded, color: AppColors.primaryOrange, size: 18),
+          const Icon(
+            Icons.local_fire_department_rounded,
+            color: AppColors.primaryOrange,
+            size: 18,
+          ),
           const SizedBox(width: AppSpacing.xs),
           Text(
             '$streak Day Streak',

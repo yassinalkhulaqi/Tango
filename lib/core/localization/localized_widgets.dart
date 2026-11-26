@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'app_locale.dart';
-import 'app_localizations.dart';
-import 'locale_controller.dart';
+import './app_locale.dart';
+import './app_localizations.dart';
+import './locale_controller.dart';
 
 /// Text widget that reads from the active locale with English fallback.
 class LocalizedText extends StatelessWidget {
@@ -52,7 +52,10 @@ class LocaleChip extends StatelessWidget {
       label: Text(locale.nativeName, textDirection: locale.direction),
       selected: selected,
       onSelected: onSelected == null ? null : (_) => onSelected!(locale),
-      avatar: Icon(locale.isRtl ? Icons.language_rounded : Icons.language_outlined, size: 16),
+      avatar: Icon(
+        locale.isRtl ? Icons.language_rounded : Icons.language_outlined,
+        size: 16,
+      ),
     );
   }
 }
@@ -74,25 +77,42 @@ class LocalePicker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(strings.selectLanguage, style: Theme.of(context).textTheme.titleMedium),
+        Text(
+          strings.selectLanguage,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         const SizedBox(height: 12),
-        Text(strings.rtlLanguages, style: Theme.of(context).textTheme.labelMedium),
+        Text(
+          strings.rtlLanguages,
+          style: Theme.of(context).textTheme.labelMedium,
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           children: [
             for (final locale in AppLocaleHelper.rtlLocales)
-              LocaleChip(locale: locale, selected: locale == current, onSelected: onChanged),
+              LocaleChip(
+                locale: locale,
+                selected: locale == current,
+                onSelected: onChanged,
+              ),
           ],
         ),
         const SizedBox(height: 16),
-        Text(strings.ltrLanguages, style: Theme.of(context).textTheme.labelMedium),
+        Text(
+          strings.ltrLanguages,
+          style: Theme.of(context).textTheme.labelMedium,
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           children: [
             for (final locale in AppLocaleHelper.ltrLocales)
-              LocaleChip(locale: locale, selected: locale == current, onSelected: onChanged),
+              LocaleChip(
+                locale: locale,
+                selected: locale == current,
+                onSelected: onChanged,
+              ),
           ],
         ),
       ],
@@ -115,10 +135,7 @@ class LocalizationScope extends StatelessWidget {
   Widget build(BuildContext context) {
     return LocaleScope(
       controller: controller,
-      child: Directionality(
-        textDirection: controller.direction,
-        child: child,
-      ),
+      child: Directionality(textDirection: controller.direction, child: child),
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
 
 class LessonNavigationWidget extends StatelessWidget {
   final int currentSection;
@@ -30,9 +30,15 @@ class LessonNavigationWidget extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: const Border(top: BorderSide(color: AppColors.cardBorder, width: 1)),
+        border: const Border(
+          top: BorderSide(color: AppColors.cardBorder, width: 1),
+        ),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 16, offset: const Offset(0, -4)),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 16,
+            offset: const Offset(0, -4),
+          ),
         ],
       ),
       child: Column(
@@ -49,7 +55,10 @@ class LessonNavigationWidget extends StatelessWidget {
                 ),
               ),
               SectionProgressIndicator(
-                sectionStatus: List.generate(totalSections, (index) => index < currentSection),
+                sectionStatus: List.generate(
+                  totalSections,
+                  (index) => index < currentSection,
+                ),
                 currentIndex: currentSection,
               ),
             ],
@@ -171,20 +180,29 @@ class SectionTabs extends StatelessWidget {
             onTap: () => onTabSelected(index),
             child: AnimatedContainer(
               duration: AppMotion.fast,
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
               margin: const EdgeInsets.only(right: AppSpacing.sm),
               decoration: BoxDecoration(
-                color: isSelected ? AppColors.primaryBlue.withValues(alpha: 0.2) : AppColors.surface,
+                color: isSelected
+                    ? AppColors.primaryBlue.withValues(alpha: 0.2)
+                    : AppColors.surface,
                 borderRadius: AppRadius.circular(AppRadius.xxl),
                 border: Border.all(
-                  color: isSelected ? AppColors.primaryBlue : AppColors.cardBorder,
+                  color: isSelected
+                      ? AppColors.primaryBlue
+                      : AppColors.cardBorder,
                   width: isSelected ? 2 : 1,
                 ),
               ),
               child: Text(
                 tabLabels[index],
                 style: AppTextStyles.bodyMedium.copyWith(
-                  color: isSelected ? AppColors.primaryBlue : AppColors.textSecondary,
+                  color: isSelected
+                      ? AppColors.primaryBlue
+                      : AppColors.textSecondary,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   fontSize: 13,
                 ),
@@ -220,7 +238,11 @@ class LessonBreadcrumb extends StatelessWidget {
           ),
         ),
         const SizedBox(width: AppSpacing.xs),
-        const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted, size: 16),
+        const Icon(
+          Icons.chevron_right_rounded,
+          color: AppColors.textMuted,
+          size: 16,
+        ),
         const SizedBox(width: AppSpacing.xs),
         Expanded(
           child: Text(

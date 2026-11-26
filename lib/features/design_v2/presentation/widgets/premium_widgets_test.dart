@@ -12,28 +12,33 @@ void main() {
     });
 
     testWidgets('shows a spinner when loading', (tester) async {
-      await tester.pumpWidget(_wrap(const PremiumButton(label: 'Login', isLoading: true)));
+      await tester.pumpWidget(
+        _wrap(const PremiumButton(label: 'Login', isLoading: true)),
+      );
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
       expect(find.text('Login'), findsNothing);
     });
 
     testWidgets('disables onPressed while loading', (tester) async {
       var taps = 0;
-      await tester.pumpWidget(_wrap(PremiumButton(
-        label: 'Login',
-        isLoading: true,
-        onPressed: () => taps++,
-      )));
+      await tester.pumpWidget(
+        _wrap(
+          PremiumButton(
+            label: 'Login',
+            isLoading: true,
+            onPressed: () => taps++,
+          ),
+        ),
+      );
       await tester.tap(find.byType(ElevatedButton));
       expect(taps, 0);
     });
 
     testWidgets('calls onPressed when enabled', (tester) async {
       var taps = 0;
-      await tester.pumpWidget(_wrap(PremiumButton(
-        label: 'Login',
-        onPressed: () => taps++,
-      )));
+      await tester.pumpWidget(
+        _wrap(PremiumButton(label: 'Login', onPressed: () => taps++)),
+      );
       await tester.tap(find.byType(ElevatedButton));
       expect(taps, 1);
     });
@@ -41,20 +46,20 @@ void main() {
 
   group('PremiumCard', () {
     testWidgets('shows title and subtitle', (tester) async {
-      await tester.pumpWidget(_wrap(const PremiumCard(
-        title: 'Flutter Basics',
-        subtitle: '24 lessons',
-      )));
+      await tester.pumpWidget(
+        _wrap(
+          const PremiumCard(title: 'Flutter Basics', subtitle: '24 lessons'),
+        ),
+      );
       expect(find.text('Flutter Basics'), findsOneWidget);
       expect(find.text('24 lessons'), findsOneWidget);
     });
 
     testWidgets('handles taps', (tester) async {
       var taps = 0;
-      await tester.pumpWidget(_wrap(PremiumCard(
-        title: 'Course',
-        onTap: () => taps++,
-      )));
+      await tester.pumpWidget(
+        _wrap(PremiumCard(title: 'Course', onTap: () => taps++)),
+      );
       await tester.tap(find.byType(InkWell));
       expect(taps, 1);
     });
@@ -62,11 +67,15 @@ void main() {
 
   group('SectionHeader', () {
     testWidgets('renders action', (tester) async {
-      await tester.pumpWidget(_wrap(SectionHeader(
-        title: 'Explore',
-        actionLabel: 'See All',
-        onAction: () {},
-      )));
+      await tester.pumpWidget(
+        _wrap(
+          SectionHeader(
+            title: 'Explore',
+            actionLabel: 'See All',
+            onAction: () {},
+          ),
+        ),
+      );
       expect(find.text('Explore'), findsOneWidget);
       expect(find.text('See All'), findsOneWidget);
     });

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OnboardingController extends ChangeNotifier {
   late final PageController _pageController;
@@ -38,7 +39,7 @@ class OnboardingController extends ChangeNotifier {
   }
 
   void onComplete(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed('/auth');
+    GoRouter.of(context).go('/login');
   }
 
   @override

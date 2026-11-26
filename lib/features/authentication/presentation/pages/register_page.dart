@@ -6,15 +6,18 @@ import '../widgets/auth_text_field.dart';
 import '../widgets/password_field.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/social_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/network/api_exception.dart';
+import '../../data/auth_repository.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage>
+class _RegisterPageState extends ConsumerState<RegisterPage>
     with SingleTickerProviderStateMixin {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -49,16 +52,32 @@ class _RegisterPageState extends State<RegisterPage>
     super.dispose();
   }
 
-  void _register() {
+  Future<void> _register() async {
     setState(() => _isLoading = true);
-    Future.delayed(const Duration(seconds: 1), () {
+    try {
+      await ref
+          .read(authRepositoryProvider)
+          .register(
+            displayName: _nameController.text.trim(),
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+          );
       if (!mounted) return;
-      setState(() => _isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Account created! Welcome to CodeBro.'), backgroundColor: AppColors.green),
+        const SnackBar(
+          content: Text('Account created! Welcome to CodeBro.'),
+          backgroundColor: AppColors.green,
+        ),
       );
-      Navigator.of(context).pushReplacementNamed('/auth');
-    });
+      GoRouter.of(context).go('/login');
+    } on ApiException catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message), backgroundColor: Colors.red),
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -99,7 +118,8 @@ class _RegisterPageState extends State<RegisterPage>
                     label: 'Password',
                     hint: '••••••••',
                     obscureText: _obscurePassword,
-                    onToggle: () => setState(() => _obscurePassword = !_obscurePassword),
+                    onToggle: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
                   ),
                   const SizedBox(height: 18),
                   PasswordField(
@@ -107,7 +127,8 @@ class _RegisterPageState extends State<RegisterPage>
                     label: 'Confirm Password',
                     hint: '••••••••',
                     obscureText: _obscureConfirm,
-                    onToggle: () => setState(() => _obscureConfirm = !_obscureConfirm),
+                    onToggle: () =>
+                        setState(() => _obscureConfirm = !_obscureConfirm),
                   ),
                   const SizedBox(height: 20),
                   GestureDetector(
@@ -118,15 +139,23 @@ class _RegisterPageState extends State<RegisterPage>
                           width: 20,
                           height: 20,
                           decoration: BoxDecoration(
-                            color: _acceptTerms ? AppColors.primaryBlue : Colors.transparent,
+                            color: _acceptTerms
+                                ? AppColors.primaryBlue
+                                : Colors.transparent,
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(
-                              color: _acceptTerms ? AppColors.primaryBlue : AppColors.cardBorder,
+                              color: _acceptTerms
+                                  ? AppColors.primaryBlue
+                                  : AppColors.cardBorder,
                               width: 1.5,
                             ),
                           ),
                           child: _acceptTerms
-                              ? const Icon(Icons.check_rounded, color: Colors.white, size: 14)
+                              ? const Icon(
+                                  Icons.check_rounded,
+                                  color: Colors.white,
+                                  size: 14,
+                                )
                               : null,
                         ),
                         const SizedBox(width: 10),
@@ -141,11 +170,17 @@ class _RegisterPageState extends State<RegisterPage>
                     ),
                   ),
                   const SizedBox(height: 28),
-                  AuthButton(text: 'Create Account', onPressed: _register, isLoading: _isLoading),
+                  AuthButton(
+                    text: 'Create Account',
+                    onPressed: _register,
+                    isLoading: _isLoading,
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      const Expanded(child: Divider(color: AppColors.cardBorder)),
+                      const Expanded(
+                        child: Divider(color: AppColors.cardBorder),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
@@ -156,7 +191,9 @@ class _RegisterPageState extends State<RegisterPage>
                           ),
                         ),
                       ),
-                      const Expanded(child: Divider(color: AppColors.cardBorder)),
+                      const Expanded(
+                        child: Divider(color: AppColors.cardBorder),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -166,10 +203,13 @@ class _RegisterPageState extends State<RegisterPage>
                   ),
                   const SizedBox(height: 32),
                   GestureDetector(
-                    onTap: () => Navigator.of(context).pushReplacementNamed('/auth'),
+                    onTap: () => GoRouter.of(context).go('/login'),
                     child: RichText(
                       text: TextSpan(
-                        style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, fontSize: 14),
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: 14,
+                        ),
                         children: [
                           const TextSpan(text: 'Already have an account? '),
                           TextSpan(

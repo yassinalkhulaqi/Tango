@@ -20,7 +20,8 @@ const Map<String, String> urduStrings = {
   StringKeys.loading: 'لوڈ ہو رہا ہے',
   StringKeys.unavailable: 'دستیاب نہیں',
   StringKeys.errorTitle: 'کچھ غلط ہو گیا',
-  StringKeys.errorMessage: 'درخواست مکمل نہیں ہو سکی۔ براہِ کرم دوبارہ کوشش کریں۔',
+  StringKeys.errorMessage:
+      'درخواست مکمل نہیں ہو سکی۔ براہِ کرم دوبارہ کوشش کریں۔',
   StringKeys.emptyTitle: 'یہاں ابھی کچھ نہیں',
   StringKeys.emptyMessage: 'آپ کا سیکھنے کا سفر یہاں سے شروع ہوتا ہے۔',
   StringKeys.language: 'زبان',

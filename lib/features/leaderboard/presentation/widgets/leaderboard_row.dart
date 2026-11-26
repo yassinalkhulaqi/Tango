@@ -4,14 +4,18 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
 import '../../../../core/extensions/context_extensions.dart';
-import '../../../core/theme/app_shadows.dart';
-import '../domain/leaderboard_model.dart';
+import '../../../../core/theme/app_shadows.dart';
+import '../../domain/leaderboard_model.dart';
 
 class LeaderboardRow extends StatelessWidget {
   final LeaderboardEntry entry;
   final bool showRankBadge;
 
-  const LeaderboardRow({super.key, required this.entry, this.showRankBadge = true});
+  const LeaderboardRow({
+    super.key,
+    required this.entry,
+    this.showRankBadge = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +23,18 @@ class LeaderboardRow extends StatelessWidget {
     final Color rankColor = entry.rank == 1
         ? AppColors.primaryYellow
         : entry.rank == 2
-            ? const Color(0xFFCBD5E1)
-            : entry.rank == 3
-                ? const Color(0xFFE2E8F0)
-                : AppColors.textMuted;
+        ? const Color(0xFFCBD5E1)
+        : entry.rank == 3
+        ? const Color(0xFFE2E8F0)
+        : AppColors.textMuted;
 
     return Container(
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: isCurrent ? AppColors.primaryBlue.withValues(alpha: 0.10) : AppColors.surface,
+        color: isCurrent
+            ? AppColors.primaryBlue.withValues(alpha: 0.10)
+            : AppColors.surface,
         borderRadius: AppRadius.circular(AppRadius.xl),
         border: Border.all(
           color: isCurrent ? AppColors.primaryBlue : AppColors.cardBorder,
@@ -53,7 +59,9 @@ class LeaderboardRow extends StatelessWidget {
                         entry.name,
                         style: AppTextStyles.bodyLarge.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: isCurrent ? AppColors.primaryBlue : AppColors.textPrimary,
+                          color: isCurrent
+                              ? AppColors.primaryBlue
+                              : AppColors.textPrimary,
                         ),
                       ),
                     ),
@@ -70,7 +78,11 @@ class LeaderboardRow extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xs),
                 Row(
                   children: [
-                    Icon(Icons.bolt_rounded, color: AppColors.primaryYellow, size: 16),
+                    Icon(
+                      Icons.bolt_rounded,
+                      color: AppColors.primaryYellow,
+                      size: 16,
+                    ),
                     const SizedBox(width: AppSpacing.xs),
                     Text(
                       '${entry.xp.toStringAsFixed(0)} XP',
@@ -85,7 +97,10 @@ class LeaderboardRow extends StatelessWidget {
           ),
           if (isCurrent)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.primaryBlue,
                 borderRadius: AppRadius.circular(AppRadius.xxl),
@@ -114,7 +129,10 @@ class LeaderboardRow extends StatelessWidget {
         height: 32,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [color.withValues(alpha: 0.2), color.withValues(alpha: 0.05)],
+            colors: [
+              color.withValues(alpha: 0.2),
+              color.withValues(alpha: 0.05),
+            ],
           ),
           shape: BoxShape.circle,
           border: Border.all(color: color, width: 2),

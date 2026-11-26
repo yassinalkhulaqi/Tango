@@ -20,7 +20,8 @@ const Map<String, String> frenchStrings = {
   StringKeys.loading: 'Chargement',
   StringKeys.unavailable: 'Indisponible',
   StringKeys.errorTitle: 'Une erreur est survenue',
-  StringKeys.errorMessage: 'Impossible de terminer la demande. Veuillez réessayer.',
+  StringKeys.errorMessage:
+      'Impossible de terminer la demande. Veuillez réessayer.',
   StringKeys.emptyTitle: 'Rien ici pour le moment',
   StringKeys.emptyMessage: 'Votre parcours commence ici.',
   StringKeys.language: 'Langue',

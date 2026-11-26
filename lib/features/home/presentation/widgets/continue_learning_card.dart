@@ -43,7 +43,11 @@ class ContinueLearningCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Icon(Icons.auto_stories_rounded, color: Colors.white, size: 22),
+                child: const Icon(
+                  Icons.auto_stories_rounded,
+                  color: Colors.white,
+                  size: 22,
+                ),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -87,7 +91,9 @@ class ContinueLearningCard extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: 0.3,
                 backgroundColor: AppColors.surfaceLight,
-                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryGreen),
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  AppColors.primaryGreen,
+                ),
               ),
             ),
           ),
@@ -140,7 +146,11 @@ class ContinueLearningCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 18),
+                      const Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                     ],
                   ),
                 ),

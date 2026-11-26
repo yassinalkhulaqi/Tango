@@ -5,8 +5,8 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/theme/app_shadows.dart';
-import '../domain/course_model.dart';
-import 'widgets/lesson_item.dart';
+import '../../domain/course_model.dart';
+import '../widgets/lesson_item.dart';
 
 class CourseDetailPage extends StatelessWidget {
   final Course course;
@@ -32,7 +32,9 @@ class CourseDetailPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             sliver: SliverToBoxAdapter(child: _buildLessonsSection(context)),
           ),
-          const SliverPadding(padding: EdgeInsets.only(bottom: AppSpacing.huge)),
+          const SliverPadding(
+            padding: EdgeInsets.only(bottom: AppSpacing.huge),
+          ),
         ],
       ),
     );
@@ -71,7 +73,9 @@ class CourseDetailPage extends StatelessWidget {
         background: Container(
           decoration: BoxDecoration(
             gradient: course.isLocked
-                ? const LinearGradient(colors: [Color(0xFF1E293B), Color(0xFF0F141C)])
+                ? const LinearGradient(
+                    colors: [Color(0xFF1E293B), Color(0xFF0F141C)],
+                  )
                 : LinearGradient(
                     colors: [
                       AppColors.primaryBlue.withValues(alpha: 0.25),
@@ -85,14 +89,19 @@ class CourseDetailPage extends StatelessWidget {
             child: Icon(
               _iconForCategory(course.category),
               size: 80,
-              color: course.isLocked ? AppColors.textMuted : AppColors.primaryBlue,
+              color: course.isLocked
+                  ? AppColors.textMuted
+                  : AppColors.primaryBlue,
             ),
           ),
         ),
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.bookmark_border_rounded, color: AppColors.textSecondary),
+          icon: const Icon(
+            Icons.bookmark_border_rounded,
+            color: AppColors.textSecondary,
+          ),
           onPressed: () {},
         ),
       ],
@@ -105,14 +114,22 @@ class CourseDetailPage extends StatelessWidget {
       children: [
         Text(
           course.subtitle,
-          style: AppTextStyles.bodyLarge.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.bodyLarge.copyWith(
+            color: AppColors.textSecondary,
+          ),
         ),
         const SizedBox(height: AppSpacing.lg),
         Row(
           children: [
-            _buildStatChip('${course.lessonCount} lessons', Icons.menu_book_rounded),
+            _buildStatChip(
+              '${course.lessonCount} lessons',
+              Icons.menu_book_rounded,
+            ),
             const SizedBox(width: AppSpacing.sm),
-            _buildStatChip('+${course.lessonCount * 50} XP', Icons.bolt_rounded),
+            _buildStatChip(
+              '+${course.lessonCount * 50} XP',
+              Icons.bolt_rounded,
+            ),
             const SizedBox(width: AppSpacing.sm),
             _buildStatChip('Beginner', Icons.school_rounded),
           ],
@@ -129,12 +146,18 @@ class CourseDetailPage extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.lock_outline_rounded, color: AppColors.textMuted, size: 20),
+                const Icon(
+                  Icons.lock_outline_rounded,
+                  color: AppColors.textMuted,
+                  size: 20,
+                ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
                     'Locked — ${course.unlockRequirement}',
-                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMuted),
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: AppColors.textMuted,
+                    ),
                   ),
                 ),
               ],
@@ -148,10 +171,11 @@ class CourseDetailPage extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: course.lessons.isNotEmpty
                   ? () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => LessonPlayerPage(lesson: course.lessons.first),
-                        ),
-                      )
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            LessonPlayerPage(lesson: course.lessons.first),
+                      ),
+                    )
                   : null,
               icon: const Icon(Icons.play_arrow_rounded, size: 20),
               label: const Text(
@@ -176,7 +200,10 @@ class CourseDetailPage extends StatelessWidget {
 
   Widget _buildStatChip(String label, IconData icon) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       decoration: BoxDecoration(
         color: AppColors.surfaceLight,
         borderRadius: AppRadius.circular(AppRadius.xxl),
@@ -212,7 +239,9 @@ class CourseDetailPage extends StatelessWidget {
         ClipRRect(
           borderRadius: AppRadius.circular(AppRadius.md),
           child: LinearProgressIndicator(
-            value: course.progress / course.lessonCount.clamp(1, course.lessonCount),
+            value:
+                course.progress /
+                course.lessonCount.clamp(1, course.lessonCount),
             minHeight: 8,
             backgroundColor: AppColors.cardBorder,
             valueColor: const AlwaysStoppedAnimation(AppColors.primaryBlue),
@@ -224,7 +253,9 @@ class CourseDetailPage extends StatelessWidget {
           children: [
             Text(
               '${course.progress.toInt()} / ${course.lessonCount}',
-              style: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.labelMedium.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
             Text(
               '${(course.completionPercent * 100).round()}%',
@@ -252,7 +283,10 @@ class CourseDetailPage extends StatelessWidget {
             ),
             Text(
               '${course.lessons.length} lessons',
-              style: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary, fontSize: 12),
+              style: AppTextStyles.labelMedium.copyWith(
+                color: AppColors.textSecondary,
+                fontSize: 12,
+              ),
             ),
           ],
         ),
@@ -268,7 +302,8 @@ class CourseDetailPage extends StatelessWidget {
                 index: index,
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => LessonPlayerPage(lesson: course.lessons[index]),
+                    builder: (_) =>
+                        LessonPlayerPage(lesson: course.lessons[index]),
                   ),
                 ),
               );
@@ -276,8 +311,11 @@ class CourseDetailPage extends StatelessWidget {
             return LessonItem(
               lesson: Lesson(
                 id: 'lesson_$index',
-                title: index == 0 ? 'Introduction to ${course.title}' : 'Lesson ${index + 1}',
-                description: 'Start your ${course.category.toLowerCase()} journey',
+                title: index == 0
+                    ? 'Introduction to ${course.title}'
+                    : 'Lesson ${index + 1}',
+                description:
+                    'Start your ${course.category.toLowerCase()} journey',
                 isLocked: index > 0,
                 xpReward: 50,
               ),
@@ -339,7 +377,9 @@ class LessonPlayerPage extends StatelessWidget {
                 children: [
                   Text(
                     lesson.description,
-                    style: AppTextStyles.bodyLarge.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.bodyLarge.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.lg),
                   Container(
@@ -355,12 +395,18 @@ class LessonPlayerPage extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.code_rounded, color: AppColors.primaryYellow, size: 20),
+                            const Icon(
+                              Icons.code_rounded,
+                              color: AppColors.primaryYellow,
+                              size: 20,
+                            ),
                             const SizedBox(width: AppSpacing.sm),
                             Expanded(
                               child: Text(
                                 'Code Example',
-                                style: AppTextStyles.labelLarge.copyWith(color: AppColors.primaryYellow),
+                                style: AppTextStyles.labelLarge.copyWith(
+                                  color: AppColors.primaryYellow,
+                                ),
                               ),
                             ),
                           ],
@@ -401,7 +447,9 @@ class LessonPlayerPage extends StatelessWidget {
             padding: const EdgeInsets.all(AppSpacing.lg),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              border: const Border(top: BorderSide(color: AppColors.cardBorder, width: 1)),
+              border: const Border(
+                top: BorderSide(color: AppColors.cardBorder, width: 1),
+              ),
               boxShadow: [AppShadows.soft],
             ),
             child: SizedBox(

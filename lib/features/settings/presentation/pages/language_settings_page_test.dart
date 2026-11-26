@@ -6,11 +6,11 @@ import 'package:tango/core/localization/locale_controller.dart';
 import 'package:tango/features/settings/presentation/pages/language_settings_page.dart';
 
 Widget _wrap(LocaleController controller) => MaterialApp(
-      locale: Locale(controller.code),
-      localizationsDelegates: AppLocalizations.delegates,
-      supportedLocales: AppLocale.supportedLocales,
-      home: LanguageSettingsPage(controller: controller),
-    );
+  locale: Locale(controller.code),
+  localizationsDelegates: AppLocalizations.delegates,
+  supportedLocales: AppLocale.supportedLocales,
+  home: LanguageSettingsPage(controller: controller),
+);
 
 void main() {
   testWidgets('renders the language settings page', (tester) async {

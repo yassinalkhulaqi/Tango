@@ -126,14 +126,7 @@ class LessonSection {
   }
 }
 
-enum SectionType {
-  theory,
-  code,
-  interactive,
-  quiz,
-  challenge,
-  summary,
-}
+enum SectionType { theory, code, interactive, quiz, challenge, summary }
 
 class LessonQuizQuestion {
   final String id;
@@ -270,12 +263,7 @@ class DiffChange {
   });
 }
 
-enum DiffType {
-  added,
-  removed,
-  changed,
-  unchanged,
-}
+enum DiffType { added, removed, changed, unchanged }
 
 class LessonSession {
   final String id;

@@ -28,8 +28,8 @@ class PremiumButton extends StatelessWidget {
     final background = isDangerous
         ? Theme.of(context).colorScheme.error
         : isPrimary
-            ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.surfaceContainerHighest;
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.surfaceContainerHighest;
     final foreground = isPrimary || isDangerous
         ? Theme.of(context).colorScheme.onPrimary
         : Theme.of(context).colorScheme.onSurface;
@@ -41,7 +41,9 @@ class PremiumButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: background,
           foregroundColor: foreground,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
         ),
         child: isLoading
             ? SizedBox(
@@ -111,8 +113,8 @@ class PremiumCard extends StatelessWidget {
                 Text(
                   subtitle!,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ],

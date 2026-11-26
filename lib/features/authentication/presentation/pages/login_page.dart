@@ -6,15 +6,19 @@ import '../widgets/auth_text_field.dart';
 import '../widgets/password_field.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/social_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/network/api_exception.dart';
+import '../../../../core/state/app_providers.dart';
+import '../../data/auth_repository.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
+class _LoginPageState extends ConsumerState<LoginPage>
     with SingleTickerProviderStateMixin {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -44,14 +48,29 @@ class _LoginPageState extends State<LoginPage>
     super.dispose();
   }
 
-  void _login() {
+  Future<void> _login() async {
     setState(() => _isLoading = true);
-    Future.delayed(const Duration(seconds: 1), () {
+    try {
+      final session = await ref
+          .read(authRepositoryProvider)
+          .login(_emailController.text.trim(), _passwordController.text);
+      await ref
+          .read(sessionProvider.notifier)
+          .signIn(
+            accessToken: session.accessToken!,
+            refreshToken: session.refreshToken ?? '',
+            userId: session.userId,
+          );
       if (!mounted) return;
+      GoRouter.of(context).go('/home');
+    } on ApiException catch (error) {
       if (!mounted) return;
-      setState(() => _isLoading = false);
-      Navigator.of(context).pushReplacementNamed('/home');
-    });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message), backgroundColor: Colors.red),
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -85,7 +104,8 @@ class _LoginPageState extends State<LoginPage>
                     label: 'Password',
                     hint: '••••••••',
                     obscureText: _obscurePassword,
-                    onToggle: () => setState(() => _obscurePassword = !_obscurePassword),
+                    onToggle: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -100,15 +120,23 @@ class _LoginPageState extends State<LoginPage>
                               width: 20,
                               height: 20,
                               decoration: BoxDecoration(
-                                color: _rememberMe ? AppColors.primaryBlue : Colors.transparent,
+                                color: _rememberMe
+                                    ? AppColors.primaryBlue
+                                    : Colors.transparent,
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
-                                  color: _rememberMe ? AppColors.primaryBlue : AppColors.cardBorder,
+                                  color: _rememberMe
+                                      ? AppColors.primaryBlue
+                                      : AppColors.cardBorder,
                                   width: 1.5,
                                 ),
                               ),
                               child: _rememberMe
-                                  ? const Icon(Icons.check_rounded, color: Colors.white, size: 14)
+                                  ? const Icon(
+                                      Icons.check_rounded,
+                                      color: Colors.white,
+                                      size: 14,
+                                    )
                                   : null,
                             ),
                             const SizedBox(width: 10),
@@ -123,7 +151,8 @@ class _LoginPageState extends State<LoginPage>
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pushNamed('/forgot-password'),
+                        onTap: () =>
+                            GoRouter.of(context).go('/forgot-password'),
                         child: Text(
                           'Forgot Password?',
                           style: AppTextStyles.labelMedium.copyWith(
@@ -136,11 +165,17 @@ class _LoginPageState extends State<LoginPage>
                     ],
                   ),
                   const SizedBox(height: 28),
-                  AuthButton(text: 'Login', onPressed: _login, isLoading: _isLoading),
+                  AuthButton(
+                    text: 'Login',
+                    onPressed: _login,
+                    isLoading: _isLoading,
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      const Expanded(child: Divider(color: AppColors.cardBorder)),
+                      const Expanded(
+                        child: Divider(color: AppColors.cardBorder),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
@@ -151,7 +186,9 @@ class _LoginPageState extends State<LoginPage>
                           ),
                         ),
                       ),
-                      const Expanded(child: Divider(color: AppColors.cardBorder)),
+                      const Expanded(
+                        child: Divider(color: AppColors.cardBorder),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -161,10 +198,13 @@ class _LoginPageState extends State<LoginPage>
                   ),
                   const SizedBox(height: 32),
                   GestureDetector(
-                    onTap: () => Navigator.of(context).pushReplacementNamed('/register'),
+                    onTap: () => GoRouter.of(context).go('/register'),
                     child: RichText(
                       text: TextSpan(
-                        style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary, fontSize: 14),
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                          fontSize: 14,
+                        ),
                         children: [
                           const TextSpan(text: "Don't have an account? "),
                           TextSpan(

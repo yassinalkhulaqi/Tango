@@ -1,237 +1,165 @@
-# 🚀 CodeBro — Tango
+# CodeBro (Tango)
 
-> **A gamified, developer-first learning platform** for mastering programming through interactive lessons, code challenges, quizzes, AI assistance, and social competition. Built with Flutter, featuring a dark IDE-inspired UI, glassmorphism components, and advanced motion design.
+> A gamified, developer-first learning platform — interactive coding lessons, quizzes, XP and streaks, badges, leaderboards and a social feed. Flutter client (Android · iOS · Web) + Node.js REST API.
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.12+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-blue?style=for-the-badge)](https://flutter.dev)
-
----
-
-## ✨ Features
-
-### 🎮 Gamified Learning
-- **XP & Leveling System** — Earn experience points, level up from Newbie to Legend
-- **Streak Tracking** — Build daily coding habits with streak freezes and flame indicators
-- **Achievements & Badges** — Unlock rare badges for milestones and skill mastery
-- **Leaderboards** — Weekly, monthly, and all-time rankings with friend competition
-
-### 📚 Interactive Lessons
-- **Course Catalog** — Browse Flutter, Python, Web Dev, Cybersecurity, AI/ML, and Game Development
-- **Lesson Player** — Theory, code examples, interactive exercises, and knowledge checks
-- **Built-in Code Editor** — Syntax-highlighted editor with run button and output console
-- **Quiz System** — Per-question quizzes with instant feedback and result screens
-- **Diff Comparison** — Side-by-side code comparison for challenge solutions
-
-### 🎨 Premium UI/UX
-- **Dark IDE Theme** — Deep space backgrounds with neon accents (no light mode)
-- **Glassmorphism** — Backdrop-filter blur cards with subtle gradients and borders
-- **Micro-interactions** — Button presses, XP floats, celebration bursts, streak pulses
-- **Responsive Design** — Mobile, tablet, and desktop adaptive layouts
-- **Smooth Animations** — Page transitions, staggered reveals, spring-based effects
-
-### 🤖 Social & Community
-- **Friends System** — Add friends, track their progress, compete on friend leaderboards
-- **Activity Feed** — Share achievements, like and comment on posts
-- **Friend Requests** — Send, accept, and reject friend requests
-- **Progress Sharing** — Share XP, badges, and streaks to social media
-
-### 🔧 Backend & Infrastructure
-- **REST API Services** — Authentication, courses, lessons, quizzes, progress, leaderboards
-- **Database Layer** — User profiles, progress tracking, friend relationships, achievements
-- **State Management** — Riverpod-based reactive state across the app
-- **Local Persistence** — Secure storage for user data and offline progress
-- **Analytics** — Learning analytics, event tracking, and performance metrics
+[![Flutter](https://img.shields.io/badge/Flutter-3.44-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.12-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)](https://nestjs.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgresql.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 ---
 
-## 📱 Screens Overview
+## Status legend
 
-| Screen | Description | Status |
-|--------|-------------|--------|
-| Splash / Onboarding | 3-screen welcome flow with skill selection | ✅ |
-| Authentication | Login, register, forgot password | ✅ |
-| Home Dashboard | Streak, XP, continue learning, daily quests | ✅ |
-| Courses List | Browse and filter courses by category | ✅ |
-| Course Detail | Lesson list, progress, start learning | ✅ |
-| Lesson Player | Theory, code, interactive exercises, quiz | ✅ |
-| Quiz System | Question screens, results, XP rewards | ✅ |
-| Code Playground | Editor, output console, run button | ✅ |
-| Leaderboard | Weekly / all-time / friends rankings | ✅ |
-| Achievements | Badge grid with earned/locked states | ✅ |
-| Profile | Avatar, level, stats, settings, sign out | ✅ |
-| Animation Showcase | Micro-interactions demo | ✅ |
-| Social Feed | Posts, likes, comments, sharing | ✅ |
+`✅ implemented` · `🔄 in progress` · `⏳ planned`
+
+| Area | Status |
+|---|---|
+| Design tokens, 6-locale i18n, RTL, responsive + a11y widgets | ✅ |
+| Original app flow (onboarding, auth, home, courses, quiz, playground, leaderboard, achievements, profile) | ✅ |
+| Riverpod + go_router canonical client shell | ✅ |
+| NestJS REST API, Prisma schema, seed, Docker Compose | ✅ |
+| CI workflow (Flutter + backend) | ✅ |
+| Golden tests, release flavors | ⏳ |
+| AI assistant chat, code-execution sandbox | ⏳ |
+
+> **Honest note:** earlier revisions of this README claimed Riverpod, a REST backend, Hive persistence and 12 locales. Those were aspirational. The audited baseline has `setState`/`ChangeNotifier`, no networking or persistence packages and **6** locales. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) §2 for the full audit. Statuses above track the current implementation work, not wishes.
 
 ---
 
-## 🛠 Tech Stack
+## Features
+
+- **Learn by building** — course catalog, lesson player with theory, code blocks, exercises and a playground.
+- **Gamification** — XP ledger with levels, daily streaks with freezes, badges, weekly/monthly/all-time/friend leaderboards.
+- **Social** — friend requests, activity feed, posts, likes and comments.
+- **Developer-native UI** — dark IDE-inspired theme, glassmorphism, tokenized motion, Inter + Fira Code typography.
+- **Global** — English, Arabic, French, Spanish, Turkish, Urdu with full RTL mirroring and locale-aware number/date formatting.
+- **Accessible** — semantic labels, focus order, 48dp targets and reduced-motion support.
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+  App[Flutter client\nAndroid / iOS / Web] -->|HTTPS / JSON| API[Node.js 20\nNestJS REST API]
+  API --> DB[(PostgreSQL 16)]
+  API --> Cache[(Redis 7)]
+```
+
+- `lib/app/` — app shell, typed router, auth guard andThemeData assembly.
+- `lib/core/` — design tokens, localization, network client, shared providers and UI kit.
+- `lib/features/<area>/` — `domain` (entities + repository contracts), `data` (DTOs + repositories), `presentation` (pages + widgets).
+- `backend/src/modules/` — auth, users, courses, progress, quizzes, xp, streaks, achievements, leaderboard, social, notifications, health.
+- `backend/prisma/` — schema, migrations and deterministic seed.
+- `archive/legacy_ui/` — reference-only copies of superseded UI layers; not compiled into the app.
+
+Full details: [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) and [`UX_BLUEPRINT.md`](UX_BLUEPRINT.md).
+
+---
+
+## Tech stack
 
 | Layer | Technology |
-|-------|------------|
-| **Framework** | Flutter 3.12+ |
-| **Language** | Dart 3.x |
-| **UI Toolkit** | Material Design 3 |
-| **State Management** | Riverpod |
-| **Backend** | REST API (Dart/Node/FastAPI) |
-| **Database** | PostgreSQL + Redis |
-| **Local Storage** | Secure Storage + Hive |
-| **Icons** | Material Icons + Custom |
+|---|---|
+| Client | Flutter 3.44, Dart 3.12, Material 3 |
+| State / routing | Riverpod, go_router |
+| HTTP / data | Dio, Freezed, json_serializable |
+| Local storage | shared_preferences, flutter_secure_storage |
+| Backend | Node.js 20, TypeScript, NestJS 10 |
+| Database / cache | PostgreSQL 16 + Prisma 5, Redis 7 |
+| Auth | JWT access + rotating refresh tokens (bcrypt hashed at rest) |
+| Docs / quality | Swagger/OpenAPI, flutter_test, Jest, ESLint, GitHub Actions |
 
 ---
 
-## 📁 Project Structure
+## Quick start
 
-```
-lib/
-├── main.dart                          # App entry point & routing
-├── core/
-│   ├── theme/
-│   │   ├── app_colors.dart            # Color palette & gradients
-│   │   ├── app_text_styles.dart       # Typography system
-│   │   ├── app_spacing.dart           # 4dp grid spacing
-│   │   ├── app_radius.dart            # Border radius constants
-│   │   ├── app_shadows.dart           # Shadow presets & glows
-│   │   ├── app_motion.dart            # Animation durations & curves
-│   │   └── app_gradients.dart         # Linear gradient definitions
-│   ├── constants/
-│   │   ├── app_constants.dart         # XP thresholds, level caps
-│   │   └── app_strings.dart           # User-facing strings
-│   └── extensions/
-│       ├── context_extensions.dart    # BuildContext shortcuts
-│       └── widget_extensions.dart     # Widget padding/helpers
-├── features/
-│   ├── onboarding/                    # Splash & welcome flow
-│   ├── onboarding_wizard/             # Multi-step skill/goal setup
-│   ├── authentication/                # Login, register, auth
-│   ├── home/                          # Dashboard, quests, stats
-│   ├── courses/                       # Course catalog & detail
-│   ├── lesson_interactive/            # Lesson player, code editor, quiz
-│   ├── playground/                    # Code playground editor
-│   ├── quiz/                          # Quiz system & results
-│   ├── leaderboard/                   # Rankings & competition
-│   ├── social_leaderboard/            # Friends, activity, sharing
-│   ├── achievements/                  # Badge system
-│   ├── profile/                       # User profile & settings
-│   └── ui_components/                 # Reusable widget library
-└── backend/                           # API services & database
-    ├── services/
-    ├── models/
-    └── repositories/
-```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **Flutter SDK** 3.12 or higher
-- **Dart SDK** 3.x
-- **Android Studio** or **VS Code** with Flutter extensions
-- **Git** for version control
-
-### Installation
+### Client
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/yassinalkhulaqi/Tango.git
 cd Tango
-
-# 2. Get Flutter dependencies
 flutter pub get
-
-# 3. Run the app
 flutter run
 ```
 
-### Supported Platforms
-
-- ✅ Android (API 21+)
-- ✅ iOS (iOS 12+)
-- ✅ Web (Chrome, Safari, Edge)
-- ✅ Windows / macOS / Linux (desktop)
-
-### Build for Release
+Supported targets: Android (API 21+), iOS 12+, Web, and desktop.
 
 ```bash
-# Android APK
+flutter test
+flutter analyze
 flutter build apk --release
-
-# Android App Bundle
-flutter build appbundle --release
-
-# iOS (requires macOS + Xcode)
-flutter build ios --release
-
-# Web
 flutter build web --release
 ```
 
----
+### API
 
-## 🌿 Branching Strategy
+```bash
+cd backend
+cp .env.example .env
+docker compose up -d          # PostgreSQL + Redis + API
+npm run prisma:migrate
+npm run prisma:seed
+npm run dev                   # http://localhost:3000/api/v1
+```
 
-Each feature is developed on a dedicated branch, then merged into `main` via pull request.
+Swagger UI: `http://localhost:3000/api/docs`. Tests: `npm test` (run without a live database).
 
-| Branch Pattern | Purpose |
-|---------------|---------|
-| `feature/ui-*` | User interface screens & components |
-| `feature/motion-*` | Animations & motion design |
-| `feature/backend-*` | API services & backend logic |
-| `fix/*` | Bug fixes & patches |
-| `refactor/*` | Code refactoring & architecture |
-| `feat/*` | New features & capabilities |
+### Configuration
 
-### Active Branches
+| Variable | Purpose | Default (dev) |
+|---|---|---|
+| `DATABASE_URL` | PostgreSQL connection string | `postgresql://codebro:codebro@localhost:5432/codebro` |
+| `REDIS_URL` | Redis connection string | `redis://localhost:6379` |
+| `JWT_ACCESS_SECRET` | Access token signing key | *required — no default* |
+| `JWT_REFRESH_SECRET` | Refresh token signing key | *required — no default* |
+| `ACCESS_TOKEN_TTL` | Access token lifetime | `15m` |
+| `REFRESH_TOKEN_TTL` | Refresh token lifetime | `30d` |
+| `PORT` | HTTP port | `3000` |
+| `API_PREFIX` | Global route prefix | `api/v1` |
 
-- `feature/ui-ux-master` — Comprehensive UI/UX (5000+ lines)
-- `feature/motion-animations-1` — Core animation engine (4000+ lines)
-- `feature/motion-animations-2` — Advanced motion effects (4000+ lines)
-- `feature/backend-api-services` — REST API layer (10k+ lines)
-- `feature/backend-database-services` — Database & persistence (10k+ lines)
-
----
-
-## 🤝 Contributing
-
-1. **Fork** the repository
-2. **Create** a feature branch: `git checkout -b feature/your-feature`
-3. **Commit** your changes: `git commit -m "feat: your message"`
-4. **Push** to your branch: `git push origin feature/your-feature`
-5. **Open** a pull request
-
-### Commit Convention
-
-- `feat:` — New feature
-- `fix:` — Bug fix
-- `docs:` — Documentation changes
-- `style:` — Formatting, missing semicolons, etc.
-- `refactor:` — Code refactoring
-- `test:` — Adding tests
-- `chore:` — Maintenance tasks
+Never commit real secrets; `.env` is git-ignored and `.env.example` contains placeholders only.
 
 ---
 
-## 📄 License
+## Testing
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+```bash
+# Flutter
+flutter analyze
+flutter test
+
+# Backend
+cd backend && npm test && npm run lint
+```
+
+List endpoints return `{ "data": [...], "meta": { "nextCursor": "...", "hasMore": false } }`; errors return `{ "error": { "code": "...", "message": "..." } }`.
 
 ---
 
-## 👥 Author
+## Contributing
+
+1. Fork the repo and create a branch: `git checkout -b feat/short-name`.
+2. Make your change with tests; keep `flutter analyze` and `npm test` clean.
+3. Commit using [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`.
+4. Push and open a pull request describing the behavior change and verification commands run.
+
+Branch prefixes: `feat/`, `fix/`, `refactor/`, `docs/`, `test/`, `chore/`. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) §5 for the phased roadmap.
+
+---
+
+## Roadmap
+
+Phases 0–4: documentation → client foundation & consolidation → backend service → UI/UX completion → quality, CI and release. Track progress in [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md).
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+## Author
 
 **yassinalkhulaqi** — [GitHub](https://github.com/yassinalkhulaqi)
-
----
-
-## 🙏 Acknowledgments
-
-- Flutter team for the amazing framework
-- Material Design for design guidelines
-- The open-source community for packages and inspiration
-
----
-
-*Happy coding with CodeBro! 🚀*

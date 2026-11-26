@@ -39,9 +39,10 @@ class _PremiumSplashScreenState extends State<PremiumSplashScreen>
       duration: const Duration(milliseconds: 600),
     );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
-    _slide = Tween<double>(begin: 16, end: 0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
-    );
+    _slide = Tween<double>(
+      begin: 16,
+      end: 0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
     _controller.forward();
     if (widget.onReady != null) {
       Future<void>.delayed(widget.hold, () {

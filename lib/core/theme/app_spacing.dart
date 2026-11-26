@@ -20,6 +20,5 @@ abstract final class AppSpacing {
     double top = 0,
     double right = 0,
     double bottom = 0,
-  }) =>
-      EdgeInsets.only(left: left, top: top, right: right, bottom: bottom);
+  }) => EdgeInsets.only(left: left, top: top, right: right, bottom: bottom);
 }

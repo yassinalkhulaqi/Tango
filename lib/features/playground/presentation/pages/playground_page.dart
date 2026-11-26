@@ -3,8 +3,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_shadows.dart';
-import '../domain/snippet_model.dart';
+import '../../../../core/theme/app_shadows.dart';
+import '../../domain/snippet_model.dart';
 
 class PlaygroundPage extends StatefulWidget {
   const PlaygroundPage({super.key});
@@ -83,18 +83,15 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final editorHeight = (constraints.maxHeight * _divider).clamp(60.0, constraints.maxHeight - 60);
+                final editorHeight = (constraints.maxHeight * _divider).clamp(
+                  60.0,
+                  constraints.maxHeight - 60,
+                );
                 return Column(
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: _buildEditorPane(editorHeight),
-                    ),
+                    Expanded(flex: 1, child: _buildEditorPane(editorHeight)),
                     _buildDivider(),
-                    Expanded(
-                      flex: 1,
-                      child: _buildOutputPane(),
-                    ),
+                    Expanded(flex: 1, child: _buildOutputPane()),
                   ],
                 );
               },
@@ -110,12 +107,17 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: const Border(bottom: BorderSide(color: AppColors.cardBorder, width: 1)),
+        border: const Border(
+          bottom: BorderSide(color: AppColors.cardBorder, width: 1),
+        ),
       ),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.sm,
+            ),
             decoration: BoxDecoration(
               color: AppColors.surfaceLight,
               borderRadius: AppRadius.circular(AppRadius.xxl),
@@ -125,7 +127,9 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
               child: DropdownButton<String>(
                 value: _language,
                 dropdownColor: AppColors.surfaceLight,
-                style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textPrimary),
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textPrimary,
+                ),
                 items: _languages
                     .map((l) => DropdownMenuItem(value: l, child: Text(l)))
                     .toList(),
@@ -140,7 +144,11 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
               child: ElevatedButton.icon(
                 onPressed: _isRunning ? null : _runCode,
                 icon: _isRunning
-                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
                     : const Icon(Icons.play_arrow_rounded, size: 20),
                 label: Text(_isRunning ? 'Running...' : 'Run'),
                 style: ElevatedButton.styleFrom(
@@ -176,11 +184,18 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             child: Row(
               children: [
-                const Icon(Icons.code_rounded, color: AppColors.primaryYellow, size: 16),
+                const Icon(
+                  Icons.code_rounded,
+                  color: AppColors.primaryYellow,
+                  size: 16,
+                ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
                   _language,
-                  style: AppTextStyles.labelSmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTextStyles.labelSmall.copyWith(
+                    color: AppColors.textMuted,
+                    fontSize: 11,
+                  ),
                 ),
               ],
             ),
@@ -210,7 +225,10 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
   Widget _buildDivider() {
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
-        setState(() => _divider = (_divider + details.delta.dx / 400).clamp(0.25, 0.85));
+        setState(
+          () =>
+              _divider = (_divider + details.delta.dx / 400).clamp(0.25, 0.85),
+        );
       },
       child: Container(
         height: 8,
@@ -232,7 +250,12 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         color: const Color(0xFF05070A),
         borderRadius: AppRadius.circular(AppRadius.lg),
       ),
-      margin: const EdgeInsets.fromLTRB(AppSpacing.md, 0, AppSpacing.md, AppSpacing.md),
+      margin: const EdgeInsets.fromLTRB(
+        AppSpacing.md,
+        0,
+        AppSpacing.md,
+        AppSpacing.md,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -242,11 +265,18 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             child: Row(
               children: [
-                const Icon(Icons.terminal_rounded, color: AppColors.primaryCyan, size: 16),
+                const Icon(
+                  Icons.terminal_rounded,
+                  color: AppColors.primaryCyan,
+                  size: 16,
+                ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
                   'Output',
-                  style: AppTextStyles.labelSmall.copyWith(color: AppColors.textMuted, fontSize: 11),
+                  style: AppTextStyles.labelSmall.copyWith(
+                    color: AppColors.textMuted,
+                    fontSize: 11,
+                  ),
                 ),
               ],
             ),
@@ -255,7 +285,9 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppSpacing.md),
               child: Text(
-                _outputController.text.isEmpty ? 'Run your code to see output here.' : _outputController.text,
+                _outputController.text.isEmpty
+                    ? 'Run your code to see output here.'
+                    : _outputController.text,
                 style: const TextStyle(
                   fontFamily: 'FiraCode',
                   fontSize: 13,

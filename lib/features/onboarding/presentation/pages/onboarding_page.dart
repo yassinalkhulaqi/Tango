@@ -63,16 +63,14 @@ class _OnboardingPageState extends State<OnboardingPage>
         children: [
           // Premium space background with subtle color glows
           _buildPremiumBackground(),
-          
+
           SafeArea(
             child: FadeTransition(
               opacity: _fadeAnimation,
               child: Column(
                 children: [
                   _buildTopBar(),
-                  Expanded(
-                    child: _buildPageView(),
-                  ),
+                  Expanded(child: _buildPageView()),
                   _buildBottomSection(),
                 ],
               ),
@@ -85,9 +83,7 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   Widget _buildPremiumBackground() {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: AppColors.backgroundGradient,
-      ),
+      decoration: const BoxDecoration(gradient: AppColors.backgroundGradient),
       child: Stack(
         children: [
           // Neon glow point top-right
@@ -156,7 +152,11 @@ class _OnboardingPageState extends State<OnboardingPage>
               // CodeBro logo label
               Row(
                 children: [
-                  const Icon(Icons.terminal_rounded, color: AppColors.primaryBlue, size: 22),
+                  const Icon(
+                    Icons.terminal_rounded,
+                    color: AppColors.primaryBlue,
+                    size: 22,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'CodeBro',
@@ -172,7 +172,10 @@ class _OnboardingPageState extends State<OnboardingPage>
                 TextButton(
                   onPressed: _controller.skipToEnd,
                   style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -198,9 +201,7 @@ class _OnboardingPageState extends State<OnboardingPage>
       onPageChanged: _onPageChanged,
       itemCount: OnboardingContent.pages.length,
       itemBuilder: (context, index) {
-        return OnboardingPageContent(
-          content: OnboardingContent.pages[index],
-        );
+        return OnboardingPageContent(content: OnboardingContent.pages[index]);
       },
     );
   }
@@ -220,7 +221,9 @@ class _OnboardingPageState extends State<OnboardingPage>
               ),
               const SizedBox(height: 32),
               OnboardingButton(
-                text: _controller.isLastPage ? 'Start Learning' : 'Next Journey',
+                text: _controller.isLastPage
+                    ? 'Start Learning'
+                    : 'Next Journey',
                 onPressed: _onActionPressed,
               ),
             ],

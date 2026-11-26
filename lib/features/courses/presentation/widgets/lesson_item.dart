@@ -5,14 +5,19 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/theme/app_shadows.dart';
-import '../domain/course_model.dart';
+import '../../domain/course_model.dart';
 
 class LessonItem extends StatelessWidget {
   final Lesson lesson;
   final int index;
   final VoidCallback onTap;
 
-  const LessonItem({super.key, required this.lesson, required this.index, required this.onTap});
+  const LessonItem({
+    super.key,
+    required this.lesson,
+    required this.index,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +50,8 @@ class LessonItem extends StatelessWidget {
                     color: isCompleted
                         ? AppColors.green
                         : isLocked
-                            ? AppColors.cardBorder
-                            : AppColors.primaryBlue,
+                        ? AppColors.cardBorder
+                        : AppColors.primaryBlue,
                     shape: BoxShape.circle,
                   ),
                   child: Center(
@@ -88,11 +93,23 @@ class LessonItem extends StatelessWidget {
                   ),
                 ),
                 if (isCompleted)
-                  const Icon(Icons.check_circle_rounded, color: AppColors.green, size: 20)
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    color: AppColors.green,
+                    size: 20,
+                  )
                 else if (isLocked)
-                  const Icon(Icons.lock_outline_rounded, color: AppColors.textMuted, size: 20)
+                  const Icon(
+                    Icons.lock_outline_rounded,
+                    color: AppColors.textMuted,
+                    size: 20,
+                  )
                 else
-                  const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.primaryBlue, size: 16),
+                  const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: AppColors.primaryBlue,
+                    size: 16,
+                  ),
               ],
             ),
           ),

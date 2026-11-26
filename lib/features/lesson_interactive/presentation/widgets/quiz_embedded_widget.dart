@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
-import '../domain/lesson_models.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
+import '../../domain/lesson_models.dart';
 
 class QuizEmbeddedWidget extends StatefulWidget {
   final LessonQuizQuestion question;
@@ -47,7 +47,10 @@ class _QuizEmbeddedWidgetState extends State<QuizEmbeddedWidget> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.primaryBlue.withValues(alpha: 0.15),
                 borderRadius: AppRadius.circular(AppRadius.xxl),
@@ -78,7 +81,9 @@ class _QuizEmbeddedWidgetState extends State<QuizEmbeddedWidget> {
             isSelected: isSelected,
             isCorrect: isCorrect,
             isRevealed: isRevealed,
-            onTap: widget.isSubmitting ? null : () => widget.onAnswerSelected(index),
+            onTap: widget.isSubmitting
+                ? null
+                : () => widget.onAnswerSelected(index),
           );
         }),
         if (widget.showResult && widget.selectedAnswer != null) ...[
@@ -92,12 +97,14 @@ class _QuizEmbeddedWidgetState extends State<QuizEmbeddedWidget> {
           child: PremiumQuizButton(
             text: widget.showResult && widget.selectedAnswer != null
                 ? (widget.selectedAnswer == widget.question.correctIndex
-                    ? 'Correct! Next'
-                    : 'Try Again')
+                      ? 'Correct! Next'
+                      : 'Try Again')
                 : 'Submit Answer',
             onPressed: widget.showResult && widget.selectedAnswer != null
                 ? widget.onNext
-                : (widget.selectedAnswer != null ? () => widget.submitAnswer() : null),
+                : (widget.selectedAnswer != null
+                      ? () => widget.submitAnswer()
+                      : null),
             isDisabled: widget.selectedAnswer == null && !widget.showResult,
             gradient: AppGradients.primary,
           ),
@@ -111,17 +118,22 @@ class _QuizEmbeddedWidgetState extends State<QuizEmbeddedWidget> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: (isCorrect ? AppColors.primaryGreen : AppColors.pink).withValues(alpha: 0.15),
+        color: (isCorrect ? AppColors.primaryGreen : AppColors.pink).withValues(
+          alpha: 0.15,
+        ),
         borderRadius: AppRadius.circular(AppRadius.lg),
         border: Border.all(
-          color: (isCorrect ? AppColors.primaryGreen : AppColors.pink).withValues(alpha: 0.3),
+          color: (isCorrect ? AppColors.primaryGreen : AppColors.pink)
+              .withValues(alpha: 0.3),
           width: 1,
         ),
       ),
       child: Row(
         children: [
           Icon(
-            isCorrect ? Icons.check_circle_rounded : Icons.error_outline_rounded,
+            isCorrect
+                ? Icons.check_circle_rounded
+                : Icons.error_outline_rounded,
             color: isCorrect ? AppColors.primaryGreen : AppColors.pink,
             size: 20,
           ),
@@ -188,7 +200,9 @@ class QuizOptionWidget extends StatelessWidget {
         textColor = AppColors.textSecondary;
       }
     } else {
-      fill = isSelected ? AppColors.primaryBlue.withValues(alpha: 0.15) : AppColors.surface;
+      fill = isSelected
+          ? AppColors.primaryBlue.withValues(alpha: 0.15)
+          : AppColors.surface;
       border = isSelected ? AppColors.primaryBlue : AppColors.cardBorder;
       textColor = AppColors.textPrimary;
     }
@@ -214,19 +228,27 @@ class QuizOptionWidget extends StatelessWidget {
                 color: isRevealed && isCorrect
                     ? AppColors.primaryGreen
                     : isRevealed && isSelected
-                        ? AppColors.pink
-                        : isSelected
-                            ? AppColors.primaryBlue
-                            : AppColors.surfaceLight,
+                    ? AppColors.pink
+                    : isSelected
+                    ? AppColors.primaryBlue
+                    : AppColors.surfaceLight,
                 shape: BoxShape.circle,
                 border: Border.all(color: border, width: 2),
               ),
               child: Center(
                 child: isRevealed && isCorrect
-                    ? const Icon(Icons.check_rounded, color: Colors.white, size: 18)
+                    ? const Icon(
+                        Icons.check_rounded,
+                        color: Colors.white,
+                        size: 18,
+                      )
                     : isRevealed && isSelected
-                        ? const Icon(Icons.close_rounded, color: Colors.white, size: 18)
-                        : null,
+                    ? const Icon(
+                        Icons.close_rounded,
+                        color: Colors.white,
+                        size: 18,
+                      )
+                    : null,
               ),
             ),
             const SizedBox(width: AppSpacing.md),

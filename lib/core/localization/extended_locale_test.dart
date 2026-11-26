@@ -18,7 +18,10 @@ void main() {
     });
 
     test('provides Flutter locales', () {
-      expect(ExtendedLocale.flutterLocales.map((l) => l.languageCode), contains('zh'));
+      expect(
+        ExtendedLocale.flutterLocales.map((l) => l.languageCode),
+        contains('zh'),
+      );
     });
 
     test('checks support', () {

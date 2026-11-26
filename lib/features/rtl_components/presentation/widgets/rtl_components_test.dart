@@ -11,19 +11,37 @@ void main() {
   });
 
   testWidgets('RTL nav row uses left chevron', (tester) async {
-    await tester.pumpWidget(_wrap(RtlNavRow(label: 'Home', onTap: () {}, rtl: true)));
+    await tester.pumpWidget(
+      _wrap(RtlNavRow(label: 'Home', onTap: () {}, rtl: true)),
+    );
     expect(find.byIcon(Icons.chevron_left_rounded), findsOneWidget);
   });
 
   testWidgets('tab bar renders tabs', (tester) async {
-    await tester.pumpWidget(_wrap(RtlTabBar(labels: ['Weekly', 'All-time'], selected: 0, onChanged: (_) {})));
+    await tester.pumpWidget(
+      _wrap(
+        RtlTabBar(
+          labels: ['Weekly', 'All-time'],
+          selected: 0,
+          onChanged: (_) {},
+        ),
+      ),
+    );
     expect(find.text('Weekly'), findsOneWidget);
     expect(find.text('All-time'), findsOneWidget);
   });
 
   testWidgets('tab bar responds to tap', (tester) async {
     int? selected;
-    await tester.pumpWidget(_wrap(RtlTabBar(labels: ['A', 'B'], selected: 0, onChanged: (i) => selected = i)));
+    await tester.pumpWidget(
+      _wrap(
+        RtlTabBar(
+          labels: ['A', 'B'],
+          selected: 0,
+          onChanged: (i) => selected = i,
+        ),
+      ),
+    );
     await tester.tap(find.text('B'));
     expect(selected, 1);
   });

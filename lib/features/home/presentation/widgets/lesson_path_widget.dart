@@ -8,11 +8,36 @@ class LessonPathWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nodes = [
-      _PathNodeData('Variables', Icons.code_rounded, AppColors.primaryGreen, true),
-      _PathNodeData('Functions', Icons.functions_rounded, AppColors.primaryBlue, true),
-      _PathNodeData('Classes', Icons.widgets_rounded, AppColors.primaryPurple, true),
-      _PathNodeData('Async', Icons.swap_horiz_rounded, AppColors.primaryOrange, false),
-      _PathNodeData('Streams', Icons.waves_rounded, AppColors.primaryCyan, false),
+      _PathNodeData(
+        'Variables',
+        Icons.code_rounded,
+        AppColors.primaryGreen,
+        true,
+      ),
+      _PathNodeData(
+        'Functions',
+        Icons.functions_rounded,
+        AppColors.primaryBlue,
+        true,
+      ),
+      _PathNodeData(
+        'Classes',
+        Icons.widgets_rounded,
+        AppColors.primaryPurple,
+        true,
+      ),
+      _PathNodeData(
+        'Async',
+        Icons.swap_horiz_rounded,
+        AppColors.primaryOrange,
+        false,
+      ),
+      _PathNodeData(
+        'Streams',
+        Icons.waves_rounded,
+        AppColors.primaryCyan,
+        false,
+      ),
     ];
 
     return SizedBox(
@@ -39,17 +64,24 @@ class LessonPathWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: node.completed || node.active
                             ? LinearGradient(
-                                colors: [node.color, node.color.withValues(alpha: 0.7)],
+                                colors: [
+                                  node.color,
+                                  node.color.withValues(alpha: 0.7),
+                                ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               )
                             : null,
-                        color: node.completed || node.active ? null : AppColors.surfaceLight,
+                        color: node.completed || node.active
+                            ? null
+                            : AppColors.surfaceLight,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
                           color: node.active
                               ? node.color
-                              : (node.completed ? node.color.withValues(alpha: 0.5) : AppColors.cardBorder),
+                              : (node.completed
+                                    ? node.color.withValues(alpha: 0.5)
+                                    : AppColors.cardBorder),
                           width: node.active ? 2.5 : 1.5,
                         ),
                         boxShadow: node.active
@@ -63,8 +95,18 @@ class LessonPathWidget extends StatelessWidget {
                       ),
                       child: Center(
                         child: node.completed
-                            ? const Icon(Icons.check_rounded, color: Colors.white, size: 24)
-                            : Icon(node.icon, color: node.active ? node.color : AppColors.textMuted, size: 22),
+                            ? const Icon(
+                                Icons.check_rounded,
+                                color: Colors.white,
+                                size: 24,
+                              )
+                            : Icon(
+                                node.icon,
+                                color: node.active
+                                    ? node.color
+                                    : AppColors.textMuted,
+                                size: 22,
+                              ),
                       ),
                     ),
                     if (!isLast)
@@ -86,7 +128,9 @@ class LessonPathWidget extends StatelessWidget {
                   node.label,
                   style: AppTextStyles.labelSmall.copyWith(
                     fontSize: 10,
-                    color: node.active ? AppColors.textPrimary : AppColors.textMuted,
+                    color: node.active
+                        ? AppColors.textPrimary
+                        : AppColors.textMuted,
                     fontWeight: node.active ? FontWeight.w700 : FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../domain/lesson_models.dart';
+import './lesson_models.dart';
 
 class LessonController extends ChangeNotifier {
   Lesson _lesson;
@@ -16,11 +16,9 @@ class LessonController extends ChangeNotifier {
   final List<String> _hintHistory = [];
   int _attempts = 0;
 
-  LessonController({
-    required Lesson lesson,
-    required LessonProgress progress,
-  }) : _lesson = lesson,
-       _progress = progress {
+  LessonController({required Lesson lesson, required LessonProgress progress})
+    : _lesson = lesson,
+      _progress = progress {
     _currentCode = _lesson.sections.isNotEmpty
         ? _lesson.sections.first.codeExample
         : '';
@@ -57,8 +55,7 @@ class LessonController extends ChangeNotifier {
     return null;
   }
 
-  bool get isLastSection =>
-      _currentSectionIndex >= _lesson.sections.length - 1;
+  bool get isLastSection => _currentSectionIndex >= _lesson.sections.length - 1;
 
   bool get isLastQuizQuestion =>
       _currentQuizQuestionIndex >= _lesson.quizQuestions.length - 1;
@@ -115,10 +112,9 @@ class LessonController extends ChangeNotifier {
         ..._progress.sectionCompletion,
         currentSection.id: true,
       },
-      currentSectionIndex:
-          _currentSectionIndex < _lesson.sections.length - 1
-              ? _currentSectionIndex + 1
-              : _currentSectionIndex,
+      currentSectionIndex: _currentSectionIndex < _lesson.sections.length - 1
+          ? _currentSectionIndex + 1
+          : _currentSectionIndex,
     );
     _attempts++;
     notifyListeners();
@@ -227,33 +223,41 @@ class LessonController extends ChangeNotifier {
       final original = i < originalLines.length ? originalLines[i] : '';
       final modified = i < modifiedLines.length ? modifiedLines[i] : '';
       if (original == modified) {
-        changes.add(DiffChange(
-          lineNumber: i + 1,
-          originalLine: original,
-          modifiedLine: modified,
-          type: DiffType.unchanged,
-        ));
+        changes.add(
+          DiffChange(
+            lineNumber: i + 1,
+            originalLine: original,
+            modifiedLine: modified,
+            type: DiffType.unchanged,
+          ),
+        );
       } else if (original.isEmpty) {
-        changes.add(DiffChange(
-          lineNumber: i + 1,
-          originalLine: '',
-          modifiedLine: modified,
-          type: DiffType.added,
-        ));
+        changes.add(
+          DiffChange(
+            lineNumber: i + 1,
+            originalLine: '',
+            modifiedLine: modified,
+            type: DiffType.added,
+          ),
+        );
       } else if (modified.isEmpty) {
-        changes.add(DiffChange(
-          lineNumber: i + 1,
-          originalLine: original,
-          modifiedLine: '',
-          type: DiffType.removed,
-        ));
+        changes.add(
+          DiffChange(
+            lineNumber: i + 1,
+            originalLine: original,
+            modifiedLine: '',
+            type: DiffType.removed,
+          ),
+        );
       } else {
-        changes.add(DiffChange(
-          lineNumber: i + 1,
-          originalLine: original,
-          modifiedLine: modified,
-          type: DiffType.changed,
-        ));
+        changes.add(
+          DiffChange(
+            lineNumber: i + 1,
+            originalLine: original,
+            modifiedLine: modified,
+            type: DiffType.changed,
+          ),
+        );
       }
     }
 
@@ -307,9 +311,10 @@ class LessonDataService {
           id: 'intro',
           title: 'Introduction to Flutter',
           content:
-              'Flutter is Google\\'s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.',
+              'Flutter is Google\'s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.',
           codeExample: 'void main() {\n  runApp(const MyApp());\n}',
-          explanation: 'The main function is the entry point of every Dart application.',
+          explanation:
+              'The main function is the entry point of every Dart application.',
           type: SectionType.theory,
           order: 1,
         ),
@@ -317,9 +322,11 @@ class LessonDataService {
           id: 'widgets',
           title: 'Understanding Widgets',
           content:
-              'Everything in Flutter is a widget. Widgets are the building blocks of your app\\'s user interface.',
-          codeExample: 'class MyApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      home: Scaffold(\n        body: Center(child: Text(\\'Hello Flutter!\\')),\n      ),\n    );\n  }\n}',
-          explanation: 'StatelessWidget is immutable and rebuilds when its configuration changes.',
+              'Everything in Flutter is a widget. Widgets are the building blocks of your app\'s user interface.',
+          codeExample:
+              'class MyApp extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      home: Scaffold(\n        body: Center(child: Text(\'Hello Flutter!\')),\n      ),\n    );\n  }\n}',
+          explanation:
+              'StatelessWidget is immutable and rebuilds when its configuration changes.',
           type: SectionType.code,
           order: 2,
         ),
@@ -328,8 +335,10 @@ class LessonDataService {
           title: 'Interactive Counter',
           content:
               'Learn how to manage state with StatefulWidget and create interactive UIs.',
-          codeExample: 'class CounterWidget extends StatefulWidget {\n  @override\n  _CounterWidgetState createState() => _CounterWidgetState();\n}\n\nclass _CounterWidgetState extends State<CounterWidget> {\n  int _count = 0;\n  void _increment() => setState(() => _count++);\n}',
-          explanation: 'StatefulWidget allows you to modify the UI based on user interactions.',
+          codeExample:
+              'class CounterWidget extends StatefulWidget {\n  @override\n  _CounterWidgetState createState() => _CounterWidgetState();\n}\n\nclass _CounterWidgetState extends State<CounterWidget> {\n  int _count = 0;\n  void _increment() => setState(() => _count++);\n}',
+          explanation:
+              'StatefulWidget allows you to modify the UI based on user interactions.',
           type: SectionType.interactive,
           order: 3,
         ),
@@ -345,7 +354,8 @@ class LessonDataService {
         LessonSection(
           id: 'summary',
           title: 'Summary',
-          content: 'You\\'ve learned the basics of Flutter! Continue to the next lesson.',
+          content:
+              'You\'ve learned the basics of Flutter! Continue to the next lesson.',
           codeExample: '',
           explanation: 'Great job completing this lesson.',
           type: SectionType.summary,
@@ -366,15 +376,17 @@ class LessonDataService {
           question: 'Which widget is immutable in Flutter?',
           options: ['StatefulWidget', 'StatelessWidget', 'Both', 'Neither'],
           correctIndex: 1,
-          explanation: 'StatelessWidget cannot change its state after being built.',
+          explanation:
+              'StatelessWidget cannot change its state after being built.',
           points: 10,
         ),
         LessonQuizQuestion(
           id: 'q3',
-          question: 'What method rebuilds a widget\\'s UI?',
+          question: 'What method rebuilds a widget\'s UI?',
           options: ['build()', 'render()', 'display()', 'show()'],
           correctIndex: 0,
-          explanation: 'The build() method describes how to display the widget.',
+          explanation:
+              'The build() method describes how to display the widget.',
           points: 10,
         ),
       ],
@@ -393,17 +405,22 @@ class LessonDataService {
         LessonSection(
           id: 'columns-rows',
           title: 'Column and Row',
-          content: 'Use Column and Row to arrange widgets vertically and horizontally.',
-          codeExample: 'Column(\n  children: [\n    Text(\\'First\\'),\n    Text(\\'Second\\'),\n  ],\n)',
-          explanation: 'Column arranges children vertically, Row arranges horizontally.',
+          content:
+              'Use Column and Row to arrange widgets vertically and horizontally.',
+          codeExample:
+              'Column(\n  children: [\n    Text(\'First\'),\n    Text(\'Second\'),\n  ],\n)',
+          explanation:
+              'Column arranges children vertically, Row arranges horizontally.',
           type: SectionType.theory,
           order: 1,
         ),
         LessonSection(
           id: 'containers',
           title: 'Container Widget',
-          content: 'Container is a convenience widget that combines common painting, positioning, and sizing widgets.',
-          codeExample: 'Container(\n  padding: EdgeInsets.all(16),\n  decoration: BoxDecoration(\n    color: Colors.blue,\n    borderRadius: BorderRadius.circular(8),\n  ),\n  child: Text(\\'Box\\'),\n)',
+          content:
+              'Container is a convenience widget that combines common painting, positioning, and sizing widgets.',
+          codeExample:
+              'Container(\n  padding: EdgeInsets.all(16),\n  decoration: BoxDecoration(\n    color: Colors.blue,\n    borderRadius: BorderRadius.circular(8),\n  ),\n  child: Text(\'Box\'),\n)',
           explanation: 'Container is one of the most used widgets in Flutter.',
           type: SectionType.code,
           order: 2,
@@ -411,9 +428,12 @@ class LessonDataService {
         LessonSection(
           id: 'navigation',
           title: 'Screen Navigation',
-          content: 'Navigate between screens using Navigator.push and Navigator.pop.',
-          codeExample: 'Navigator.push(\n  context,\n  MaterialPageRoute(builder: (context) => SecondScreen()),\n)',
-          explanation: 'Navigator manages a stack of routes for screen transitions.',
+          content:
+              'Navigate between screens using Navigator.push and Navigator.pop.',
+          codeExample:
+              'Navigator.push(\n  context,\n  MaterialPageRoute(builder: (context) => SecondScreen()),\n)',
+          explanation:
+              'Navigator manages a stack of routes for screen transitions.',
           type: SectionType.interactive,
           order: 3,
         ),
@@ -463,7 +483,12 @@ class LessonDataService {
         LessonQuizQuestion(
           id: 'q1',
           question: 'What does print() do in Python?',
-          options: ['Displays text', 'Calculates math', 'Creates variables', 'Deletes files'],
+          options: [
+            'Displays text',
+            'Calculates math',
+            'Creates variables',
+            'Deletes files',
+          ],
           correctIndex: 0,
           explanation: 'print() outputs text to the console.',
           points: 10,

@@ -44,7 +44,10 @@ void main() {
       expect(LocaleFormat.money('12.50', AppLocale.ar), contains('١٢.٥٠'));
     });
     test('adds an explicit currency', () {
-      expect(LocaleFormat.money('10.00', AppLocale.en, currency: 'YER'), '10.00 YER');
+      expect(
+        LocaleFormat.money('10.00', AppLocale.en, currency: 'YER'),
+        '10.00 YER',
+      );
     });
     test('degrades unknown values', () {
       expect(LocaleFormat.money(null, AppLocale.en), '\u2014');
@@ -53,7 +56,10 @@ void main() {
 
   group('LocaleFormat.date', () {
     test('formats a date', () {
-      expect(LocaleFormat.date(DateTime(2026, 3, 15), AppLocale.en), '15/3/2026');
+      expect(
+        LocaleFormat.date(DateTime(2026, 3, 15), AppLocale.en),
+        '15/3/2026',
+      );
     });
     test('degrades null', () {
       expect(LocaleFormat.date(null, AppLocale.en), '\u2014');

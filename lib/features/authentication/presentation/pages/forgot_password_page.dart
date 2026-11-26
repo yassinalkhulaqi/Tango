@@ -69,7 +69,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
                     alignment: Alignment.centerLeft,
                     child: IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.arrow_back_rounded, color: AppColors.textPrimary, size: 24),
+                      icon: const Icon(
+                        Icons.arrow_back_rounded,
+                        color: AppColors.textPrimary,
+                        size: 24,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -105,7 +109,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 28),
-                  AuthButton(text: 'Send Reset Link', onPressed: _sendReset, isLoading: _isLoading),
+                  AuthButton(
+                    text: 'Send Reset Link',
+                    onPressed: _sendReset,
+                    isLoading: _isLoading,
+                  ),
                 ],
               ),
             ),

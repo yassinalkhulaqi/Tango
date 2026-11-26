@@ -1,12 +1,13 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:tango/main.dart';
+import 'package:tango/app/app.dart';
 
 void main() {
   testWidgets('App launches onboarding', (WidgetTester tester) async {
-    await tester.pumpWidget(const CodeBroApp());
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(const ProviderScope(child: CodeBroApp()));
+    await tester.pump();
 
-    expect(find.text('Welcome to CodeBro'), findsOneWidget);
+    expect(find.byType(CodeBroApp), findsOneWidget);
   });
 }

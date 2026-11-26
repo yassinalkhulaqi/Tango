@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
-import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_radius.dart';
-import '../../../core/theme/app_motion.dart';
-import '../../../core/theme/app_gradients.dart';
-import '../domain/lesson_models.dart';
-import '../domain/lesson_controller.dart';
-import '../presentation/widgets/code_editor_widget.dart';
-import '../presentation/widgets/lesson_content_widget.dart';
-import '../presentation/widgets/quiz_embedded_widget.dart';
-import '../presentation/widgets/lesson_progress_widget.dart';
-import '../presentation/widgets/lesson_navigation_widget.dart';
-import '../presentation/widgets/lesson_completion_widget.dart';
-import '../presentation/widgets/lesson_diff_widget.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_motion.dart';
+import '../../../../core/theme/app_gradients.dart';
+import '../../domain/lesson_models.dart';
+import '../../domain/lesson_controller.dart';
+import '../widgets/code_editor_widget.dart';
+import '../widgets/lesson_content_widget.dart';
+import '../widgets/quiz_embedded_widget.dart';
+import '../widgets/lesson_progress_widget.dart';
+import '../widgets/lesson_navigation_widget.dart';
+import '../widgets/lesson_completion_widget.dart';
+import '../widgets/lesson_diff_widget.dart';
 
 class LessonPlayerScreen extends StatefulWidget {
   final String lessonId;
@@ -79,16 +79,13 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
                     child: Column(
                       children: [
                         _buildHeader(controller),
-                        Expanded(
-                          child: _buildBody(controller),
-                        ),
+                        Expanded(child: _buildBody(controller)),
                         _buildBottomBar(controller),
                       ],
                     ),
                   ),
                 ),
-                if (_showDiff)
-                  _buildDiffOverlay(context, controller),
+                if (_showDiff) _buildDiffOverlay(context, controller),
                 if (controller.isMarkingComplete)
                   _buildCompletionOverlay(controller),
               ],
@@ -119,12 +116,19 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
                   ],
                 ),
                 child: const Center(
-                  child: Icon(Icons.school_rounded, color: Colors.white, size: 24),
+                  child: Icon(
+                    Icons.school_rounded,
+                    color: Colors.white,
+                    size: 24,
+                  ),
                 ),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Icon(Icons.close_rounded, color: AppColors.textSecondary),
+                child: const Icon(
+                  Icons.close_rounded,
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -218,7 +222,10 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
     );
   }
 
-  Widget _buildSectionContent(LessonController controller, LessonSection section) {
+  Widget _buildSectionContent(
+    LessonController controller,
+    LessonSection section,
+  ) {
     switch (section.type) {
       case SectionType.code:
       case SectionType.interactive:
@@ -329,7 +336,11 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
         children: [
           Row(
             children: [
-              const Icon(Icons.summary_rounded, color: AppColors.primaryBlue, size: 24),
+              const Icon(
+                Icons.summary_rounded,
+                color: AppColors.primaryBlue,
+                size: 24,
+              ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(
@@ -346,7 +357,8 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
           _buildSummaryItem(
             icon: Icons.check_circle_rounded,
             label: 'Sections Completed',
-            value: '${controller.completedSections} / ${controller.lesson.totalSections}',
+            value:
+                '${controller.completedSections} / ${controller.lesson.totalSections}',
             color: AppColors.primaryGreen,
           ),
           const SizedBox(height: AppSpacing.md),
@@ -403,9 +415,20 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
+              Text(
+                label,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
               const SizedBox(height: 4),
-              Text(value, style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.w700, color: color)),
+              Text(
+                value,
+                style: AppTextStyles.labelLarge.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: color,
+                ),
+              ),
             ],
           ),
         ),
@@ -423,7 +446,11 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
       ),
       child: Row(
         children: [
-          const Icon(Icons.lightbulb_rounded, color: AppColors.primaryYellow, size: 20),
+          const Icon(
+            Icons.lightbulb_rounded,
+            color: AppColors.primaryYellow,
+            size: 20,
+          ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Text(
@@ -444,9 +471,15 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        border: const Border(top: BorderSide(color: AppColors.cardBorder, width: 1)),
+        border: const Border(
+          top: BorderSide(color: AppColors.cardBorder, width: 1),
+        ),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 16, offset: const Offset(0, -4)),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 16,
+            offset: const Offset(0, -4),
+          ),
         ],
       ),
       child: Row(
@@ -462,7 +495,9 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppColors.textSecondary,
                     side: const BorderSide(color: AppColors.cardBorder),
-                    shape: RoundedRectangleBorder(borderRadius: AppRadius.circular(AppRadius.xl)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: AppRadius.circular(AppRadius.xl),
+                    ),
                   ),
                 ),
               ),
@@ -475,8 +510,8 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
               child: PremiumLessonButton(
                 text: controller.isLastSection
                     ? controller.lesson.isCompleted
-                        ? 'Review Lesson'
-                        : 'Complete Lesson'
+                          ? 'Review Lesson'
+                          : 'Complete Lesson'
                     : 'Next Section',
                 onPressed: controller.nextSection,
                 gradient: AppGradients.primary,
@@ -512,7 +547,9 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
               const SizedBox(height: AppSpacing.md),
               Expanded(
                 child: LessonDiffWidget(
-                  diff: controller.getCodeDiff('void main() {\n  print("Hello World");\n}'),
+                  diff: controller.getCodeDiff(
+                    'void main() {\n  print("Hello World");\n}',
+                  ),
                 ),
               ),
               const SizedBox(height: AppSpacing.lg),

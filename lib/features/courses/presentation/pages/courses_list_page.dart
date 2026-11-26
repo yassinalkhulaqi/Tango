@@ -3,20 +3,39 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
-import '../domain/course_model.dart';
-import 'widgets/course_card.dart';
+import '../../domain/course_model.dart';
+import '../widgets/course_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../data/courses_repository.dart';
 
-class CoursesListPage extends StatefulWidget {
+class CoursesListPage extends ConsumerStatefulWidget {
   const CoursesListPage({super.key});
 
   @override
-  State<CoursesListPage> createState() => _CoursesListPageState();
+  ConsumerState<CoursesListPage> createState() => _CoursesListPageState();
 }
 
-class _CoursesListPageState extends State<CoursesListPage> {
+class _CoursesListPageState extends ConsumerState<CoursesListPage> {
   String _filter = 'All';
+  bool _isLoading = false;
 
-  final List<Course> _allCourses = [
+  @override
+  void initState() {
+    super.initState();
+    _loadCourses();
+  }
+
+  Future<void> _loadCourses() async {
+    setState(() => _isLoading = true);
+    final courses = await ref.read(coursesRepositoryProvider).fetchCourses();
+    if (!mounted) return;
+    setState(() {
+      _allCourses = courses;
+      _isLoading = false;
+    });
+  }
+
+  List<Course> _allCourses = [
     Course(
       id: 'flutter-basics',
       title: 'Flutter Fundamentals',
@@ -75,9 +94,7 @@ class _CoursesListPageState extends State<CoursesListPage> {
           children: [
             _buildHeader(),
             _buildFilterChips(),
-            Expanded(
-              child: _buildCoursesGrid(),
-            ),
+            Expanded(child: _buildCoursesGrid()),
           ],
         ),
       ),
@@ -116,7 +133,11 @@ class _CoursesListPageState extends State<CoursesListPage> {
               color: AppColors.primaryBlue.withValues(alpha: 0.1),
               borderRadius: AppRadius.circular(AppRadius.md),
             ),
-            child: const Icon(Icons.search_rounded, color: AppColors.primaryBlue, size: 22),
+            child: const Icon(
+              Icons.search_rounded,
+              color: AppColors.primaryBlue,
+              size: 22,
+            ),
           ),
         ],
       ),
@@ -161,10 +182,14 @@ class _CoursesListPageState extends State<CoursesListPage> {
   }
 
   Widget _buildCoursesGrid() {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     final visibleCourses = _filter == 'All'
         ? _allCourses
         : _allCourses.where((c) {
-            if (_filter == 'In Progress') return c.progress > 0 && c.progress < c.lessonCount;
+            if (_filter == 'In Progress')
+              return c.progress > 0 && c.progress < c.lessonCount;
             if (_filter == 'Completed') return c.progress >= c.lessonCount;
             if (_filter == 'Saved') return false;
             return true;
