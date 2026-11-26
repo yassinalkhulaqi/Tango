@@ -20,28 +20,55 @@ import '../features/quiz/domain/quiz_model.dart';
 import '../features/quiz/presentation/pages/quiz_page.dart';
 import '../features/settings/presentation/pages/language_settings_page.dart';
 
+class AuthRedirect {
+  const AuthRedirect._();
+
+  static const String loginPath = '/login';
+  static const String homePath = '/home';
+  static const Set<String> authPaths = <String>{
+    loginPath,
+    '/register',
+    '/forgot-password',
+  };
+
+  static bool isAuthPath(String path) => authPaths.contains(path);
+
+  static String? safeReturnPath(String? path) {
+    if (path == null || path.isEmpty) return null;
+    if (!path.startsWith('/') || path.startsWith('//')) return null;
+    if (path == '/' || isAuthPath(path)) return null;
+    return path;
+  }
+
+  static String? resolve({
+    required AuthStatus status,
+    required String location,
+    String? from,
+  }) {
+    if (status == AuthStatus.unknown) return null;
+    if (status == AuthStatus.anonymous) {
+      if (isAuthPath(location) || location == '/') return null;
+      return '$loginPath?from=${Uri.encodeComponent(location)}';
+    }
+    if (location == '/' || isAuthPath(location)) {
+      final destination = safeReturnPath(from) ?? homePath;
+      return destination == location ? null : destination;
+    }
+    return null;
+  }
+}
+
 final routerProvider = Provider<GoRouter>((ref) {
-  final isAuthenticated = ref.watch(
-    sessionProvider.select((s) => s.isAuthenticated),
-  );
+  final status = ref.watch(sessionProvider.select((s) => s.status));
 
   return GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: false,
-    redirect: (context, state) {
-      final location = state.matchedLocation;
-      final isAuthRoute =
-          location == '/login' ||
-          location == '/register' ||
-          location == '/forgot-password';
-      if (!isAuthenticated && location != '/' && !isAuthRoute) {
-        return '/login';
-      }
-      if (isAuthenticated && (location == '/' || isAuthRoute)) {
-        return '/home';
-      }
-      return null;
-    },
+    redirect: (context, state) => AuthRedirect.resolve(
+      status: status,
+      location: state.matchedLocation,
+      from: state.uri.queryParameters['from'],
+    ),
     errorBuilder: (context, state) => Scaffold(
       backgroundColor: AppColors.background,
       body: Center(
