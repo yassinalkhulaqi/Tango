@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../data/lesson_repository.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -15,16 +17,16 @@ import '../widgets/lesson_navigation_widget.dart';
 import '../widgets/lesson_completion_widget.dart';
 import '../widgets/lesson_diff_widget.dart';
 
-class LessonPlayerScreen extends StatefulWidget {
+class LessonPlayerScreen extends ConsumerStatefulWidget {
   final String lessonId;
 
   const LessonPlayerScreen({super.key, required this.lessonId});
 
   @override
-  State<LessonPlayerScreen> createState() => _LessonPlayerScreenState();
+  ConsumerState<LessonPlayerScreen> createState() => _LessonPlayerScreenState();
 }
 
-class _LessonPlayerScreenState extends State<LessonPlayerScreen>
+class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen>
     with TickerProviderStateMixin {
   late LessonController _controller;
   late AnimationController _fadeController;
@@ -53,6 +55,28 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
       curve: Curves.easeInOut,
     );
     _fadeController.forward();
+    _loadRemoteLesson();
+  }
+
+  Future<void> _loadRemoteLesson() async {
+    final lesson = await ref.read(lessonFutureProvider(widget.lessonId).future);
+    if (!mounted || lesson == null || lesson.id == _controller.lesson.id) {
+      return;
+    }
+    final previous = _controller;
+    _controller = LessonController(
+      lesson: lesson,
+      progress: LessonProgress(
+        lessonId: lesson.id,
+        currentSectionIndex: 0,
+        sectionCompletion: const <String, bool>{},
+        quizAnswers: const <String, LessonQuizQuestion>{},
+        xpEarned: 0,
+        isCompleted: lesson.isCompleted,
+      ),
+    );
+    previous.dispose();
+    setState(() {});
   }
 
   @override
@@ -336,11 +360,7 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen>
         children: [
           Row(
             children: [
-              const Icon(
-                Icons.summary_rounded,
-                color: AppColors.primaryBlue,
-                size: 24,
-              ),
+              const Icon(Icons.description, color: AppColors.primaryBlue, size: 24),
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(

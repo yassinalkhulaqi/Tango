@@ -217,7 +217,7 @@ class _ConfettiAnimationState extends State<ConfettiAnimation>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   final List<Offset> _positions = [];
-  final List<Color> _colors = [];
+  List<Color> _colors = [];
   final List<double> _sizes = [];
 
   @override
