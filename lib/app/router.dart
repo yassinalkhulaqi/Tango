@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../core/state/app_providers.dart';
 import '../core/theme/app_colors.dart';
-import '../features/achievements/presentation/pages/achievements_page.dart';
+import '../features/achievements/presentation/pages/connected_achievements_page.dart';
 import '../features/authentication/presentation/pages/forgot_password_page.dart';
 import '../features/authentication/presentation/pages/login_page.dart';
 import '../features/authentication/presentation/pages/register_page.dart';
@@ -13,6 +13,7 @@ import '../features/courses/presentation/pages/courses_list_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
 import '../features/leaderboard/presentation/pages/connected_leaderboard_page.dart';
 import '../features/lesson_interactive/presentation/screens/lesson_player_screen.dart';
+import '../features/notifications/presentation/pages/notifications_page.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/playground/presentation/pages/playground_page.dart';
 import '../features/profile/presentation/pages/profile_page.dart';
@@ -139,7 +140,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/achievements',
-        builder: (context, state) => const AchievementsPage(),
+        builder: (context, state) => const ConnectedAchievementsPage(),
+      ),
+      GoRoute(
+        path: '/notifications',
+        builder: (context, state) => const NotificationsPage(),
       ),
       GoRoute(
         path: '/profile',
