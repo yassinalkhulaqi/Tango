@@ -10,8 +10,9 @@ import '../widgets/quiz_option_card.dart';
 
 class QuizPage extends StatefulWidget {
   final List<QuizQuestion> questions;
+  final Future<void> Function(List<int?> answers)? onFinished;
 
-  const QuizPage({super.key, required this.questions});
+  const QuizPage({super.key, required this.questions, this.onFinished});
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -33,8 +34,10 @@ class _QuizPageState extends State<QuizPage> {
 
   bool get _isLast => _currentIndex == widget.questions.length - 1;
 
-  void _next() {
+  Future<void> _next() async {
     if (_isLast) {
+      await widget.onFinished?.call(List<int?>.from(_answers));
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) =>

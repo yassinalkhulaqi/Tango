@@ -16,8 +16,7 @@ import '../features/lesson_interactive/presentation/screens/lesson_player_screen
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/playground/presentation/pages/playground_page.dart';
 import '../features/profile/presentation/pages/profile_page.dart';
-import '../features/quiz/domain/quiz_model.dart';
-import '../features/quiz/presentation/pages/quiz_page.dart';
+import '../features/quiz/presentation/pages/connected_quiz_page.dart';
 import '../features/settings/presentation/pages/language_settings_page.dart';
 
 class AuthRedirect {
@@ -122,7 +121,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/quiz',
-        builder: (context, state) => QuizPage(questions: _starterQuestions),
+        builder: (context, state) =>
+            const ConnectedQuizPage(quizId: 'dart-basics'),
       ),
       GoRoute(
         path: '/playground',
@@ -149,29 +149,3 @@ final routerProvider = Provider<GoRouter>((ref) {
     ],
   );
 });
-
-const List<QuizQuestion> _starterQuestions = [
-  QuizQuestion(
-    id: 'q1',
-    question: 'What does "void" mean in a Dart function?',
-    options: [
-      'Returns no value',
-      'Returns null',
-      'Returns 0',
-      'Returns String',
-    ],
-    correctIndex: 0,
-  ),
-  QuizQuestion(
-    id: 'q2',
-    question: 'Which keyword defines a class in Dart?',
-    options: ['class', 'struct', 'interface', 'type'],
-    correctIndex: 0,
-  ),
-  QuizQuestion(
-    id: 'q3',
-    question: 'What is the entry point function in Dart?',
-    options: ['start()', 'run()', 'main()', 'init()'],
-    correctIndex: 2,
-  ),
-];
