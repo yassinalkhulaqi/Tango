@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../widgets/user_header.dart';
+import '../widgets/live_progress_header.dart';
 import '../widgets/xp_progress_card.dart';
 import '../widgets/continue_learning_card.dart';
 import '../widgets/stats_card.dart';
@@ -57,7 +58,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: _buildPage(),
+      body: Column(
+        children: [
+          const LiveProgressHeader(),
+          Expanded(child: _buildPage()),
+        ],
+      ),
       bottomNavigationBar: _buildBottomNav(),
     );
   }

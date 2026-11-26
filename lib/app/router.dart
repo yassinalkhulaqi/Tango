@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../core/state/app_providers.dart';
 import '../core/theme/app_colors.dart';
-import '../features/achievements/presentation/pages/achievements_page.dart';
+import '../features/achievements/presentation/pages/connected_achievements_page.dart';
 import '../features/authentication/presentation/pages/forgot_password_page.dart';
 import '../features/authentication/presentation/pages/login_page.dart';
 import '../features/authentication/presentation/pages/register_page.dart';
@@ -11,14 +11,15 @@ import '../features/courses/domain/course_model.dart';
 import '../features/courses/presentation/pages/course_detail_page.dart';
 import '../features/courses/presentation/pages/courses_list_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
-import '../features/leaderboard/presentation/pages/leaderboard_page.dart';
+import '../features/leaderboard/presentation/pages/connected_leaderboard_page.dart';
 import '../features/lesson_interactive/presentation/screens/lesson_player_screen.dart';
+import '../features/notifications/presentation/pages/notifications_page.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/playground/presentation/pages/playground_page.dart';
 import '../features/profile/presentation/pages/profile_page.dart';
-import '../features/quiz/domain/quiz_model.dart';
-import '../features/quiz/presentation/pages/quiz_page.dart';
+import '../features/quiz/presentation/pages/connected_quiz_page.dart';
 import '../features/settings/presentation/pages/language_settings_page.dart';
+import '../features/social/presentation/pages/connected_social_page.dart';
 
 class AuthRedirect {
   const AuthRedirect._();
@@ -122,7 +123,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/quiz',
-        builder: (context, state) => QuizPage(questions: _starterQuestions),
+        builder: (context, state) =>
+            const ConnectedQuizPage(quizId: 'dart-basics'),
       ),
       GoRoute(
         path: '/playground',
@@ -130,11 +132,19 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/leaderboard',
-        builder: (context, state) => const LeaderboardPage(),
+        builder: (context, state) => const ConnectedLeaderboardPage(),
+      ),
+      GoRoute(
+        path: '/social',
+        builder: (context, state) => const ConnectedSocialPage(),
       ),
       GoRoute(
         path: '/achievements',
-        builder: (context, state) => const AchievementsPage(),
+        builder: (context, state) => const ConnectedAchievementsPage(),
+      ),
+      GoRoute(
+        path: '/notifications',
+        builder: (context, state) => const NotificationsPage(),
       ),
       GoRoute(
         path: '/profile',
@@ -149,29 +159,3 @@ final routerProvider = Provider<GoRouter>((ref) {
     ],
   );
 });
-
-const List<QuizQuestion> _starterQuestions = [
-  QuizQuestion(
-    id: 'q1',
-    question: 'What does "void" mean in a Dart function?',
-    options: [
-      'Returns no value',
-      'Returns null',
-      'Returns 0',
-      'Returns String',
-    ],
-    correctIndex: 0,
-  ),
-  QuizQuestion(
-    id: 'q2',
-    question: 'Which keyword defines a class in Dart?',
-    options: ['class', 'struct', 'interface', 'type'],
-    correctIndex: 0,
-  ),
-  QuizQuestion(
-    id: 'q3',
-    question: 'What is the entry point function in Dart?',
-    options: ['start()', 'run()', 'main()', 'init()'],
-    correctIndex: 2,
-  ),
-];

@@ -171,7 +171,7 @@ class QuizOptionWidget extends StatelessWidget {
   final bool isSelected;
   final bool isCorrect;
   final bool isRevealed;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const QuizOptionWidget({
     super.key,

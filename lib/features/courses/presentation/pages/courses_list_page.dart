@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../../core/data/paged_repository.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_radius.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/ui/app_states.dart';
+import '../../data/course_catalog_repository.dart';
+import '../../data/course_filters.dart';
+import '../../data/courses_repository.dart';
 import '../../domain/course_model.dart';
 import '../widgets/course_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../data/courses_repository.dart';
+import 'course_detail_page.dart';
 
 class CoursesListPage extends ConsumerStatefulWidget {
   const CoursesListPage({super.key});
@@ -16,85 +22,62 @@ class CoursesListPage extends ConsumerStatefulWidget {
 }
 
 class _CoursesListPageState extends ConsumerState<CoursesListPage> {
-  String _filter = 'All';
-  bool _isLoading = false;
+  final TextEditingController _search = TextEditingController();
+  CourseQuery _query = const CourseQuery();
+  List<Course> _courses = demoCourses;
+  bool _isLoading = true;
+  String? _error;
 
   @override
   void initState() {
     super.initState();
+    _search.addListener(_onSearchChanged);
     _loadCourses();
   }
 
-  Future<void> _loadCourses() async {
-    setState(() => _isLoading = true);
-    final courses = await ref.read(coursesRepositoryProvider).fetchCourses();
+  @override
+  void dispose() {
+    _search.removeListener(_onSearchChanged);
+    _search.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    setState(() => _query = _query.copyWith(search: _search.text));
+  }
+
+  Future<void> _loadCourses({bool refresh = false}) async {
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+    final controller = ref.read(coursesPagedControllerProvider.notifier);
+    if (refresh) {
+      await controller.refresh();
+    } else {
+      await controller.loadFirst();
+    }
+    final result = ref.read(coursesPagedControllerProvider);
     if (!mounted) return;
     setState(() {
-      _allCourses = courses;
       _isLoading = false;
+      _courses = result.items.isEmpty ? demoCourses : result.items;
+      _error = result.status == PagedStatus.failure ? result.message : null;
     });
   }
 
-  List<Course> _allCourses = [
-    Course(
-      id: 'flutter-basics',
-      title: 'Flutter Fundamentals',
-      subtitle: 'Build beautiful cross-platform apps',
-      category: 'Flutter',
-      thumbnail: 'flutter',
-      lessonCount: 24,
-      progress: 12.0,
-    ),
-    Course(
-      id: 'python-101',
-      title: 'Python 101',
-      subtitle: 'From zero to your first script',
-      category: 'Python',
-      thumbnail: 'python',
-      lessonCount: 18,
-      progress: 6.0,
-    ),
-    Course(
-      id: 'web-dev',
-      title: 'Web Development',
-      subtitle: 'HTML, CSS, and modern JavaScript',
-      category: 'Web Dev',
-      thumbnail: 'web',
-      lessonCount: 30,
-      progress: 0.0,
-    ),
-    Course(
-      id: 'security',
-      title: 'Cybersecurity Essentials',
-      subtitle: 'Protect systems and data',
-      category: 'Security',
-      thumbnail: 'security',
-      lessonCount: 12,
-      progress: 0.0,
-    ),
-    Course(
-      id: 'ai-ml',
-      title: 'AI / Machine Learning',
-      subtitle: 'Intro to neural networks & models',
-      category: 'AI / ML',
-      thumbnail: 'ai',
-      lessonCount: 9,
-      progress: 0.0,
-      isLocked: true,
-      unlockRequirement: 'Reach Level 4',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final visible = filterCourses(_courses, _query);
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
             _buildHeader(),
-            _buildFilterChips(),
-            Expanded(child: _buildCoursesGrid()),
+            _buildCategoryChips(),
+            _buildProgressChips(),
+            Expanded(child: _buildCoursesGrid(visible)),
           ],
         ),
       ),
@@ -104,39 +87,53 @@ class _CoursesListPageState extends ConsumerState<CoursesListPage> {
   Widget _buildHeader() {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Courses',
-                  style: AppTextStyles.displayMedium.copyWith(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xs),
-                Text(
-                  'Pick a skill and start building',
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-              ],
+          Text(
+            'Courses',
+            style: AppTextStyles.displayMedium.copyWith(
+              fontSize: 28,
+              fontWeight: FontWeight.w800,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(AppSpacing.sm),
-            decoration: BoxDecoration(
-              color: AppColors.primaryBlue.withValues(alpha: 0.1),
-              borderRadius: AppRadius.circular(AppRadius.md),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            'Pick a skill and start building',
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
             ),
-            child: const Icon(
-              Icons.search_rounded,
-              color: AppColors.primaryBlue,
-              size: 22,
+          ),
+          const SizedBox(height: AppSpacing.md),
+          TextField(
+            controller: _search,
+            style: AppTextStyles.bodyMedium,
+            decoration: InputDecoration(
+              hintText: 'Search courses',
+              hintStyle: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.textMuted,
+              ),
+              prefixIcon: const Icon(
+                Icons.search_rounded,
+                color: AppColors.primaryBlue,
+              ),
+              suffixIcon: _search.text.isEmpty
+                  ? null
+                  : IconButton(
+                      onPressed: () => _search.clear(),
+                      icon: const Icon(Icons.close_rounded),
+                      color: AppColors.textSecondary,
+                    ),
+              filled: true,
+              fillColor: AppColors.surface,
+              border: OutlineInputBorder(
+                borderRadius: AppRadius.circular(AppRadius.lg),
+                borderSide: const BorderSide(color: AppColors.cardBorder),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: AppRadius.circular(AppRadius.lg),
+                borderSide: const BorderSide(color: AppColors.cardBorder),
+              ),
             ),
           ),
         ],
@@ -144,61 +141,103 @@ class _CoursesListPageState extends ConsumerState<CoursesListPage> {
     );
   }
 
-  Widget _buildFilterChips() {
-    final filters = ['All', 'In Progress', 'Completed', 'Saved'];
+  Widget _buildCategoryChips() {
+    final categories = availableCategories(_courses);
     return SizedBox(
       height: 40,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-        itemCount: filters.length,
+        itemCount: categories.length,
         separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.sm),
         itemBuilder: (context, index) {
-          final isActive = _filter == filters[index];
-          return FilterChip(
-            label: Text(
-              filters[index],
-              style: AppTextStyles.labelMedium.copyWith(
-                fontWeight: FontWeight.w600,
-                color: isActive ? Colors.white : AppColors.textSecondary,
-                fontSize: 12,
-              ),
-            ),
-            selected: isActive,
-            onSelected: (_) => setState(() => _filter = filters[index]),
-            backgroundColor: AppColors.surface,
-            selectedColor: AppColors.primaryBlue,
-            checkmarkColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: AppRadius.circular(AppRadius.xxl),
-              side: BorderSide(
-                color: isActive ? AppColors.primaryBlue : AppColors.cardBorder,
-              ),
-            ),
+          final category = categories[index];
+          return _chip(
+            label: category,
+            active: _query.category == category,
+            onTap: () =>
+                setState(() => _query = _query.copyWith(category: category)),
           );
         },
       ),
     );
   }
 
-  Widget _buildCoursesGrid() {
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-    final visibleCourses = _filter == 'All'
-        ? _allCourses
-        : _allCourses.where((c) {
-            if (_filter == 'In Progress')
-              return c.progress > 0 && c.progress < c.lessonCount;
-            if (_filter == 'Completed') return c.progress >= c.lessonCount;
-            if (_filter == 'Saved') return false;
-            return true;
-          }).toList();
-
+  Widget _buildProgressChips() {
+    const options = <CourseProgressFilter>[
+      CourseProgressFilter.all,
+      CourseProgressFilter.inProgress,
+      CourseProgressFilter.completed,
+      CourseProgressFilter.locked,
+    ];
+    const labels = <String>['All', 'In progress', 'Completed', 'Locked'];
     return Padding(
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: AppSpacing.sm,
+      ),
+      child: Wrap(
+        spacing: AppSpacing.sm,
+        children: [
+          for (var i = 0; i < options.length; i++)
+            _chip(
+              label: labels[i],
+              active: _query.progress == options[i],
+              onTap: () => setState(
+                () => _query = _query.copyWith(progress: options[i]),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _chip({
+    required String label,
+    required bool active,
+    required VoidCallback onTap,
+  }) {
+    return FilterChip(
+      label: Text(
+        label,
+        style: AppTextStyles.labelMedium.copyWith(
+          color: active ? Colors.white : AppColors.textSecondary,
+          fontSize: 12,
+        ),
+      ),
+      selected: active,
+      onSelected: (_) => onTap(),
+      backgroundColor: AppColors.surface,
+      selectedColor: AppColors.primaryBlue,
+      checkmarkColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: AppRadius.circular(AppRadius.xxl),
+        side: BorderSide(
+          color: active ? AppColors.primaryBlue : AppColors.cardBorder,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCoursesGrid(List<Course> visible) {
+    if (_isLoading) return const AppLoadingView(message: 'Loading courses...');
+    if (_error != null) {
+      return AppErrorView(
+        message: _error!,
+        onRetry: () => _loadCourses(refresh: true),
+      );
+    }
+    if (visible.isEmpty) {
+      return const AppEmptyView(
+        title: 'No courses found',
+        message: 'Try a different search or filter.',
+      );
+    }
+    return RefreshIndicator(
+      onRefresh: () => _loadCourses(refresh: true),
       child: GridView.builder(
-        itemCount: visibleCourses.length,
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        itemCount: visible.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 0.78,
@@ -206,7 +245,7 @@ class _CoursesListPageState extends ConsumerState<CoursesListPage> {
           mainAxisSpacing: AppSpacing.md,
         ),
         itemBuilder: (context, index) {
-          final course = visibleCourses[index];
+          final course = visible[index];
           return CourseCard(
             course: course,
             onTap: () => Navigator.of(context).push(
