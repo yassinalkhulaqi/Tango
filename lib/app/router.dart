@@ -11,13 +11,14 @@ import '../features/courses/domain/course_model.dart';
 import '../features/courses/presentation/pages/course_detail_page.dart';
 import '../features/courses/presentation/pages/courses_list_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
-import '../features/leaderboard/presentation/pages/leaderboard_page.dart';
+import '../features/leaderboard/presentation/pages/connected_leaderboard_page.dart';
 import '../features/lesson_interactive/presentation/screens/lesson_player_screen.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/playground/presentation/pages/playground_page.dart';
 import '../features/profile/presentation/pages/profile_page.dart';
 import '../features/quiz/presentation/pages/connected_quiz_page.dart';
 import '../features/settings/presentation/pages/language_settings_page.dart';
+import '../features/social/presentation/pages/connected_social_page.dart';
 
 class AuthRedirect {
   const AuthRedirect._();
@@ -130,7 +131,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/leaderboard',
-        builder: (context, state) => const LeaderboardPage(),
+        builder: (context, state) => const ConnectedLeaderboardPage(),
+      ),
+      GoRoute(
+        path: '/social',
+        builder: (context, state) => const ConnectedSocialPage(),
       ),
       GoRoute(
         path: '/achievements',
